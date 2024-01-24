@@ -7,4 +7,5 @@ class EndPoints {
   static const login = "$mainBaseUrl/admin/admin-login";
   static const businesslogin = "$mainBaseUrl/api/businessuser/login-user";
   static const businessRegister = "$mainBaseUrl/api/businessuser/register-user";
+  static const category = "$mainBaseUrl/api/category/all";
 }

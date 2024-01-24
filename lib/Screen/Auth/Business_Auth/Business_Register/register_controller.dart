@@ -1,8 +1,10 @@
+import 'package:alaroos/Api_calling/auth/business_register_api/category_api/category_model.dart';
 import 'package:alaroos/Screen/Home_Screen/home_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 import '../../../../Api_calling/auth/business_register_api/business_register_api.dart';
+import '../../../../Api_calling/auth/business_register_api/category_api/category_api.dart';
 import '../../../../Utils/string.dart';
 import '../../../Category_select_Screen/category_screen.dart';
 import '../../../Dashboard/Widgets/bottom_bar.dart';
@@ -18,11 +20,33 @@ class BusinessRegisterController extends GetxController {
   TextEditingController passwordController = TextEditingController();
   TextEditingController categoryController = TextEditingController();
   RxBool isLoading = false.obs;
+  bool isClick = false;
+  CategoryModel categoryModel = CategoryModel();
+List<CategoryModel> categoryList = [];
+
+String CategoryId = "";
 
 
-  registerUser({email, password, firstName, lastName, mobile,businessname,category }) async {
+  registerUser({password, firstName, lastName, mobile,businessname,category }) async {
     isLoading.value = true;
-    await BusinessRegisterApi.businessRegisterApi(email: email, password: password, firstName: firstName, lastName: lastName, mobile: mobile, businessname: businessname, category: category);
+    await BusinessRegisterApi.businessRegisterApi(password: password, firstName: firstName, lastName: lastName, mobile: mobile, businessname: businessname, category: category);
+    isLoading.value = false;
+  }
+
+  category () async {
+    isLoading.value = true;
+    categoryModel = await CategoryApi.categoryApi();
+   /* if (categoryModel.data != null && categoryModel.data!.isNotEmpty) {
+      // Remove duplicates before adding new locations
+      Set<String?> existingIds = categoryList.map((data) => data.title).toSet();
+      List<CategoryModel> newCategory = categoryModel.data!
+          .where((data) => !existingIds.contains(data.title))
+          .toList();
+
+      categoryList.addAll(newCategory);
+      update(['business_register']);
+    }*/
+
     isLoading.value = false;
   }
 
@@ -38,6 +62,7 @@ class BusinessRegisterController extends GetxController {
   ];
 
   String userName = "";
+
 
   void setUserName(String value) {
     userName = value.trim();

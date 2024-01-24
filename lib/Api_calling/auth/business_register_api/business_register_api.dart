@@ -11,10 +11,10 @@ import '../../../service/http_service.dart';
 
 class BusinessRegisterApi {
   static businessRegisterApi(
-      {email, password, firstName, lastName, mobile,businessname, category  }) async {
+      {password, firstName, lastName, mobile,businessname, category  }) async {
     String url = EndPoints.businessRegister;
 
-    Map<String, dynamic> translateBody = {
+/*    Map<String, dynamic> translateBody = {
       "firstname":"userb7",
       "lastname" : "doeb7",
       "businessname" : "businessname7",
@@ -24,7 +24,7 @@ class BusinessRegisterApi {
       "password": "userb123"
     };
 
-   /* Map<String, dynamic> withOutTranslateBody = {
+    Map<String, dynamic> withOutTranslateBody = {
       "email": email,
       "password": password,
       "role": role,
@@ -47,16 +47,13 @@ class BusinessRegisterApi {
          "lastname" : lastName,
          "businessname" : businessname,
          "category" : category,
-         "email": email,
          "phone": mobile,
          "password":password
        },
-       /* body: (translateFirstName.toString().isEmpty && translateLastName.toString().isEmpty)
-            ? jsonEncode(withOutTranslateBody)
-            : jsonEncode(translateBody),*/
-        header: {
+       /* header: {
           'Content-Type': 'application/json',
-        });
+        }*/
+        );
     final decoded = jsonDecode(response!.body);
     print(decoded);
     if (response.statusCode == 200) {

@@ -7,6 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../../Api_calling/auth/business_register_api/category_api/category_model.dart';
 import '../../../../Common/text_filed.dart';
 import '../../../../Common/text_style.dart';
 import '../../../../Utils/assets_res.dart';
@@ -109,7 +110,7 @@ class BusinessRegisterScreen extends StatelessWidget {
                         // validator: businessRegisterController.validateEmail(),
                       ),
                     ),
-                   /* businessRegisterController.businessEmail.isNotEmpty
+                    /* businessRegisterController.businessEmail.isNotEmpty
                         ? Text(businessRegisterController.businessEmail,
                             style: errorStyle)
                         : SizedBox(),*/
@@ -150,20 +151,59 @@ class BusinessRegisterScreen extends StatelessWidget {
                         //     businessRegisterController.validatePassword(),
                       ),
                     ),
-                  /*  businessRegisterController.password.isNotEmpty
+                    /*  businessRegisterController.password.isNotEmpty
                         ? Text(businessRegisterController.password,
                             style: errorStyle)
                         : SizedBox(),*/
                     SizedBox(
                       height: Get.height * 0.03,
                     ),
-                    const SizedBox(
+                    SizedBox(
+                        height: 60,
+                        child: CommonTextField(
+                          isSuffixIcon: true,
+                            suffixIcon: AssetsRes.down,
+                            title: Strings.category,
+                            suffixIconOnTap: () {
+                              businessRegisterController.isClick = ! businessRegisterController.isClick;
+                              controller.update(['business_register']);
+                            },
+                            controller:
+                                businessRegisterController.categoryController,
+                            keyboardType: TextInputType.none)),
+                    businessRegisterController.categoryError.isNotEmpty
+                        ? Text(businessRegisterController.categoryError,
+                            style: errorStyle)
+                        : SizedBox(),
+                    controller.isClick == false
+                        ? SizedBox()
+                        : Container(
+                            height: Get.height * 0.15,
+                            width: Get.width * 0.8,
+                            decoration: BoxDecoration(color: Colors.white),
+                            child: ListView.builder(
+                              itemCount: controller.categoryModel.data?.length??0,
+                              itemBuilder: (context, index) {
+                                return GestureDetector(
+                                  onTap: () {
+                                    // controller.categoryController.text = controller.categoryList[index].data![index].title ?? "";
+                                    // controller.CategoryId = controller.categoryList[index].data![index].title ?? "";
+                                  },
+                                  child: ListTile(
+                                    //title: Text("data"),
+                                   title: Text( controller.categoryModel.data![index].title ?? ""),
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                    /* const SizedBox(
                         height: 60,
                         width: double.infinity,
                         child: DropDownTextFled(
                           //controller: businessRegisterController.categoryController,
                           title: Strings.category,
-                        )),
+                        )),*/
                     SizedBox(
                       height: Get.height * 0.06,
                     ),
@@ -174,9 +214,9 @@ class BusinessRegisterScreen extends StatelessWidget {
                             businessRegisterController.registerUser(
                                 firstName: controller.userNameController.text,
                                 businessname:
-                                    controller.businessNameController.text,
-                                lastName:
                                     controller.businessEmailController.text,
+                                lastName:
+                                    controller.businessNameController.text,
                                 mobile: controller.passwordController.text,
                                 password: controller.passwordController.text,
                                 category: controller.categoryController.text);

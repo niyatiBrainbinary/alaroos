@@ -1,6 +1,10 @@
 class AssetsRes {
   static const images = "assets/Image/";
 
+
+  ///-------------------------------register-------------
+  static const down = images + "down.png";
+
   ///--------------------------------------images---------------------------
   static const login = images + "login_image.png";
   static const registation = images + "register_image.png";

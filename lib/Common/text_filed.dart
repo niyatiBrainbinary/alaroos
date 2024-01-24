@@ -1,7 +1,10 @@
 import 'package:alaroos/Common/text_style.dart';
+import 'package:alaroos/Screen/Auth/Guest_Auth/Guest_login/gusest_login.dart';
 import 'package:dropdown_textfield/dropdown_textfield.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
+import '../Screen/Auth/Business_Auth/Business_Register/register_controller.dart';
 import '../Utils/color_res.dart';
 import '../Utils/string.dart';
 
@@ -15,6 +18,9 @@ class CommonTextField extends StatelessWidget {
   final bool? isObSecure;
   final TextInputType? textInputType;
   final bool? isPhone;
+  final bool? isSuffixIcon;
+  final String? suffixIcon;
+  final GestureTapCallback? suffixIconOnTap;
   final String? Function(String?)? validator;
   const CommonTextField({
     Key? key,
@@ -26,7 +32,9 @@ class CommonTextField extends StatelessWidget {
     this.isPhone,
     this.validator,
     this.prefixText,
-    required this.keyboardType,
+    this.isSuffixIcon,
+    this.suffixIcon, 
+    required this.keyboardType, this.suffixIconOnTap,
   }) : super(key: key);
 
   @override
@@ -49,6 +57,16 @@ class CommonTextField extends StatelessWidget {
             labelText: title,
             labelStyle: textfiledLable,
             prefixText: prefixText,
+              suffixIcon: isSuffixIcon != null
+                  ? isSuffixIcon == true
+                  ? GestureDetector(
+                  onTap: suffixIconOnTap,
+                  child: Image.asset(
+                    suffixIcon ?? "",
+                    scale: 2.5,
+                  )
+              )
+                  : SizedBox(): null,
             border: OutlineInputBorder(
               borderSide: const BorderSide(color: Colors.red),
               borderRadius: BorderRadius.circular(4),
@@ -70,8 +88,12 @@ class DropDownTextFled extends StatelessWidget {
       {Key? key, this.controller, this.hintText, required this.title})
       : super(key: key);
 
+
   @override
   Widget build(BuildContext context) {
+
+    BusinessRegisterController businessRegisterController =
+    Get.put(BusinessRegisterController());
     return Scaffold(
       body: DropDownTextField(
         //controller: controller,
@@ -102,6 +124,7 @@ class DropDownTextFled extends StatelessWidget {
           }
         },
         dropDownList: const [
+
           DropDownValueModel(name: Strings.wedding, value: "value1"),
           DropDownValueModel(name: Strings.photoStudio, value: "value2"),
           DropDownValueModel(name: Strings.event, value: "value3"),
@@ -113,7 +136,11 @@ class DropDownTextFled extends StatelessWidget {
 
         dropDownItemCount: 7,
 
-        onChanged: (val) {},
+        onChanged: (val) async {
+if(businessRegisterController.validationSignup()){
+ await businessRegisterController.category();
+}
+        },
       ),
     );
   }
