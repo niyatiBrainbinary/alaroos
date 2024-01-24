@@ -17,7 +17,8 @@ class Business_Login_Screen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final BusinessLoginController businessLoginController = Get.put(BusinessLoginController());
+    final BusinessLoginController businessLoginController =
+        Get.put(BusinessLoginController());
     return Scaffold(
       body: GetBuilder<BusinessLoginController>(
         id: 'business_login',
@@ -100,7 +101,20 @@ class Business_Login_Screen extends StatelessWidget {
                     CommonBtn(
                       title: Strings.signin,
                       onTap: () {
-                        businessLoginController.onTapLogIn();
+                        FocusScope.of(context).unfocus();
+                        if (businessLoginController.validation()) {
+                          businessLoginController.BusinessLoginApi(
+                                  email: businessLoginController
+                                      .emailController.text,
+                                  password: businessLoginController
+                                      .passController.text)
+                              .then((value) {
+                            if (value == false) {
+                              businessLoginController.emailController.clear();
+                              businessLoginController.passController.clear();
+                            }
+                          });
+                        }
                       },
                     ),
                     SizedBox(

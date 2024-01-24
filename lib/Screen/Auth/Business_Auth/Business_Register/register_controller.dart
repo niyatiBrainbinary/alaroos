@@ -2,6 +2,7 @@ import 'package:alaroos/Screen/Home_Screen/home_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
+import '../../../../Api_calling/auth/business_register_api/business_register_api.dart';
 import '../../../../Utils/string.dart';
 import '../../../Category_select_Screen/category_screen.dart';
 import '../../../Dashboard/Widgets/bottom_bar.dart';
@@ -16,10 +17,14 @@ class BusinessRegisterController extends GetxController {
   TextEditingController phoneNoController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController categoryController = TextEditingController();
+  RxBool isLoading = false.obs;
 
-  // String selectCategoryType = "Wedding Venue";
 
-  //String categoryName = "Wedding Venue";
+  registerUser({email, password, firstName, lastName, mobile,businessname,category }) async {
+    isLoading.value = true;
+    await BusinessRegisterApi.businessRegisterApi(email: email, password: password, firstName: firstName, lastName: lastName, mobile: mobile, businessname: businessname, category: category);
+    isLoading.value = false;
+  }
 
   String categoryError = "";
   List categoryData = [];
@@ -125,15 +130,16 @@ class BusinessRegisterController extends GetxController {
   bool validationSignup() {
     validateUserName();
     validateBusinessName();
-    validateEmail();
-    validatePhone();
-    validatePassword();
+   // validateEmail();
+    //validatePhone();
+   // validatePassword();
 
     if (userName == '' &&
-        businessName == '' &&
-        businessEmail == '' &&
-        phoneNo == '' &&
-        password == '') {
+        businessName == ''
+      //  businessEmail == '' &&
+      //  phoneNo == '' &&
+      //  password == ''
+    ) {
       return true;
     } else {
       return false;

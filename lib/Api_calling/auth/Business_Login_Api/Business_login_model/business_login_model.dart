@@ -1,3 +1,7 @@
+// To parse this JSON data, do
+//
+//     final businessLoginModel = businessLoginModelFromJson(jsonString);
+
 import 'dart:convert';
 
 BusinessLoginModel businessLoginModelFromJson(String str) => BusinessLoginModel.fromJson(json.decode(str));
@@ -5,48 +9,48 @@ BusinessLoginModel businessLoginModelFromJson(String str) => BusinessLoginModel.
 String businessLoginModelToJson(BusinessLoginModel data) => json.encode(data.toJson());
 
 class BusinessLoginModel {
-  bool status;
-  int code;
-  Data data;
+  bool? status;
+  int? code;
+  Data? data;
 
   BusinessLoginModel({
-    required this.status,
-    required this.code,
-    required this.data,
+    this.status,
+    this.code,
+    this.data,
   });
 
   factory BusinessLoginModel.fromJson(Map<String, dynamic> json) => BusinessLoginModel(
     status: json["status"],
     code: json["code"],
-    data: Data.fromJson(json["data"]),
+    data: json["data"] == null ? null : Data.fromJson(json["data"]),
   );
 
   Map<String, dynamic> toJson() => {
     "status": status,
     "code": code,
-    "data": data.toJson(),
+    "data": data?.toJson(),
   };
 }
 
 class Data {
-  String id;
-  String firstname;
-  String lastname;
-  String businessname;
-  List<String> category;
-  String email;
-  String phone;
-  String token;
+  String? id;
+  String? firstname;
+  String? lastname;
+  String? businessname;
+  List<String>? category;
+  String? email;
+  String? phone;
+  String? token;
 
   Data({
-    required this.id,
-    required this.firstname,
-    required this.lastname,
-    required this.businessname,
-    required this.category,
-    required this.email,
-    required this.phone,
-    required this.token,
+    this.id,
+    this.firstname,
+    this.lastname,
+    this.businessname,
+    this.category,
+    this.email,
+    this.phone,
+    this.token,
   });
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
@@ -54,7 +58,7 @@ class Data {
     firstname: json["firstname"],
     lastname: json["lastname"],
     businessname: json["businessname"],
-    category: List<String>.from(json["category"].map((x) => x)),
+    category: json["category"] == null ? [] : List<String>.from(json["category"]!.map((x) => x)),
     email: json["email"],
     phone: json["phone"],
     token: json["token"],
@@ -65,7 +69,7 @@ class Data {
     "firstname": firstname,
     "lastname": lastname,
     "businessname": businessname,
-    "category": List<dynamic>.from(category.map((x) => x)),
+    "category": category == null ? [] : List<dynamic>.from(category!.map((x) => x)),
     "email": email,
     "phone": phone,
     "token": token,

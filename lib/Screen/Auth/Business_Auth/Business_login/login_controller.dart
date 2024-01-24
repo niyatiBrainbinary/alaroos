@@ -9,7 +9,9 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import '../../../../Api_calling/auth/Business_Login_Api/business_login_api.dart';
 import '../../../../Common/toast.dart';
+import '../../../../Utils/pref_key.dart';
 import '../../../../Utils/string.dart';
+import '../../../../service/pref_service.dart';
 import '../../../Category_select_Screen/category_screen.dart';
 import '../../../Dashboard/Widgets/bottom_bar.dart';
 import '../../../Dashboard/dashboard.dart';
@@ -21,8 +23,27 @@ class BusinessLoginController extends GetxController {
   TextEditingController passController = TextEditingController();
   String email = "";
   String pass = "";
-  RxBool loader = false.obs;
-  //BusinessLoginModel businessLoginModel =BusinessLoginModel(status: status, code: code, data: data);
+
+  RxBool isLoading = false.obs;
+  BusinessLoginModel businessLoginModel =BusinessLoginModel();
+
+  Future<bool> BusinessLoginApi({email,password})
+  async {
+    isLoading.value = true;
+    businessLoginModel =  await LoginApi.loginApi(email: email,password: password, userType: '');
+    PrefService.setValue(PrefKeys.registerToken, businessLoginModel.data!.id);
+    PrefService.setValue(PrefKeys.firstName, businessLoginModel.data!.firstname);
+    PrefService.setValue(PrefKeys.lastName, businessLoginModel.data!.lastname);
+    PrefService.setValue(PrefKeys.email, businessLoginModel.data!.email);
+    PrefService.setValue(PrefKeys.employeeId, businessLoginModel.data!.phone);
+    PrefService.setValue(PrefKeys.mobileNumber, businessLoginModel.data!.token);
+    isLoading.value = false;
+    return  isLoading.value;
+  }
+
+
+
+
   emailValidation() {
     if (emailController.text.trim() == "") {
       email = Strings.emailError;
@@ -41,7 +62,7 @@ class BusinessLoginController extends GetxController {
   passwordValidation() {
     if (passController.text.trim() == "") {
       pass = Strings.errorPass;
-    } else if (passController.text.length < 8) {
+    } else if (passController.text.length < 1) {
       pass = Strings.errorPass1;
     } else {
       pass = '';
