@@ -177,33 +177,50 @@ class BusinessRegisterScreen extends StatelessWidget {
                         : SizedBox(),
                     controller.isClick == false
                         ? SizedBox()
-                        : Container(
-                            height: Get.height * 0.15,
-                            width: Get.width * 0.8,
-                            decoration: BoxDecoration(color: Colors.white),
-                            child: ListView.builder(
-                              itemCount: controller.categoryModel.data?.length??0,
-                              itemBuilder: (context, index) {
-                                return GestureDetector(
-                                  onTap: () {
-                                    // controller.categoryController.text = controller.categoryList[index].data![index].title ?? "";
-                                    // controller.CategoryId = controller.categoryList[index].data![index].title ?? "";
-                                  },
-                                  child: ListTile(
-                                    //title: Text("data"),
-                                   title: Text( controller.categoryModel.data![index].title ?? ""),
-                                  ),
-                                );
-                              },
+                        : Align(
+                      alignment: Alignment.centerRight,
+                          child: Container(
+                            margin: const EdgeInsets.only(right: 8),
+                              height: Get.height * 0.15,
+                              width: Get.width * 0.65,
+                              decoration: BoxDecoration(color: Colors.white,boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.4),
+                                  blurRadius: 5
+                                )
+                              ]),
+                              child: ListView.builder(
+                                itemCount: controller.categoryModel.data?.length??0,
+                                itemBuilder: (context, index) {
+                                  return GestureDetector(
+                                    onTap: () {
+                                      controller.categoryController.text = controller.categoryModel.data?[index].title ?? "";
+                                      controller.CategoryId = controller.categoryModel.data?[index].id ?? "";
+                                      controller.isClick = false;
+                                      controller.update(["business_register"]);
+                                    },
+                                    child: Container(
+                                      padding: EdgeInsets.symmetric(horizontal: 15,vertical: 10),
+                                      child: Row(
+                                        children: [
+                                          Expanded(child: Text(controller.categoryModel.data?[index].title ?? "")),
+                                          controller.CategoryId == controller.categoryModel.data?[index].id ? const Icon(Icons.check,color: Colors.green) : const SizedBox(),
+                                        ],
+                                      ),
+
+                                    ),
+                                  );
+                                },
+                              ),
                             ),
-                          ),
-                    /* const SizedBox(
-                        height: 60,
-                        width: double.infinity,
-                        child: DropDownTextFled(
-                          //controller: businessRegisterController.categoryController,
-                          title: Strings.category,
-                        )),*/
+                        ),
+                     // const SizedBox(
+                     //    height: 60,
+                     //    width: double.infinity,
+                     //    child: DropDownTextFled(
+                     //      //controller: businessRegisterController.categoryController,
+                     //      title: Strings.category,
+                     //    )),
                     SizedBox(
                       height: Get.height * 0.06,
                     ),

@@ -33,6 +33,7 @@ String CategoryId = "";
     isLoading.value = false;
   }
 
+
   category () async {
     isLoading.value = true;
     categoryModel = await CategoryApi.categoryApi();
@@ -175,5 +176,12 @@ String CategoryId = "";
     if (validationSignup()) {
       Get.to(() => Select_Language());
     }
+  }
+
+  @override
+  Future<void> onInit() async {
+    // TODO: implement onInit
+    super.onInit();
+    await category();
   }
 }
