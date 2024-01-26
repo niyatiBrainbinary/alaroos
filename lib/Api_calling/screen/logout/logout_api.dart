@@ -15,14 +15,14 @@ import '../../../../service/http_service.dart';
 import '../../../Utils/pref_key.dart';
 import '../../../service/pref_service.dart';
 
-
+/*
 class LogoutApi {
   static Future logoutApi () async {
     String url = EndPoints.logout;
     http.Response? response = await HttpService.getApi(
         url: url,
         header: {
-          'Authorization' :"Bearer ${PrefService.getString(PrefKeys.registerToken)}" ,
+          'Authorization' :"Bearer ${PrefService.getString(PrefKeys.registerToken)}",
         }
     );
     final decoded = jsonDecode(response!.body);
@@ -36,7 +36,11 @@ class LogoutApi {
       return LogoutModel();
     }
   }
-}
+}*/
+
+
+
+
 /*
 Future<void> logout() async {
   try {

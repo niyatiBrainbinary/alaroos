@@ -8,7 +8,7 @@ class SettingController extends GetxController {
 
 
 
-  logout () async {
+ /* logout () async {
     isLoading.value = true;
     logoutModel = await LogoutApi.logoutApi();
     isLoading.value = false;
@@ -19,5 +19,5 @@ class SettingController extends GetxController {
     // TODO: implement onInit
     logout();
     super.onInit();
-  }
+  }*/
 }

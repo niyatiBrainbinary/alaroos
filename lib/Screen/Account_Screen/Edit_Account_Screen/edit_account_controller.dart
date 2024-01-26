@@ -20,6 +20,7 @@ class Edit_Account_Controller extends GetxController {
     super.onInit();
 
   }
+  GlobalKey<ScaffoldState> scaffoldkey = GlobalKey<ScaffoldState>();
   final GlobalKey<FormState> editForm = GlobalKey<FormState>();
   TextEditingController editNameController = TextEditingController();
   TextEditingController editBusinessNameController = TextEditingController();
@@ -61,29 +62,9 @@ class Edit_Account_Controller extends GetxController {
     isLoading.value = false;
   }
 
-  File? _selectedImage;
 
 
 
-  File? image;
-  final ImagePicker picker = ImagePicker();
-  Future<void> getImageFromCamera() async {
-    final XFile? photo = await picker.pickImage(source: ImageSource.camera);
 
-    if (photo != null) {
-      image = File(photo.path);
-      if(image != null)
-      {
-
-
-
-      }
-
-
-      //  String imageUrl = await uploadImage(image);
-      //    print('Image URL: $imageUrl');
-    }
-    update(['profile']);
-  }
 
 }

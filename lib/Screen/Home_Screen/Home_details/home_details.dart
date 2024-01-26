@@ -47,7 +47,7 @@ class Home_Details_Screen extends StatelessWidget {
               ),
             ];
           },
-          body: const Column(
+          body:  Column(
             children: <Widget>[
               Material(
 

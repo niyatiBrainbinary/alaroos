@@ -91,9 +91,9 @@ SettingController settingController = Get.put(SettingController());
             child: Setting_Btn_List(
               title: Strings.logout,
               onTap: () {
-                settingController.logout();
-               // PrefService.clear();
-
+              //  settingController.logout();
+                PrefService.clear();
+                Get.to(() => Splash_Screen());
               },
               icon: Icons.logout,
             ),

@@ -16,6 +16,10 @@ class AssetsRes {
   static const image2 = images + "image2.png";
   static const userImage2 = images + "profilePicture.png";
 
+  ///-------------------home-----------------
+   static const videoImage =  images + "videoImage.png";
+
+
   ///--------------------------- gallery image list -----------------------
   static const List<String> imageUrls = [
     'assets/Image/image1.png',

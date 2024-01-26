@@ -26,18 +26,19 @@ class Edit_Account_Screen extends StatefulWidget {
 class _Edit_Account_ScreenState extends State<Edit_Account_Screen> {
   Edit_Account_Controller editAccountController =
       Get.put(Edit_Account_Controller());
-  GlobalKey<ScaffoldState> scaffoldkey = GlobalKey<ScaffoldState>();
-  File? imgFile;
+ //
+  //File? imgFile;
 
   File? _selectedImage;
 
   Future<void> _pickImage() async {
-   // final pickedFile = await ImagePicker().getImage(source: ImageSource.gallery);
-final pickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
-    setState(() {
-      _selectedImage = pickedFile != null ? File(pickedFile.path) : null;
-    });
+    // final pickedFile = await ImagePicker().getImage(source: ImageSource.gallery);
+    final pickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
+
+    _selectedImage = pickedFile != null ? File(pickedFile.path) : null;
+    editAccountController.update(['edit_account']);
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +63,7 @@ final pickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
           id: 'edit_account',
           builder: (controller) {
             return Scaffold(
-              key: scaffoldkey,
+              key: controller.scaffoldkey,
               body: Padding(
                 padding: const EdgeInsets.only(left: 30, right: 30),
                 child: SingleChildScrollView(
@@ -74,55 +75,7 @@ final pickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
                         SizedBox(
                           height: Get.height * 0.04,
                         ),
-                        // CircleAvatar(
-                        //   radius: Get.height * 0.063,
-                        //   foregroundImage:
-                        //   (imgFile == null) ? null : FileImage(imgFile as File),
-                        //   child: FloatingActionButton(
-                        //     elevation: 0,
-                        //     onPressed: () async {
-                        //       scaffoldkey.currentState!.showBottomSheet(
-                        //             (context) => Container(
-                        //           height: 200,
-                        //           child: Column(
-                        //             children: [
-                        //               ListTile(
-                        //                 title: Text("Pick the Camera"),
-                        //                 onTap: () async {
-                        //                   ImagePicker picker = ImagePicker();
-                        //                   XFile? xfile = await picker.pickImage(
-                        //                       source: ImageSource.camera);
-                        //                   String path = xfile!.path;
-                        //                   setState(() {
-                        //                     imgFile = File(path);
-                        //                   });
-                        //                   Navigator.of(context).pop();
-                        //                 },
-                        //               ),
-                        //               ListTile(
-                        //                 title: Text("Pick the Gallery"),
-                        //                 onTap: () async {
-                        //                   ImagePicker picker = ImagePicker();
-                        //                   XFile? xfile = await picker.pickImage(
-                        //                       source: ImageSource.gallery);
-                        //                   String path = xfile!.path;
-                        //                   setState(() {
-                        //                     imgFile = File(path);
-                        //                   });
-                        //                   Navigator.of(context).pop();
-                        //                 },
-                        //               ),
-                        //             ],
-                        //           ),
-                        //         ),
-                        //       );
-                        //     },
-                        //     child: const Icon(
-                        //       Icons.camera_alt_outlined,
-                        //       size: 30,
-                        //     ),
-                        //   ),
-                        // ),
+
                       /*  Center(
                           child: GestureDetector(
                             onTap: _pickImage,

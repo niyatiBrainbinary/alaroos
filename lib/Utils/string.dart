@@ -77,6 +77,9 @@ class Strings {
   static const newPost = "New Post";
   static const titles = "Title";
   static const share = "Share";
+  static const addImage = "Add image";
+  static const titleError = "Enter title";
+  static const descriptionError = "Enter description";
 
   ///----------------------------------------home details -------------------------------
   static const trueline = "Trueline";
