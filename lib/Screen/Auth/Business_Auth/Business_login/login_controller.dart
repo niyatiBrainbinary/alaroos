@@ -27,18 +27,17 @@ class BusinessLoginController extends GetxController {
   RxBool isLoading = false.obs;
   BusinessLoginModel businessLoginModel =BusinessLoginModel();
 
-  Future<bool> BusinessLoginApi({email,password})
+  businessLoginApi({email,password})
   async {
     isLoading.value = true;
     businessLoginModel =  await LoginApi.loginApi(email: email,password: password, userType: '');
-    PrefService.setValue(PrefKeys.registerToken, businessLoginModel.data!.id);
-    PrefService.setValue(PrefKeys.firstName, businessLoginModel.data!.firstname);
-    PrefService.setValue(PrefKeys.lastName, businessLoginModel.data!.lastname);
-    PrefService.setValue(PrefKeys.email, businessLoginModel.data!.email);
-    PrefService.setValue(PrefKeys.employeeId, businessLoginModel.data!.phone);
-    PrefService.setValue(PrefKeys.mobileNumber, businessLoginModel.data!.token);
+     PrefService.setValue(PrefKeys.registerToken, businessLoginModel.data?.token);
+    PrefService.setValue(PrefKeys.firstName, businessLoginModel.data?.firstname);
+    PrefService.setValue(PrefKeys.lastName, businessLoginModel.data?.lastname);
+    PrefService.setValue(PrefKeys.email, businessLoginModel.data?.email);
+    PrefService.setValue(PrefKeys.mobileNumber, businessLoginModel.data?.phone);
+   PrefService.setValue(PrefKeys.employeeId, businessLoginModel.data?.id);
     isLoading.value = false;
-    return  isLoading.value;
   }
 
 

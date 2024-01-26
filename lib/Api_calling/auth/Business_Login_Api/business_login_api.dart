@@ -16,7 +16,8 @@ class LoginApi {
 
   static Future loginApi({required String email, required String password, required String userType}) async {
 
-
+    https://fbe4-2405-201-2024-ad6b-29-13e8-81f1-f63b.ngrok-free.app/api/businessuser/login-user?email=abc@gmail.com&password=userb1203&userTypes=
+    https://fbe4-2405-201-2024-ad6b-29-13e8-81f1-f63b.ngrok-free.app/api/businessuser/register-user
     try{
       String url = "${EndPoints.businesslogin}?email=$email&password=$password&userTypes=$userType";
 
@@ -33,15 +34,19 @@ class LoginApi {
   
  // if(decoded["success"]== true){
     PrefService.setValue(PrefKeys.login, true);
+    // PrefService.setValue(PrefKeys.firstName, decoded["data"]["firstname"]);
     Get.to(() => Select_Language());
 
 
   //}
-        return (userType == "consumer")
-            ? businessLoginModelFromJson(response.body)
-            : (userType == "Staff");
-            // ?  loginStaffModelFromJson(response.body)
-            // : loginMerchantModelFromJson(response.body);
+  //       return (userType == "consumer")
+  //           ? businessLoginModelFromJson(response.body)
+  //           : (userType == "Staff");
+  //           // ?  loginStaffModelFromJson(response.body)
+  //           // : loginMerchantModelFromJson(response.body);
+
+        return businessLoginModelFromJson(response.body);
+
       } else {
         print('Error:::: ${response.body}');
         errorToast(Strings.userNotFound);

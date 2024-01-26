@@ -37,7 +37,7 @@ class Data {
   String? firstname;
   String? lastname;
   String? businessname;
-  List<String>? category;
+  String? category;
   String? email;
   String? phone;
   String? token;
@@ -58,7 +58,7 @@ class Data {
     firstname: json["firstname"],
     lastname: json["lastname"],
     businessname: json["businessname"],
-    category: json["category"] == null ? [] : List<String>.from(json["category"]!.map((x) => x)),
+    category: json["category"],
     email: json["email"],
     phone: json["phone"],
     token: json["token"],
@@ -69,7 +69,7 @@ class Data {
     "firstname": firstname,
     "lastname": lastname,
     "businessname": businessname,
-    "category": category == null ? [] : List<dynamic>.from(category!.map((x) => x)),
+    "category": category,
     "email": email,
     "phone": phone,
     "token": token,

@@ -60,7 +60,7 @@ Widget profile(BuildContext contex) {
         children: [
           GestureDetector(
             onTap: () {
-              Get.to(() => const Profile_Screen());
+              Get.to(() =>  Profile_Screen());
             },
             child: Padding(
               padding: const EdgeInsets.only(left: 20, right: 20),

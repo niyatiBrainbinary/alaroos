@@ -1,7 +1,9 @@
 import 'package:alaroos/Screen/Account_Screen/account_screen.dart';
 import 'package:alaroos/Screen/Select_Language/select_language.dart';
+import 'package:alaroos/Screen/Setting_Screen/setting_controller.dart';
 import 'package:alaroos/Screen/Setting_Screen/widget/setting_btn_list.dart';
 import 'package:alaroos/Screen/Splash/splash_screen.dart';
+import 'package:alaroos/service/pref_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -11,8 +13,8 @@ import '../../Utils/color_res.dart';
 import '../../Utils/string.dart';
 
 class Setting_Screen extends StatelessWidget {
-  const Setting_Screen({Key? key}) : super(key: key);
-
+   Setting_Screen({Key? key}) : super(key: key);
+SettingController settingController = Get.put(SettingController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -89,7 +91,9 @@ class Setting_Screen extends StatelessWidget {
             child: Setting_Btn_List(
               title: Strings.logout,
               onTap: () {
-                Get.to(() => Splash_Screen());
+                settingController.logout();
+               // PrefService.clear();
+
               },
               icon: Icons.logout,
             ),

@@ -12,7 +12,9 @@ import '../../../Common/text_filed.dart';
 import '../../../Common/text_style.dart';
 import '../../../Utils/assets_res.dart';
 import '../../../Utils/color_res.dart';
+import '../../../Utils/pref_key.dart';
 import '../../../Utils/string.dart';
+import '../../../service/pref_service.dart';
 
 class Edit_Account_Screen extends StatefulWidget {
   const Edit_Account_Screen({Key? key}) : super(key: key);
@@ -22,12 +24,23 @@ class Edit_Account_Screen extends StatefulWidget {
 }
 
 class _Edit_Account_ScreenState extends State<Edit_Account_Screen> {
+  Edit_Account_Controller editAccountController =
+      Get.put(Edit_Account_Controller());
+  GlobalKey<ScaffoldState> scaffoldkey = GlobalKey<ScaffoldState>();
+  File? imgFile;
+
+  File? _selectedImage;
+
+  Future<void> _pickImage() async {
+   // final pickedFile = await ImagePicker().getImage(source: ImageSource.gallery);
+final pickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
+    setState(() {
+      _selectedImage = pickedFile != null ? File(pickedFile.path) : null;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    GlobalKey<ScaffoldState> scaffoldkey = GlobalKey<ScaffoldState>();
-    File? imgFile;
-    Edit_Account_Controller edit_account_controller =
-        Get.put(Edit_Account_Controller());
     return Scaffold(
         appBar: AppBar(
           leading: IconButton(
@@ -54,7 +67,7 @@ class _Edit_Account_ScreenState extends State<Edit_Account_Screen> {
                 padding: const EdgeInsets.only(left: 30, right: 30),
                 child: SingleChildScrollView(
                   child: Form(
-                    key: edit_account_controller.editForm,
+                    key: editAccountController.editForm,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
@@ -110,11 +123,36 @@ class _Edit_Account_ScreenState extends State<Edit_Account_Screen> {
                         //     ),
                         //   ),
                         // ),
-                        Center(
-                          child: CircleAvatar(
-                            radius: Get.height * 0.063,
-                            foregroundImage: AssetImage(AssetsRes.userImage2),
+                      /*  Center(
+                          child: GestureDetector(
+                            onTap: _pickImage,
+                            child: CircleAvatar(
+                              //backgroundImage: _selectedImage != null ? FileImage(_selectedImage!) : null,
+                              radius: Get.height * 0.063,
+                              foregroundImage: AssetImage(AssetsRes.userImage2),
+                              child: _selectedImage == null
+                                  ? Icon(Icons.camera_alt, size: 50.0, color: Colors.white)
+                                  : null,
+                            ),
                           ),
+                        ),*/
+                        GestureDetector(
+                          onTap: _pickImage,
+                          child: Container(
+                              height: 100,
+                              width: 100,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Colors.blue,
+                                image: _selectedImage == null
+                                    ? PrefService.getString(PrefKeys.userImage) != ""?
+                                DecorationImage(fit: BoxFit.fill,image: NetworkImage(PrefService.getString(PrefKeys.userImage))):DecorationImage(image: AssetImage(AssetsRes.userImage2))
+                                    : DecorationImage(
+                                    fit: BoxFit.fill,
+                                    image: FileImage(
+                                      File(_selectedImage!.path),
+                                    )),
+                              )),
                         ),
                         SizedBox(
                           height: Get.height * 0.02,
@@ -130,9 +168,11 @@ class _Edit_Account_ScreenState extends State<Edit_Account_Screen> {
                           height: 60,
                           width: double.infinity,
                           child: CommonTextField(
+                            // readOnly: true
+                            // ,
                             title: Strings.name,
                             controller:
-                                edit_account_controller.editNameController,
+                                editAccountController.editNameController,
                             keyboardType: TextInputType.text,
                           ),
                         ),
@@ -146,7 +186,7 @@ class _Edit_Account_ScreenState extends State<Edit_Account_Screen> {
                           child: CommonTextField(
                             title: Strings.email,
                             controller:
-                                edit_account_controller.editEmailController,
+                                editAccountController.editEmailController,
                             keyboardType: TextInputType.text,
                           ),
                         ),
@@ -159,7 +199,7 @@ class _Edit_Account_ScreenState extends State<Edit_Account_Screen> {
                           width: double.infinity,
                           child: CommonTextField(
                             title: Strings.businessName,
-                            controller: edit_account_controller
+                            controller: editAccountController
                                 .editBusinessNameController,
                             keyboardType: TextInputType.emailAddress,
                           ),
@@ -173,7 +213,7 @@ class _Edit_Account_ScreenState extends State<Edit_Account_Screen> {
                           child: CommonTextField(
                             title: Strings.password,
                             controller:
-                                edit_account_controller.editPasswordController,
+                                editAccountController.editPasswordController,
                             isObSecure: true,
                             keyboardType: TextInputType.visiblePassword,
                           ),
@@ -189,7 +229,7 @@ class _Edit_Account_ScreenState extends State<Edit_Account_Screen> {
                             title: Strings.phoneno,
                             prefixText: "+91 ",
                             controller:
-                                edit_account_controller.editPhoneNoController,
+                                editAccountController.editPhoneNoController,
                             keyboardType: TextInputType.phone,
                           ),
                         ),
@@ -201,7 +241,7 @@ class _Edit_Account_ScreenState extends State<Edit_Account_Screen> {
                           width: double.infinity,
                           child: CommonTextField(
                             title: Strings.link,
-                            controller: edit_account_controller.linkController,
+                            controller: editAccountController.linkController,
                             keyboardType: TextInputType.emailAddress,
                           ),
                         ),
@@ -211,7 +251,16 @@ class _Edit_Account_ScreenState extends State<Edit_Account_Screen> {
                         ),
                         CommonBtn(
                             onTap: () async {
-                              Get.to(()=>Profile_Screen());
+                              editAccountController.editProfileApi(
+                                  email: editAccountController.editEmailController.text,
+                                  firstName: editAccountController.editNameController.text,
+                                  lastName: editAccountController.editBusinessNameController.text,
+                                  phone: editAccountController.editPhoneNoController.text,
+                                  businessname: editAccountController.editBusinessNameController.text,
+                                  profileImage: '');
+                              //profileScreenController.isEditProfile = true;
+                              editAccountController.update(['edit_account']);
+
                               // edit_account_controller.onTapSignUp();
                             },
                             title: Strings.saveChange),

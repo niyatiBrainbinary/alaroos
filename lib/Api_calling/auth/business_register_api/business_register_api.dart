@@ -1,4 +1,6 @@
 import 'package:alaroos/Screen/Auth/Forgot_Password/forgot_pass.dart';
+import 'package:alaroos/Utils/pref_key.dart';
+import 'package:alaroos/service/pref_service.dart';
 import 'package:get/get_connect/http/src/response/response.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get.dart';
@@ -11,7 +13,7 @@ import '../../../service/http_service.dart';
 
 class BusinessRegisterApi {
   static businessRegisterApi(
-      {password, firstName, lastName, mobile,businessname, category  }) async {
+      {password, firstName, lastName, mobile,businessname, categoryId ,email}) async {
     String url = EndPoints.businessRegister;
 
 /*    Map<String, dynamic> translateBody = {
@@ -46,7 +48,8 @@ class BusinessRegisterApi {
          "firstname":firstName,
          "lastname" : lastName,
          "businessname" : businessname,
-         "category" : category,
+         "email": email,
+         "category" : categoryId,
          "phone": mobile,
          "password":password
        },
@@ -59,6 +62,8 @@ class BusinessRegisterApi {
     if (response.statusCode == 200) {
       // flutterToast(decoded["message"]["en"]);
       // PrefService.setValue(PrefKeys.loginType, role.toString().capitalizeFirst);
+      PrefService.setValue(PrefKeys.firstName, decoded["user"]["firstname"]);
+      print("kmijmkjmkmkkmkm${PrefService.getString(PrefKeys.firstName)}");
       Get.to(() => Forgot_Password_Screen());
       return response.body;
     }  else {

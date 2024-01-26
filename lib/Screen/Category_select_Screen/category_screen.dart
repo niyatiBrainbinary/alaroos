@@ -1,4 +1,5 @@
 import 'package:alaroos/Screen/Category_Screen/category_screen.dart';
+import 'package:alaroos/Screen/Category_select_Screen/category_controller.dart';
 import 'package:alaroos/Screen/Dashboard/Widgets/bottom_bar.dart';
 import 'package:alaroos/Screen/WhatsApp_Message/Message_Screen/message_screen.dart';
 import 'package:flutter/cupertino.dart';
@@ -21,7 +22,7 @@ class Category_Select_Screen extends StatefulWidget {
 class _Category_Select_ScreenState extends State<Category_Select_Screen> {
 
   int currentindex=0;
-
+CategoryController categoryController = Get.put(CategoryController());
   @override
   Widget build(BuildContext context) {
     PageController pageController = PageController();
@@ -150,8 +151,13 @@ class _Category_Select_ScreenState extends State<Category_Select_Screen> {
               padding: const EdgeInsets.only(left: 30, right: 30),
               child: CommonBtn(
                   onTap: () {
+                    FocusScope.of(context).unfocus();
+                    categoryController.onInit();
                     //Get.to(() => const BottomBar());
-                    Get.to(() => const Category_Screen());
+                    Get.to(() =>  Category_Screen(
+
+                     //   categoryController.onInit();
+                    ));
                   },
                   title: Strings.start),
             ),

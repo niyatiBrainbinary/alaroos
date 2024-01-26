@@ -29,7 +29,7 @@ String CategoryId = "";
 
   registerUser({password, firstName, lastName, mobile,businessname,category }) async {
     isLoading.value = true;
-    await BusinessRegisterApi.businessRegisterApi(password: password, firstName: firstName, lastName: lastName, mobile: mobile, businessname: businessname, category: category);
+    await BusinessRegisterApi.businessRegisterApi(password: password, firstName: firstName, lastName: lastName, mobile: mobile, businessname: businessname,email: businessEmail, categoryId: CategoryId);
     isLoading.value = false;
   }
 

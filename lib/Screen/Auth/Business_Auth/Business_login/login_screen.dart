@@ -103,17 +103,18 @@ class Business_Login_Screen extends StatelessWidget {
                       onTap: () {
                         FocusScope.of(context).unfocus();
                         if (businessLoginController.validation()) {
-                          businessLoginController.BusinessLoginApi(
+                          businessLoginController.businessLoginApi(
                                   email: businessLoginController
                                       .emailController.text,
                                   password: businessLoginController
-                                      .passController.text)
-                              .then((value) {
-                            if (value == false) {
-                              businessLoginController.emailController.clear();
-                              businessLoginController.passController.clear();
-                            }
-                          });
+                                      .passController.text
+                          //     .then((value) {
+                          //   if (value == false) {
+                          //     businessLoginController.emailController.clear();
+                          //     businessLoginController.passController.clear();
+                          //   }
+                          // }
+                          );
                         }
                       },
                     ),

@@ -19,6 +19,8 @@ class CommonTextField extends StatelessWidget {
   final TextInputType? textInputType;
   final bool? isPhone;
   final bool? isSuffixIcon;
+  final bool? readOnly;
+ // final bool? readOnly;
   final String? suffixIcon;
   final GestureTapCallback? suffixIconOnTap;
   final String? Function(String?)? validator;
@@ -34,7 +36,7 @@ class CommonTextField extends StatelessWidget {
     this.prefixText,
     this.isSuffixIcon,
     this.suffixIcon, 
-    required this.keyboardType, this.suffixIconOnTap,
+    required this.keyboardType, this.suffixIconOnTap, this.readOnly,
   }) : super(key: key);
 
   @override
@@ -44,6 +46,7 @@ class CommonTextField extends StatelessWidget {
         //height: 50,
         width: double.infinity,
         child: TextFormField(
+          readOnly: readOnly ?? false,
           controller: controller,
           obscureText: isObSecure ?? false,
           keyboardType: keyboardType,
