@@ -39,19 +39,24 @@ class AddVideoModel {
 class Datum {
   String? mediaUrl;
   String? publicId;
+  String? type;
 
   Datum({
     this.mediaUrl,
     this.publicId,
+    this.type
   });
 
   factory Datum.fromJson(Map<String, dynamic> json) => Datum(
     mediaUrl: json["mediaUrl"],
     publicId: json["public_id"],
+    type: json["resource_type"],
   );
 
   Map<String, dynamic> toJson() => {
     "mediaUrl": mediaUrl,
     "public_id": publicId,
+    "resource_type": type,
+
   };
 }

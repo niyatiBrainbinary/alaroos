@@ -99,40 +99,32 @@ class AddPostApi {
 
 class AddPostApi {
 
-  static Future addPostApi({title,description,image_id, image_url, video_id,video_url}) async {
-
+  static Future addPostApi({title,description,id,url,type}) async {
+     String typeD ='image';
+     if(type=="video"){
+       typeD = "videos";
+     }
     // try{
       var headers = {
         'Content-Type': 'application/json',
         'Authorization': "Bearer ${PrefService.getString(PrefKeys.registerToken)}",
-        'Cookie': 'refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1YjMyZjRlMTM2ZTdmNmJmMWVmNTVmNiIsImlhdCI6MTcwNjI0NzM5OCwiZXhwIjoxNzA2NTA2NTk4fQ.ilZtUCuWDOmGuSw7O_zDvj4fLjgO5PPDq3G2taNCbiU'
       };
-      var request = http.Request('POST', Uri.parse('https://7a51-2405-201-2024-ad6b-34d7-c362-2d5-88cc.ngrok-free.app/api/businessuser/addpost/65b32f4e136e7f6bf1ef55f6'));
-      request.body = json.encode({
-        "title": title,
-        "description": description,
-        "images": [
-          {
-            "public_id": "w2lpcqgg39dkzzv5l1v1",
-            "url": image_url
-          },
-        ],
-        "videos": [
-          {
-            "public_id": "topjalkjkhrldd5u4fii",
-            "url": "https://res.cloudinary.com/de21nmsb1/video/upload/v1706156545/topjalkjkhrldd5u4fii.mov"
-          }
-        ]
-      });
+      var request = http.Request('POST', Uri.parse('${EndPoints.mainBaseUrl}/api/businessuser/addpost/${PrefService.getString(PrefKeys.employeeId)}'));
+     request.body = json.encode({
+       "title":title,
+       "description": description,
+       "images": {
+         "public_id": id,
+         "url": url,
+         "resource_type": typeD
+       }
+     });
       request.headers.addAll(headers);
 
       http.StreamedResponse response = await request.send();
 
       if (response.statusCode == 200) {
         var responded = await http.Response.fromStream(response);
-        final decoded = jsonDecode(responded.body);
-
-        print(decoded);
        // print(await response.stream.bytesToString());
       //  Get.to(() => Account_Screen());
        return addPostModelFromJson(responded.body);

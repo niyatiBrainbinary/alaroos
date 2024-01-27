@@ -8,8 +8,19 @@ import '../../Common/common_btn.dart';
 import '../../Utils/color_res.dart';
 import '../Auth/Business_Auth/Business_login/login_screen.dart';
 
-class Splash_Screen extends StatelessWidget {
+class Splash_Screen extends StatefulWidget {
   const Splash_Screen({Key? key}) : super(key: key);
+
+  @override
+  State<Splash_Screen> createState() => _Splash_ScreenState();
+}
+
+class _Splash_ScreenState extends State<Splash_Screen> {
+  @override
+  void initState() {
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,10 +35,10 @@ class Splash_Screen extends StatelessWidget {
                 BoxShadow(
                   color: ColorRes.shadowColor.withOpacity(0.1),
                   blurRadius: 10,
-                  offset: Offset(0, 5),
+                  offset: const Offset(0, 5),
                 ),
               ],
-              borderRadius: BorderRadius.only(
+              borderRadius: const BorderRadius.only(
                 bottomLeft: Radius.circular(30),
                 bottomRight: Radius.circular(30),
               ),

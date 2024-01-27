@@ -1,74 +1,74 @@
 // To parse this JSON data, do
 //
-//     final addPostModel = addPostModelFromJson(jsonString);
+//     final getAllPostModel = getAllPostModelFromJson(jsonString);
 
 import 'dart:convert';
 
-AddPostModel addPostModelFromJson(String str) => AddPostModel.fromJson(json.decode(str));
+GetAllPostModel getAllPostModelFromJson(String str) => GetAllPostModel.fromJson(json.decode(str));
 
-String addPostModelToJson(AddPostModel data) => json.encode(data.toJson());
+String getAllPostModelToJson(GetAllPostModel data) => json.encode(data.toJson());
 
-class AddPostModel {
+class GetAllPostModel {
   bool? success;
   int? code;
-  Data? data;
+  List<Datum>? data;
 
-  AddPostModel({
+  GetAllPostModel({
     this.success,
     this.code,
     this.data,
   });
 
-  factory AddPostModel.fromJson(Map<String, dynamic> json) => AddPostModel(
+  factory GetAllPostModel.fromJson(Map<String, dynamic> json) => GetAllPostModel(
     success: json["success"],
     code: json["code"],
-    data: json["data"] == null ? null : Data.fromJson(json["data"]),
+    data: json["data"] == null ? [] : List<Datum>.from(json["data"]!.map((x) => Datum.fromJson(x))),
   );
 
   Map<String, dynamic> toJson() => {
     "success": success,
     "code": code,
-    "data": data?.toJson(),
+    "data": data == null ? [] : List<dynamic>.from(data!.map((x) => x.toJson())),
   };
 }
 
-class Data {
+class Datum {
+  String? id;
   String? title;
   String? description;
-  Images? images;
-  String? id;
   DateTime? createdAt;
   DateTime? updatedAt;
   int? v;
+  Images? images;
 
-  Data({
+  Datum({
+    this.id,
     this.title,
     this.description,
-    this.images,
-    this.id,
     this.createdAt,
     this.updatedAt,
     this.v,
+    this.images,
   });
 
-  factory Data.fromJson(Map<String, dynamic> json) => Data(
+  factory Datum.fromJson(Map<String, dynamic> json) => Datum(
+    id: json["_id"],
     title: json["title"],
     description: json["description"],
-    images: json["images"] == null ? null : Images.fromJson(json["images"]),
-    id: json["_id"],
     createdAt: json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
     updatedAt: json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),
     v: json["__v"],
+    images: json["images"] == null ? null : Images.fromJson(json["images"]),
   );
 
   Map<String, dynamic> toJson() => {
+    "_id": id,
     "title": title,
     "description": description,
-    "images": images?.toJson(),
-    "_id": id,
     "createdAt": createdAt?.toIso8601String(),
     "updatedAt": updatedAt?.toIso8601String(),
     "__v": v,
+    "images": images?.toJson(),
   };
 }
 

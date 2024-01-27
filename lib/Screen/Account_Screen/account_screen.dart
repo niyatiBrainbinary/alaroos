@@ -1,3 +1,4 @@
+import 'package:alaroos/Screen/Home_Screen/Add_New_Post/add_new_post_controller.dart';
 import 'package:alaroos/Screen/Setting_Screen/setting_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +9,6 @@ import '../../Utils/color_res.dart';
 import '../../Utils/string.dart';
 import '../Home_Screen/Home_details/Components/Gallery/gallery.dart';
 import '../Home_Screen/Home_details/Components/Reels/reels.dart';
-import '../Home_Screen/Home_details/widget/profile_header_widget.dart';
 import 'Profile_Screen/widget/profile.dart';
 
 class Account_Screen extends StatelessWidget {
@@ -16,6 +16,9 @@ class Account_Screen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AddNewPostController addNewPostController = Get.put(AddNewPostController());
+    addNewPostController.callApiGetAllPost();
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -26,8 +29,10 @@ class Account_Screen extends StatelessWidget {
         ),
         actions: [
           IconButton(
-            onPressed: () {Get.to(()=>Setting_Screen());},
-            icon: Icon(CupertinoIcons.settings),
+            onPressed: () {
+              Get.to(() => Setting_Screen());
+            },
+            icon: const Icon(CupertinoIcons.settings),
           ),
         ],
         shape: const Border(bottom: BorderSide(color: ColorRes.textColor)),
@@ -39,52 +44,59 @@ class Account_Screen extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-      body: DefaultTabController(
-        length: 2,
-        child: NestedScrollView(
-          headerSliverBuilder: (context, _) {
-            return [
-              SliverList(
-                delegate: SliverChildListDelegate(
-                  [
-                    profile(context),
-                  ],
-                ),
-              ),
-            ];
-          },
-          body:  Column(
-            children: <Widget>[
-              Material(
-                color: Colors.white,
-                child: TabBar(
-                  unselectedLabelColor: ColorRes.textfiledBorder,
-                  labelColor: ColorRes.textColor,
-                  tabs: [
-                    Tab(
-                      icon: Icon(
-                        Icons.image_outlined,
-                      ),
+      body: Stack(
+        children: [
+          DefaultTabController(
+            length: 2,
+            child: NestedScrollView(
+              headerSliverBuilder: (context, _) {
+                return [
+                  SliverList(
+                    delegate: SliverChildListDelegate(
+                      [
+                        profile(context),
+                      ],
                     ),
-                    Tab(
-                      icon: Icon(
-                        Icons.video_camera_back_outlined,
-                      ),
+                  ),
+                ];
+              },
+              body: Column(
+                children: <Widget>[
+                  const Material(
+                    color: Colors.white,
+                    child: TabBar(
+                      unselectedLabelColor: ColorRes.textfiledBorder,
+                      labelColor: ColorRes.textColor,
+                      tabs: [
+                        Tab(
+                          icon: Icon(
+                            Icons.image_outlined,
+                          ),
+                        ),
+                        Tab(
+                          icon: Icon(
+                            Icons.video_camera_back_outlined,
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                  Expanded(
+                    child: TabBarView(
+                      children: [
+                        Gallery(),
+                        const Reels(),
+                      ],
+                    ),
+                  ),
+                ],
               ),
-              Expanded(
-                child: TabBarView(
-                  children: [
-                    Gallery(),
-                    Reels(),
-                  ],
-                ),
-              ),
-            ],
+            ),
           ),
-        ),
+          Obx(() => addNewPostController.isLoading.isTrue
+              ? const Center(child: CircularProgressIndicator())
+              : const SizedBox())
+        ],
       ),
     );
   }

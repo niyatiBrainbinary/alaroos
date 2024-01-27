@@ -1,5 +1,6 @@
 class AssetsRes {
   static const images = "assets/Image/";
+  static const icons = "assets/Image/icons/";
 
 
   ///-------------------------------register-------------
@@ -52,4 +53,5 @@ class AssetsRes {
   static const decorationPlanner =
       images + "Search_images/decorationPlanner.png";
   static const designer = images + "Search_images/Designer.png";
+  static const play = icons + "play.png";
 }

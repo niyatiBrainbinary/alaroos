@@ -31,7 +31,9 @@ class BusinessLoginController extends GetxController {
   async {
     isLoading.value = true;
     businessLoginModel =  await LoginApi.loginApi(email: email,password: password, userType: '');
-     PrefService.setValue(PrefKeys.registerToken, businessLoginModel.data?.token);
+    if(businessLoginModel.data!=null){
+      await PrefService.setValue(PrefKeys.registerToken, businessLoginModel.data!.token);
+    }
     PrefService.setValue(PrefKeys.firstName, businessLoginModel.data?.firstname);
     PrefService.setValue(PrefKeys.lastName, businessLoginModel.data?.lastname);
     PrefService.setValue(PrefKeys.email, businessLoginModel.data?.email);

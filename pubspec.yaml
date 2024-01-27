@@ -70,6 +70,7 @@ flutter:
     - assets/Image/
     - assets/Image/Gallery_images/
     - assets/Image/Search_images/
+    - assets/Image/icons/
 
   # To add assets to your application, add an assets section, like this:
   # assets:

@@ -1,10 +1,12 @@
+import 'dart:io';
+
 import 'package:alaroos/Api_calling/screen/add_post/add_post_api.dart';
 import 'package:alaroos/Api_calling/screen/add_post/add_post_model.dart';
 import 'package:alaroos/Api_calling/screen/add_video/add_video_model.dart';
+import 'package:alaroos/Api_calling/screen/get_all_post/get_all_post_api.dart';
+import 'package:alaroos/Api_calling/screen/get_all_post/get_all_post_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'dart:io';
-
 import 'package:image_picker/image_picker.dart';
 import 'package:video_player/video_player.dart';
 
@@ -23,7 +25,6 @@ class AddNewPostController extends GetxController {
   String imageError = "";
   String titleError = "";
   String descriptionError = "";
-
 /*
   imageValidation() {
     if (selectedImage == null) {
@@ -71,24 +72,19 @@ class AddNewPostController extends GetxController {
   void settingModalBottomSheet(BuildContext context){
     showModalBottomSheet(
         context: context,
-        builder: (BuildContext bc){
-          return Container(
-            child: Wrap(
-              children: <Widget>[
-                ListTile(
-                    leading: const Icon(Icons.music_note),
-                    title: const Text('photo'),
-                    onTap:
-                      pickImage
-
-                ),
-                ListTile(
-                  leading: const Icon(Icons.videocam),
-                  title: const Text('Video'),
-                  onTap: pickVideo,
-                ),
-              ],
-            ),
+        builder: (BuildContext bc) {
+          return Wrap(
+            children: <Widget>[
+              ListTile(
+                  leading: const Icon(Icons.music_note),
+                  title: const Text('photo'),
+                  onTap: pickImage),
+              ListTile(
+                leading: const Icon(Icons.videocam),
+                title: const Text('Video'),
+                onTap: pickVideo,
+              ),
+            ],
           );
         });
   }
@@ -100,18 +96,20 @@ class AddNewPostController extends GetxController {
     final pickedFile =
         await ImagePicker().pickImage(source: ImageSource.gallery);
 
-    if(pickedFile != null) {
-      await addVideoApi(file: File(pickedFile.path));
-      selectedImage =  File(pickedFile.path);
+    if (pickedFile != null) {
+      await addVideoApi(file: File(pickedFile.path), type: "image");
+      selectedImage = File(pickedFile.path);
+      update(['newPost']);
     }
 
     update(['newPost']);
   }
 
-
   VideoPlayerController? controller;
-   Future<void>? _initializeVideoPlayerFuture;
-   File? pickedVideoFile;
+  bool isPlaying = false;
+
+  Future<void>? _initializeVideoPlayerFuture;
+  File? pickedVideoFile;
 
   @override
   void dispose() {
@@ -120,43 +118,71 @@ class AddNewPostController extends GetxController {
   }
 
   Future<void> pickVideo() async {
-   //  pickedVideo = await ImagePicker().getVideo(source: ImageSource.gallery);
-var pickedVideo = await ImagePicker().pickVideo(source: ImageSource.gallery);
+    //  pickedVideo = await ImagePicker().getVideo(source: ImageSource.gallery);
+    var pickedVideo =
+        await ImagePicker().pickVideo(source: ImageSource.gallery);
     if (pickedVideo != null) {
-
-     await addVideoApi(file: File(pickedVideo.path));
-     if(addVideoModel.data != null){
-       //Get.to(() => Account_Screen());
+      await addVideoApi(file: File(pickedVideo.path), type: "video");
+      if (addVideoModel.data != null) {
+        //Get.to(() => Account_Screen());
 
         pickedVideoFile = File(pickedVideo.path);
-        controller = VideoPlayerController.file(pickedVideoFile!)
+        controller = VideoPlayerController.networkUrl(
+            Uri.parse(addVideoModel.data!.first.mediaUrl.toString()))
+          ..initialize().then(
+            (value) {
+              controller?.setLooping(true);
+              update(['newPost']);
+            },
+          );
+        /*    controller = VideoPlayerController.file(pickedVideoFile!)
           ..initialize().then((_) {
             controller?.setLooping(true);
-            controller?.play();
-          });}
-update(['newPost']);
+          */ /*  controller?.play();*/ /*
+            update(['newPost']);
+          });*/
+      }
+      update(['newPost']);
     }
   }
 
   RxBool isLoading = false.obs;
   AddPostModel addPostModel = AddPostModel();
 
-  Future addPostApi({required String title, required String description, required String image}) async {
+  Future addPostApi(
+      {required String title,
+      required String description,
+      required String image,
+      String? type,
+      String? id}) async {
     isLoading.value = true;
-    addPostModel = await AddPostApi.addPostApi(title: title, description: description, image_url: image);
-   if(addPostModel.data != null){
-    Get.to(() => const Account_Screen());
-   }
+    addPostModel = await AddPostApi.addPostApi(
+        title: title, description: description, url: image, id: id, type: type);
+    if (addPostModel.data != null) {
+      await callApiGetAllPost();
+      Get.to(() => const Account_Screen());
+    }
     isLoading.value = false;
   }
 
-AddVideoModel addVideoModel = AddVideoModel();
-  Future addVideoApi({required File file}) async {
-    isLoading.value = true;
-    addVideoModel = await AddVideoApi.addVideoApi(file: file);
+  AddVideoModel addVideoModel = AddVideoModel();
+
+  Future addVideoApi({required File file, String? type}) async {
+    try {
+      isLoading.value = true;
+
+      addVideoModel = await AddVideoApi.addVideoApi(file: file, type: type);
+      if (addVideoModel.data != null) {
+        Get.back();
+      }
+      isLoading.value = false;
+    } catch (e) {
+      isLoading.value = false;
+
+      debugPrint(e.toString());
+    }
     isLoading.value = false;
   }
-
 
   @override
   void onInit() {
@@ -165,7 +191,50 @@ AddVideoModel addVideoModel = AddVideoModel();
     controller?.setLooping(true);
     // TODO: implement onInit
     super.onInit();
-
-
   }
+
+  GetAllPostModel getAllPostModel = GetAllPostModel();
+  List<Map<String,dynamic>> images = [];
+  List<Map<String,dynamic>> videos = [];
+  List<VideoPlayerController> videoController = [];
+   int? currentIndex;
+  Future<void> callApiGetAllPost() async {
+    try {
+      isLoading.value = true;
+      getAllPostModel = GetAllPostModel();
+      images = [];
+      videos = [];
+      getAllPostModel = await GetAllPostApi.getAllPostApi();
+      if (getAllPostModel.data != null) {
+        for (int i = 0; i < getAllPostModel.data!.length; i++) {
+          if (getAllPostModel.data![i].images!.resourceType=="image") {
+            images.add({"url":getAllPostModel.data![i].images!.url,"des":getAllPostModel.data![i].description,
+            "title":getAllPostModel.data![i].title});
+
+          }
+          if (getAllPostModel.data![i].images!.resourceType=="video"){
+            currentIndex = 0;
+            videos.add({"url":getAllPostModel.data![i].images!.url,"des":getAllPostModel.data![i].description,
+              "title":getAllPostModel.data![i].title});
+            videoController.add( VideoPlayerController.network(getAllPostModel.data![i].images!.url.toString()));
+            initializeControllers();
+          }
+        }
+        debugPrint("${getAllPostModel.data!.first.images}");
+      }
+      isLoading.value = false;
+      update(["post"]);
+    } catch (e) {
+      isLoading.value = false;
+      update(["post"]);
+
+      debugPrint(e.toString());
+    }
+    isLoading.value = false;
+    update(["post"]);
+  }
+
+  void initializeControllers() async {
+    await Future.wait(videoController.map((controller) => controller.initialize()));
+    update(["post"]);  }
 }

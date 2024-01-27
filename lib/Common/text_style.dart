@@ -96,3 +96,8 @@ TextStyle notificationStyle = const TextStyle(
   fontSize: 10,
   fontFamily: FontRes.latoRegular,
 );
+TextStyle addImage = const TextStyle(
+  color: ColorRes.textColor,
+  fontSize: 29,fontWeight: FontWeight.w400,
+  fontFamily: FontRes.latoRegular,
+);
