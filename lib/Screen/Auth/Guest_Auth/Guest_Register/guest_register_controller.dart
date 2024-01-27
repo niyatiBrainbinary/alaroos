@@ -1,3 +1,5 @@
+import 'package:alaroos/Api_calling/auth/guest/guest_register/guest_register_api.dart';
+import 'package:alaroos/Api_calling/auth/guest/guest_register/guest_register_model.dart';
 import 'package:alaroos/Screen/Home_Screen/home_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
@@ -16,6 +18,15 @@ class GuestRegisterController extends GetxController {
   TextEditingController passwordController = TextEditingController();
 
   String firstName = "";
+  RxBool isLoading = false.obs;
+  GuestRegisterModel guestRegisterModel = GuestRegisterModel();
+
+  guestRegister({password, firstName, lastName,email}) async {
+    isLoading.value = true;
+    await GuestRegisterApi.guestRegisterApi(password: password, firstName: firstName, lastName: lastName,email: email);
+    isLoading.value = false;
+  }
+
 
   void setFirstName(String value) {
     firstName = value.trim();
@@ -74,7 +85,7 @@ class GuestRegisterController extends GetxController {
   validatePassword() {
     if (passwordController.text.trim() == "") {
       password = Strings.passwordErrorMessage;
-    } else if (password.length < 8) {
+    } else if (password.length < 1) {
       password = Strings.passwordErrorMessage1;
     } else {
       password = "";
@@ -82,22 +93,22 @@ class GuestRegisterController extends GetxController {
     update(['guest_register']);
   }
 
-  bool validationSignup() {
+/*  bool validation() {
     validateFirstName();
     validateLastName();
-    validateEmail();
-    validatePassword();
+    //validateEmail();
+   // validatePassword();
 
     if (firstName == '' && lastName == '' && email == '' && password == '') {
       return true;
     } else {
       return false;
     }
-  }
+  }*/
 
-  onTapSignUp() {
-    if (validationSignup()) {
+ /* onTapSignUp() {
+    if (validation()) {
       Get.to(() => Select_Language());
     }
-  }
+  }*/
 }

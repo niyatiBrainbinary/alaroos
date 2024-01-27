@@ -1,3 +1,4 @@
+import 'package:alaroos/Api_calling/auth/guest/forgot_password/forgot_password_api.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
@@ -16,6 +17,14 @@ class Forgot_Pass_Controller extends GetxController {
     forgotEmail = value.trim();
   }
 
+  RxBool isLoading = false.obs;
+
+  forgotPassword({email}) async {
+    isLoading.value = true;
+    await ForgotPasswordApi.forgotPasswordApi(email: email);
+    isLoading.value = false;
+  }
+
   validateForgotEmail() {
     final emailRegex = RegExp(
       r'^[\w-]+(\.[\w-]+)*@([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,7}$',
@@ -31,7 +40,7 @@ class Forgot_Pass_Controller extends GetxController {
   }
 
   bool validation() {
-    validateForgotEmail();
+   // validateForgotEmail();
 
     if (forgotEmail == '' && forgotEmail == '') {
       return true;

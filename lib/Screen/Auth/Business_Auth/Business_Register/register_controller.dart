@@ -56,51 +56,56 @@ String CategoryId = "";
   List categoryData = [];
 
   String selectCategoryType = Strings.selectCategory;
-  String categoryDrop = "";
-  List categoryName = [
-    "State 1",
-    "State 2",
-    "State 3",
-  ];
+
 
   String userName = "";
-
-
-  void setUserName(String value) {
-    userName = value.trim();
-  }
-
-  validateUserName() {
-    if (userNameController.text.trim() == "") {
-      userName = Strings.usernameerrorMessage;
-    } else {
-      userName = "";
-    }
-    update(['business_register']);
-  }
-
   String businessName = "";
+  String businessEmail = "";
+  String phoneNo = '';
+  String password = '';
 
-  void setBusinessName(String value) {
-    businessName = value.trim();
-  }
+  String userNameError = "";
+  String businessNameError = "";
+  String emailError = "";
+  String phoneError = "";
+  String passwordError = "";
 
-  validateBusinessName() {
-    if (businessNameController.text.trim() == "") {
-      businessName = Strings.businessnameerrorMessage;
+
+ /* void setUserName(String value) {
+    userName = value.trim();
+  }*/
+
+  userNameValidation() {
+    if (userNameController.text.trim() == "") {
+      userNameError = Strings.usernameerrorMessage;
     } else {
-      businessName = "";
+      userNameError = "";
     }
     update(['business_register']);
   }
 
-  String businessEmail = "";
 
+
+/*  void setBusinessName(String value) {
+    businessName = value.trim();
+  }*/
+
+  businessNameValidation() {
+    if (businessNameController.text.trim() == "") {
+      businessNameError = Strings.businessnameerrorMessage;
+    } else {
+      businessNameError = "";
+    }
+    update(['business_register']);
+  }
+
+
+/*
   void setEmail(String value) {
     businessEmail = value.trim();
-  }
+  }*/
 
-  validateEmail() {
+/*  validateEmail() {
     final emailRegex = RegExp(
       r'^[\w-]+(\.[\w-]+)*@([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,7}$',
     );
@@ -112,77 +117,97 @@ String CategoryId = "";
       businessEmail = "";
     }
     update(['business_register']);
-  }
+  }*/
 
-  String phoneNo = '';
-
-  void setPhone(String value) {
-    phoneNo = value.trim();
-  }
-
-  validatePhone() {
-    if (phoneNoController.text.trim() == "") {
-      phoneNo = Strings.phoneErrorMessage;
-    } else if (phoneNo.length < 10) {
-      phoneNo = Strings.phoneErrorMessage1;
-    } else if (phoneNo.length > 10) {
-      phoneNo = Strings.phoneErrorMessage1;
+  emailValidation() {
+    update(['business_register']);
+    if (businessEmailController.text.trim() == "") {
+      // errorToast(StringRes.enterEmailError.tr);
+      emailError = Strings.emailErrorRegister.tr;
+      update(['business_register']);
+      return false;
     } else {
-      phoneNo = "";
+      if (RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+          .hasMatch(businessEmailController.text)) {
+        emailError = '';
+        update(['business_register']);
+        return true;
+      } else {
+        // errorToast(StringRes.enterValidEmail.tr);
+        emailError = Strings.emailError1.tr;
+        update(['business_register']);
+        return false;
+      }
+    }
+  }
+
+
+
+ /* void setPhone(String value) {
+    phoneNo = value.trim();
+  }*/
+
+  phoneValidation() {
+    if (phoneNoController.text.trim() == "") {
+      phoneError = Strings.phoneErrorMessage;
+    } else if (phoneNo.length < 10) {
+      phoneError = Strings.phoneErrorMessage1;
+    } else if (phoneNo.length > 10) {
+      phoneError = Strings.phoneErrorMessage1;
+    } else {
+      phoneError = "";
     }
     update(['business_register']);
   }
 
-  String password = '';
 
+/*
   void setPassword(String value) {
     password = value.trim();
-  }
+  }*/
 
-  validatePassword() {
+
+
+  passwordValidation() {
     if (passwordController.text.trim() == "") {
-      password = Strings.passwordErrorMessage;
+      passwordError = Strings.passwordErrorMessage;
     } else if (password.length < 8) {
-      password = Strings.passwordErrorMessage1;
+      passwordError = Strings.passwordErrorMessage1;
     } else {
-      password = "";
+      passwordError = "";
     }
     update(['business_register']);
   }
 
-  void setCategoryDrop(String value) {
-    categoryDrop = value.trim();
+   val() async {
+    userNameValidation();
+    businessNameValidation();
+    emailValidation();
+    phoneValidation();
+    passwordValidation();
   }
 
-  bool validationSignup() {
-    validateUserName();
-    validateBusinessName();
-   // validateEmail();
-    //validatePhone();
-   // validatePassword();
-
+  validation (){
+    val();
     if (userName == '' &&
         businessName == ''
-      //  businessEmail == '' &&
-      //  phoneNo == '' &&
-      //  password == ''
-    ) {
+        && businessEmail == '' && phoneNo == '' && password == ''){
       return true;
     } else {
       return false;
     }
   }
 
-  onTapSignUp() {
+/*  onTapSignUp() {
     if (validationSignup()) {
       Get.to(() => Select_Language());
     }
-  }
+  }*/
 
   @override
   Future<void> onInit() async {
     // TODO: implement onInit
     super.onInit();
-    await category();
+    //await category();
   }
 }

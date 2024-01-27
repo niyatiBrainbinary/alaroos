@@ -1,13 +1,13 @@
 import 'dart:convert';
 
-import 'package:alaroos/Api_calling/auth/Business_Login_Api/Business_login_model/business_login_model.dart';
 import 'package:alaroos/Screen/Home_Screen/home_screen.dart';
 import 'package:alaroos/Utils/api_res.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import '../../../../Api_calling/auth/Business_Login_Api/business_login_api.dart';
+import '../../../../Api_calling/auth/business/Business_Login_Api/Business_login_model/business_login_model.dart';
+import '../../../../Api_calling/auth/business/Business_Login_Api/business_login_api.dart';
 import '../../../../Common/toast.dart';
 import '../../../../Utils/pref_key.dart';
 import '../../../../Utils/string.dart';

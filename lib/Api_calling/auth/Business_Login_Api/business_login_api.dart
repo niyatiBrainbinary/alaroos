@@ -28,9 +28,11 @@ class LoginApi {
           url: url);
 
       if (response!.statusCode == 200) {
+  var decoded = jsonDecode(response.body);
+  debugPrint('=========$decoded');
   
  // if(decoded["success"]== true){
-    await PrefService.setValue(PrefKeys.login, true);
+    PrefService.setValue(PrefKeys.login, true);
     // PrefService.setValue(PrefKeys.firstName, decoded["data"]["firstname"]);
     Get.to(() => Select_Language());
 

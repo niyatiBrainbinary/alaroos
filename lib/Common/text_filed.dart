@@ -140,7 +140,7 @@ class DropDownTextFled extends StatelessWidget {
         dropDownItemCount: 7,
 
         onChanged: (val) async {
-if(businessRegisterController.validationSignup()){
+if(businessRegisterController.validation()){
  await businessRegisterController.category();
 }
         },

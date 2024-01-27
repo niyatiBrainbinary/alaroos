@@ -63,15 +63,15 @@ class BusinessRegisterScreen extends StatelessWidget {
                         title: Strings.userName,
                         controller:
                             businessRegisterController.userNameController,
-                        onChange: businessRegisterController.setUserName,
+                       // onChange: businessRegisterController.setUserName,
                         keyboardType: TextInputType.text,
 
                         // validator:
                         //     businessRegisterController.validateUserName(),
                       ),
                     ),
-                    businessRegisterController.userName.isEmpty
-                        ? Text(businessRegisterController.userName,
+                    (controller.userNameError != "") ?
+                   Text(businessRegisterController.userNameError,
                             style: errorStyle)
                         : const SizedBox(),
                     SizedBox(
@@ -84,16 +84,16 @@ class BusinessRegisterScreen extends StatelessWidget {
                         title: Strings.businessName,
                         controller:
                             businessRegisterController.businessNameController,
-                        onChange: businessRegisterController.setBusinessName,
+                        //onChange: businessRegisterController.setBusinessName,
                         keyboardType: TextInputType.text,
 
                         // validator:
                         //     businessRegisterController.validateBusinessName(),
                       ),
                     ),
-                    businessRegisterController.businessName.isEmpty
-                        ? Text(businessRegisterController.businessName,
-                            style: errorStyle)
+                    (controller.businessNameError != "") ?
+                    Text(businessRegisterController.businessNameError,
+                        style: errorStyle)
                         : const SizedBox(),
                     SizedBox(
                       height: Get.height * 0.03,
@@ -105,11 +105,15 @@ class BusinessRegisterScreen extends StatelessWidget {
                         title: Strings.businessEmail,
                         controller:
                             businessRegisterController.businessEmailController,
-                        onChange: businessRegisterController.setEmail,
+                        //onChange: businessRegisterController.setEmail,
                         keyboardType: TextInputType.emailAddress,
                         // validator: businessRegisterController.validateEmail(),
                       ),
                     ),
+                    (controller.emailError != "") ?
+                    Text(businessRegisterController.emailError,
+                        style: errorStyle)
+                        : const SizedBox(),
                     /* businessRegisterController.businessEmail.isNotEmpty
                         ? Text(businessRegisterController.businessEmail,
                             style: errorStyle)
@@ -125,11 +129,15 @@ class BusinessRegisterScreen extends StatelessWidget {
                         prefixText: "+91 ",
                         controller:
                             businessRegisterController.phoneNoController,
-                        onChange: businessRegisterController.setPhone,
+                       // onChange: businessRegisterController.setPhone,
                         keyboardType: TextInputType.phone,
                         //validator: businessRegisterController.validatePhone(),
                       ),
                     ),
+                    (controller.phoneError != "") ?
+                    Text(businessRegisterController.phoneError,
+                        style: errorStyle)
+                        : const SizedBox(),
                     /*businessRegisterController.phoneNo.isNotEmpty
                         ? Text(businessRegisterController.phoneNo,
                             style: errorStyle)
@@ -144,13 +152,17 @@ class BusinessRegisterScreen extends StatelessWidget {
                         title: Strings.password,
                         controller:
                             businessRegisterController.passwordController,
-                        onChange: businessRegisterController.setPassword,
+                       // onChange: businessRegisterController.setPassword,
                         isObSecure: true,
                         keyboardType: TextInputType.visiblePassword,
                         // validator:
                         //     businessRegisterController.validatePassword(),
                       ),
                     ),
+                    (controller.passwordError != "") ?
+                    Text(businessRegisterController.passwordError,
+                        style: errorStyle)
+                        : const SizedBox(),
                     /*  businessRegisterController.password.isNotEmpty
                         ? Text(businessRegisterController.password,
                             style: errorStyle)
@@ -227,7 +239,7 @@ class BusinessRegisterScreen extends StatelessWidget {
                     CommonBtn(
                         onTap: () async {
                           FocusScope.of(context).unfocus();
-                          if (businessRegisterController.validationSignup()) {
+                          if (businessRegisterController.validation()) {
                             businessRegisterController.registerUser(
                                 firstName: controller.userNameController.text,
                                 businessname:

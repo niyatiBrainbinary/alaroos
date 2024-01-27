@@ -7,7 +7,7 @@ class ColorRes {
   static const shadowColor = Color(0x3F000000);
   static const textfiledBorder = Color(0xffA5A5A5);
   static const donthaveaccountColor = Color(0xff716B6B);
-  static const errorColor = Colors.red;
+  static const errorColor = Color(0xffef0606);
   static const bottomBarColor = Color(0xff676D75);
   static const truelineContainerColor = Color(0xffEFEFEF);
   static const chat2 = Color(0xffFDF2CC);
