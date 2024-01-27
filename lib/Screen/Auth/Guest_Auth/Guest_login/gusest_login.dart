@@ -1,4 +1,5 @@
-import 'package:alaroos/Screen/Auth/Guest_Auth/Guest_Register/guest_register.dart';
+import 'package:alaroos/Common/loader.dart';
+import 'package:alaroos/Screen/Auth/Guest_Auth/Guest_Register/guest_register_screen.dart';
 import 'package:alaroos/Screen/Auth/Guest_Auth/Guest_login/guest_login_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -99,7 +100,14 @@ class GuestLoginScreen extends StatelessWidget {
                     CommonBtn(
                       title: Strings.signin,
                       onTap: () {
-                        guestLoginController.onTapLogIn();
+                        FocusScope.of(context).unfocus();
+                        if(guestLoginController.validation()){
+                          guestLoginController.guestLoginApi(
+                            email: guestLoginController.emailController.text,
+                            password: guestLoginController.passwordController.text
+                          );
+                        }
+                       // guestLoginController.onTapLogIn();
                       },
                     ),
                     SizedBox(
@@ -123,6 +131,7 @@ class GuestLoginScreen extends StatelessWidget {
                         ),
                       ],
                     ),
+                  //  Obx(() => controller.isLoading.value ? Loader() : SizedBox())
                   ],
                 ),
               ),

@@ -6,39 +6,23 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get_connect/http/src/response/response.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get.dart';
-import '../../../Common/toast.dart';
-import '../../../Utils/api_res.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-import '../../../service/http_service.dart';
+import '../../../../Common/toast.dart';
+import '../../../../Utils/api_res.dart';
+import '../../../../service/http_service.dart';
 
-class BusinessRegisterApi {
-  static businessRegisterApi(
-      {password,
-      firstName,
-      lastName,
-      mobile,
-      businessname,
-      categoryId,
-      email}) async {
-    String url = EndPoints.businessRegister;
+class GuestRegisterApi {
+  static guestRegisterApi({password, firstName, lastName, email}) async {
+    String url = EndPoints.guestRegister;
 
-    http.Response? response = await HttpService.postApi(
-      url: url,
-      body: {
-        "firstname": firstName,
-        "lastname": lastName,
-        "businessname": businessname,
-        "email": email,
-        "category": categoryId,
-        "phone": mobile,
-        "password": password
-      },
-      /* header: {
-          'Content-Type': 'application/json',
-        }*/
-    );
+    http.Response? response = await HttpService.postApi(url: url, body: {
+      "firstname": firstName,
+      "lastname": lastName,
+      "email": email,
+      "password": password
+    });
     final decoded = jsonDecode(response!.body);
     print(decoded);
     if (response.statusCode == 200) {

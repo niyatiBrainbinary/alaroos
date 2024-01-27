@@ -1,3 +1,4 @@
+import 'package:alaroos/Common/loader.dart';
 import 'package:alaroos/Common/text_style.dart';
 import 'package:alaroos/Screen/Auth/Forgot_Password/ForgotPassword.dart';
 import 'package:alaroos/Screen/Home_Screen/home_screen.dart';
@@ -109,10 +110,10 @@ class Business_Login_Screen extends StatelessWidget {
                                   password: businessLoginController
                                       .passController.text
                           //     .then((value) {
-                          //   if (value == false) {
-                          //     businessLoginController.emailController.clear();
-                          //     businessLoginController.passController.clear();
-                          //   }
+                           /* if (value == false) {
+                              businessLoginController.emailController.clear();
+                              businessLoginController.passController.clear();
+                            }*/
                           // }
                           );
                         }
@@ -139,13 +140,17 @@ class Business_Login_Screen extends StatelessWidget {
                         ),
                       ],
                     ),
+                    Obx(() => controller.isLoading.value ? Loader() : SizedBox())
                   ],
+                  
                 ),
               ),
             ),
+
           );
         },
       ),
+
       backgroundColor: ColorRes.themeColor,
     );
   }

@@ -76,15 +76,20 @@ class ForgotPassword extends StatelessWidget {
                       keyboardType: TextInputType.emailAddress,
                     ),
                   ),
-                  forgot_pass_controller.forgotEmail.isNotEmpty
+                  /*forgot_pass_controller.forgotEmail.isNotEmpty
                       ? Text(forgot_pass_controller.forgotEmail,
                           style: errorStyle)
-                      : SizedBox(),
+                      : SizedBox(),*/
                   SizedBox(
                     height: Get.height * 0.04,
                   ),
                   CommonBtn(
                       onTap: () {
+                        FocusScope.of(context).unfocus();
+                       // controller.fogotEmailController.clear();
+                        controller.forgotPassword(
+                          email: controller.fogotEmailController.text
+                        );
                         forgot_pass_controller.onTapForgotEmail();
                       },
                       title: Strings.send)
