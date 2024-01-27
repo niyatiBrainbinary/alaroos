@@ -24,11 +24,11 @@ class Home_Details_Screen extends StatelessWidget {
           },
           icon: const Icon(CupertinoIcons.back),
         ),
-        shape: Border(bottom: BorderSide(color: ColorRes.textColor)),
+        shape: const Border(bottom: BorderSide(color: ColorRes.textColor)),
         backgroundColor: ColorRes.btnColor,
         toolbarHeight: Get.height * 0.13,
         title: Text(
-          Strings.trueline,
+          Strings.trueline.tr,
           style: splashSubTitle,
         ),
         centerTitle: true,

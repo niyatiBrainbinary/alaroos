@@ -21,9 +21,9 @@ class Forgot_Pass_Controller extends GetxController {
       r'^[\w-]+(\.[\w-]+)*@([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,7}$',
     );
     if (fogotEmailController.text.trim() == "") {
-      forgotEmail = Strings.emailErrorRegister;
+      forgotEmail = Strings.emailErrorRegister.tr;
     } else if (!emailRegex.hasMatch(forgotEmail)) {
-      forgotEmail = Strings.emailErrorRegister1;
+      forgotEmail = Strings.emailErrorRegister1.tr;
     } else {
       forgotEmail = "";
     }

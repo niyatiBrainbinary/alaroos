@@ -49,7 +49,7 @@ class GuestLoginScreen extends StatelessWidget {
                       height: 60,
                       width: double.infinity,
                       child: CommonTextField(
-                        title: Strings.email,
+                        title: Strings.email.tr,
                         controller: guestLoginController.emailController,
                         onChange: (val) {
                           guestLoginController.email = val;
@@ -67,7 +67,7 @@ class GuestLoginScreen extends StatelessWidget {
                       height: 60,
                       width: double.infinity,
                       child: CommonTextField(isObSecure: true,
-                        title: Strings.password,
+                        title: Strings.password.tr,
                         controller: guestLoginController.passwordController,
                         onChange: (val) {
                           guestLoginController.password = val;
@@ -88,8 +88,8 @@ class GuestLoginScreen extends StatelessWidget {
                       child: Align(
                         alignment: Alignment.bottomRight,
                         child: Text(
-                          Strings.forgotPassword,
-                          style: register,
+                          Strings.forgotPassword.tr,
+                          style: forgot,
                         ),
                       ),
                     ),
@@ -97,7 +97,7 @@ class GuestLoginScreen extends StatelessWidget {
                       height: Get.height * 0.04,
                     ),
                     CommonBtn(
-                      title: Strings.signin,
+                      title: Strings.signin.tr,
                       onTap: () {
                         guestLoginController.onTapLogIn();
                       },
@@ -109,16 +109,16 @@ class GuestLoginScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          Strings.donthaveaccount,
-                          style: donthaveac,
+                          Strings.donthaveaccount.tr,
+                          style: doNotAccount,
                         ),
                         GestureDetector(
                           onTap: () {
                             Get.to(() => GuestRegisterScreen());
                           },
                           child: Text(
-                            Strings.register,
-                            style: register,
+                            Strings.register.tr,
+                            style: registerPoppins,
                           ),
                         ),
                       ],

@@ -9,6 +9,7 @@ import 'package:rolling_bottom_bar/rolling_bottom_bar.dart';
 import 'package:rolling_bottom_bar/rolling_bottom_bar_item.dart';
 
 import '../../../Utils/color_res.dart';
+import '../../../Utils/string.dart';
 import '../dashboard_controller.dart';
 import 'bottom_controller.dart';
 
@@ -36,18 +37,18 @@ class BottomBar extends StatelessWidget {
       bottomNavigationBar: Obx(() => CurvedNavigationBar(
         key: bottomNavigationKey,
         index: _controller.currentPage.value,
-        items: const [
+        items:  [
           CurvedNavigationBarItem(
-            child: Icon(Icons.home_outlined,),
-            label: 'Home',
+            child: const Icon(Icons.home_outlined,),
+            label: Strings.home.tr,
           ),
           CurvedNavigationBarItem(
-            child: Icon(Icons.search),
-            label: 'Search',
+            child: const Icon(Icons.search),
+            label: Strings.search.tr,
           ),
           CurvedNavigationBarItem(
-            child: Icon(Icons.person_2_outlined),
-            label: 'Account',
+            child: const Icon(Icons.person_2_outlined),
+            label: Strings.account.tr,
           ),
         ],
         color: ColorRes.btnColor,

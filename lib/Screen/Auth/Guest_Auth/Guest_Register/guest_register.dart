@@ -58,7 +58,7 @@ class GuestRegisterScreen extends StatelessWidget {
                       height: 60,
                       width: double.infinity,
                       child: CommonTextField(
-                        title: Strings.firstName,
+                        title: Strings.firstName.tr,
                         controller: guestRegisterController.firstNameController,
                         onChange: guestRegisterController.setFirstName,
                         keyboardType: TextInputType.text,
@@ -81,7 +81,7 @@ class GuestRegisterScreen extends StatelessWidget {
                       height: 60,
                       width: double.infinity,
                       child: CommonTextField(
-                        title: Strings.lastName,
+                        title: Strings.lastName.tr,
                         controller: guestRegisterController.lastNameController,
                         onChange: guestRegisterController.setLastName,
                         keyboardType: TextInputType.text,
@@ -101,7 +101,7 @@ class GuestRegisterScreen extends StatelessWidget {
                       height: 60,
                       width: double.infinity,
                       child: CommonTextField(
-                        title: Strings.email,
+                        title: Strings.email.tr,
                         controller: guestRegisterController.emailController,
                         onChange: guestRegisterController.setEmail,
                         keyboardType: TextInputType.emailAddress,
@@ -118,7 +118,7 @@ class GuestRegisterScreen extends StatelessWidget {
                       height: 60,
                       width: double.infinity,
                       child: CommonTextField(
-                        title: Strings.password,
+                        title: Strings.password.tr,
                         controller: guestRegisterController.passwordController,
                         onChange: guestRegisterController.setPassword,
                         isObSecure: true,
@@ -138,7 +138,7 @@ class GuestRegisterScreen extends StatelessWidget {
                         onTap: () async {
                           guestRegisterController.onTapSignUp();
                         },
-                        title: Strings.register),
+                        title: Strings.register.tr),
                     SizedBox(
                       height: Get.height * 0.06,
                     ),

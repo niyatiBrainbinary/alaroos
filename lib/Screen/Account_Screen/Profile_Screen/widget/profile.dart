@@ -14,7 +14,7 @@ Widget profile(BuildContext contex) {
   return Column(
     children: [
       Padding(
-        padding: const EdgeInsets.only(left: 20, top: 20),
+        padding: const EdgeInsets.only(left: 20, top: 20,right: 20),
         child: GestureDetector(onTap: (){Get.to(()=>Profile_Screen());},
           child: Row(
             children: [
@@ -29,19 +29,19 @@ Widget profile(BuildContext contex) {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    Strings.username2,
+                    Strings.username2.tr,
                     style: forgotPass,
                   ),
                   Text(
-                    Strings.artline,
+                    Strings.artline.tr,
                     style: btnText,
                   ),
                   Text(
-                    Strings.riyadh,
+                    Strings.riyadh.tr,
                     style: btnText,
                   ),
                   Text(
-                    Strings.contactNo,
+                    Strings.contactNo.tr,
                     style: btnText,
                   ),
                 ],
@@ -73,7 +73,7 @@ Widget profile(BuildContext contex) {
                 ),
                 child: Center(
                   child: Text(
-                    Strings.editProfile,
+                    Strings.editProfile.tr,
                     style: btnText,
                   ),
                 ),
@@ -95,7 +95,7 @@ Widget profile(BuildContext contex) {
                 ),
                 child: Center(
                   child: Text(
-                    Strings.shareProfile,
+                    Strings.shareProfile.tr,
                     style: btnText,
                   ),
                 ),

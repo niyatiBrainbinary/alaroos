@@ -43,14 +43,31 @@ TextStyle register = const TextStyle(
   fontWeight: FontWeight.bold,
   fontSize: 14,
   color: ColorRes.textColor,
+);TextStyle registerPoppins = const TextStyle(
+
+  fontFamily: FontRes.poppinsMedium,
+  fontSize: 14,
+  color: ColorRes.textColor,
 );
 TextStyle donthaveac = const TextStyle(
   fontWeight: FontWeight.w500,
   fontSize: 14,
   color: ColorRes.donthaveaccountColor,
 );
+TextStyle doNotAccount = const TextStyle(
+  fontWeight: FontWeight.w500,
+  fontFamily: FontRes.poppinsMedium,
+  fontSize: 14,
+  color: ColorRes.donthaveaccountColor,
+);
 TextStyle forgotPass = const TextStyle(
   fontWeight: FontWeight.w500,
+  fontSize: 16,
+  color: ColorRes.textColor,
+);
+TextStyle forgot = const TextStyle(
+  fontWeight: FontWeight.w500,
+  fontFamily: FontRes.poppinsMedium,
   fontSize: 16,
   color: ColorRes.textColor,
 );

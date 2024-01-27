@@ -40,7 +40,7 @@ class _Edit_Account_ScreenState extends State<Edit_Account_Screen> {
           backgroundColor: ColorRes.btnColor,
           toolbarHeight: Get.height * 0.13,
           title: Text(
-            Strings.editProfile,
+            Strings.editProfile.tr,
             style: forgotPass,
           ),
           centerTitle: true,
@@ -130,7 +130,7 @@ class _Edit_Account_ScreenState extends State<Edit_Account_Screen> {
                           height: 60,
                           width: double.infinity,
                           child: CommonTextField(
-                            title: Strings.name,
+                            title: Strings.name.tr,
                             controller:
                                 edit_account_controller.editNameController,
                             keyboardType: TextInputType.text,
@@ -144,7 +144,7 @@ class _Edit_Account_ScreenState extends State<Edit_Account_Screen> {
                           height: 60,
                           width: double.infinity,
                           child: CommonTextField(
-                            title: Strings.email,
+                            title: Strings.email.tr,
                             controller:
                                 edit_account_controller.editEmailController,
                             keyboardType: TextInputType.text,
@@ -158,7 +158,7 @@ class _Edit_Account_ScreenState extends State<Edit_Account_Screen> {
                           height: 60,
                           width: double.infinity,
                           child: CommonTextField(
-                            title: Strings.businessName,
+                            title: Strings.businessName.tr,
                             controller: edit_account_controller
                                 .editBusinessNameController,
                             keyboardType: TextInputType.emailAddress,
@@ -171,7 +171,7 @@ class _Edit_Account_ScreenState extends State<Edit_Account_Screen> {
                           height: 60,
                           width: double.infinity,
                           child: CommonTextField(
-                            title: Strings.password,
+                            title: Strings.password.tr,
                             controller:
                                 edit_account_controller.editPasswordController,
                             isObSecure: true,
@@ -200,7 +200,7 @@ class _Edit_Account_ScreenState extends State<Edit_Account_Screen> {
                           height: 60,
                           width: double.infinity,
                           child: CommonTextField(
-                            title: Strings.link,
+                            title: Strings.link.tr,
                             controller: edit_account_controller.linkController,
                             keyboardType: TextInputType.emailAddress,
                           ),
@@ -214,7 +214,7 @@ class _Edit_Account_ScreenState extends State<Edit_Account_Screen> {
                               Get.to(()=>Profile_Screen());
                               // edit_account_controller.onTapSignUp();
                             },
-                            title: Strings.saveChange),
+                            title: Strings.saveChange.tr),
                         SizedBox(
                           height: Get.height * 0.06,
                         ),

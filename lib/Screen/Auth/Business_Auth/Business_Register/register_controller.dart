@@ -2,7 +2,7 @@ import 'package:alaroos/Screen/Home_Screen/home_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
-import '../../../../Api_calling/auth/business_register_api/business_register_api.dart';
+import '../../../../Api_calling/auth/Business_Register_Api/business_register_api.dart';
 import '../../../../Utils/string.dart';
 import '../../../Category_select_Screen/category_screen.dart';
 import '../../../Dashboard/Widgets/bottom_bar.dart';
@@ -19,10 +19,27 @@ class BusinessRegisterController extends GetxController {
   TextEditingController categoryController = TextEditingController();
   RxBool isLoading = false.obs;
 
+  // String selectCategoryType = "Wedding Venue";
 
-  registerUser({email, password, firstName, lastName, mobile,businessname,category }) async {
+  //String categoryName = "Wedding Venue";
+  registerUser(
+      {email,
+      password,
+      firstName,
+      lastName,
+      mobile,
+      businessname,
+      category}) async {
     isLoading.value = true;
-    await BusinessRegisterApi.businessRegisterApi(email: email, password: password, firstName: firstName, lastName: lastName, mobile: mobile, businessname: businessname, category: category);
+    await BusinessRegisterApi.businessRegisterApi(
+     // email: email,
+      password: password,
+      firstName: firstName,
+      lastName: lastName,
+      mobile: mobile,
+      businessname: businessname,
+      category: category,
+    );
     isLoading.value = false;
   }
 
@@ -45,7 +62,7 @@ class BusinessRegisterController extends GetxController {
 
   validateUserName() {
     if (userNameController.text.trim() == "") {
-      userName = Strings.usernameerrorMessage;
+      userName = Strings.usernameerrorMessage.tr;
     } else {
       userName = "";
     }
@@ -60,7 +77,7 @@ class BusinessRegisterController extends GetxController {
 
   validateBusinessName() {
     if (businessNameController.text.trim() == "") {
-      businessName = Strings.businessnameerrorMessage;
+      businessName = Strings.businessnameerrorMessage.tr;
     } else {
       businessName = "";
     }
@@ -78,9 +95,9 @@ class BusinessRegisterController extends GetxController {
       r'^[\w-]+(\.[\w-]+)*@([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,7}$',
     );
     if (businessEmailController.text.trim() == "") {
-      businessEmail = Strings.emailErrorRegister;
+      businessEmail = Strings.emailErrorRegister.tr;
     } else if (!emailRegex.hasMatch(businessEmail)) {
-      businessEmail = Strings.emailErrorRegister1;
+      businessEmail = Strings.emailErrorRegister1.tr;
     } else {
       businessEmail = "";
     }
@@ -95,11 +112,9 @@ class BusinessRegisterController extends GetxController {
 
   validatePhone() {
     if (phoneNoController.text.trim() == "") {
-      phoneNo = Strings.phoneErrorMessage;
+      phoneNo = Strings.phoneErrorMessage.tr;
     } else if (phoneNo.length < 10) {
-      phoneNo = Strings.phoneErrorMessage1;
-    } else if (phoneNo.length > 10) {
-      phoneNo = Strings.phoneErrorMessage1;
+      phoneNo = Strings.phoneErrorMessage1.tr;
     } else {
       phoneNo = "";
     }
@@ -114,9 +129,9 @@ class BusinessRegisterController extends GetxController {
 
   validatePassword() {
     if (passwordController.text.trim() == "") {
-      password = Strings.passwordErrorMessage;
-    } else if (password.length < 8) {
-      password = Strings.passwordErrorMessage1;
+      password = Strings.passwordErrorMessage.tr;
+    } else if (password.length < 1) {
+      password = Strings.passwordErrorMessage1.tr;
     } else {
       password = "";
     }
@@ -130,16 +145,15 @@ class BusinessRegisterController extends GetxController {
   bool validationSignup() {
     validateUserName();
     validateBusinessName();
-   // validateEmail();
-    //validatePhone();
-   // validatePassword();
+    validateEmail();
+    validatePhone();
+    validatePassword();
 
     if (userName == '' &&
-        businessName == ''
-      //  businessEmail == '' &&
-      //  phoneNo == '' &&
-      //  password == ''
-    ) {
+        businessName == '' &&
+        businessEmail == '' &&
+        phoneNo == '' &&
+        password == '') {
       return true;
     } else {
       return false;

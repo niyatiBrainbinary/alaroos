@@ -19,21 +19,21 @@ class List_Tile extends StatelessWidget {
           },
           child: ListTile(
             title: Text(
-              Strings.username,
+              Strings.username.tr,
               style: forgotPass,
             ),
             subtitle: Text(
-              Strings.trueline,
+              Strings.trueline.tr,
               style: donthaveac,
             ),
             leading: CircleAvatar(
               radius: Get.height * 0.033,
-              foregroundImage: AssetImage(AssetsRes.userImage),
+              foregroundImage: const AssetImage(AssetsRes.userImage),
             ),
             trailing: Column(
               children: [
                 Text(
-                  Strings.time,
+                  Strings.time.tr,
                   style: subTitleStyle,
                 ),
                 Container(
@@ -45,7 +45,7 @@ class List_Tile extends StatelessWidget {
                   ),
                   child: Center(
                     child: Text(
-                      Strings.notification,
+                      Strings.notification.tr,
                       style: notificationStyle,
                     ),
                   ),
@@ -64,33 +64,33 @@ class List_Tile extends StatelessWidget {
           },
           child: ListTile(
             title: Text(
-              Strings.username,
+              Strings.username.tr,
               style: forgotPass,
             ),
             subtitle: Text(
-              Strings.trueline,
+              Strings.trueline.tr,
               style: donthaveac,
             ),
             leading: CircleAvatar(
               radius: Get.height * 0.033,
-              foregroundImage: AssetImage(AssetsRes.userImage),
+              foregroundImage: const AssetImage(AssetsRes.userImage),
             ),
             trailing: Column(
               children: [
                 Text(
-                  Strings.time,
+                  Strings.time.tr,
                   style: subTitleStyle,
                 ),
                 Container(
                   height: Get.height * 0.05,
                   width: Get.width * 0.05,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     shape: BoxShape.circle,
                     color: Colors.black,
                   ),
                   child: Center(
                     child: Text(
-                      Strings.notification,
+                      Strings.notification.tr,
                       style: notificationStyle,
                     ),
                   ),
@@ -109,33 +109,33 @@ class List_Tile extends StatelessWidget {
           },
           child: ListTile(
             title: Text(
-              Strings.username,
+              Strings.username.tr,
               style: forgotPass,
             ),
             subtitle: Text(
-              Strings.trueline,
+              Strings.trueline.tr,
               style: donthaveac,
             ),
             leading: CircleAvatar(
               radius: Get.height * 0.033,
-              foregroundImage: AssetImage(AssetsRes.userImage),
+              foregroundImage: const AssetImage(AssetsRes.userImage),
             ),
             trailing: Column(
               children: [
                 Text(
-                  Strings.time,
+                  Strings.time.tr,
                   style: subTitleStyle,
                 ),
                 Container(
                   height: Get.height * 0.05,
                   width: Get.width * 0.05,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     shape: BoxShape.circle,
                     color: Colors.black,
                   ),
                   child: Center(
                     child: Text(
-                      Strings.notification,
+                      Strings.notification.tr,
                       style: notificationStyle,
                     ),
                   ),
@@ -154,33 +154,33 @@ class List_Tile extends StatelessWidget {
           },
           child: ListTile(
             title: Text(
-              Strings.username,
+              Strings.username.tr,
               style: forgotPass,
             ),
             subtitle: Text(
-              Strings.trueline,
+              Strings.trueline.tr,
               style: donthaveac,
             ),
             leading: CircleAvatar(
               radius: Get.height * 0.033,
-              foregroundImage: AssetImage(AssetsRes.userImage),
+              foregroundImage: const AssetImage(AssetsRes.userImage),
             ),
             trailing: Column(
               children: [
                 Text(
-                  Strings.time,
+                  Strings.time.tr,
                   style: subTitleStyle,
                 ),
                 Container(
                   height: Get.height * 0.05,
                   width: Get.width * 0.05,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     shape: BoxShape.circle,
                     color: Colors.black,
                   ),
                   child: Center(
                     child: Text(
-                      Strings.notification,
+                      Strings.notification.tr,
                       style: notificationStyle,
                     ),
                   ),
@@ -199,33 +199,33 @@ class List_Tile extends StatelessWidget {
           },
           child: ListTile(
             title: Text(
-              Strings.username,
+              Strings.username.tr,
               style: forgotPass,
             ),
             subtitle: Text(
-              Strings.trueline,
+              Strings.trueline.tr,
               style: donthaveac,
             ),
             leading: CircleAvatar(
               radius: Get.height * 0.033,
-              foregroundImage: AssetImage(AssetsRes.userImage),
+              foregroundImage: const AssetImage(AssetsRes.userImage),
             ),
             trailing: Column(
               children: [
                 Text(
-                  Strings.time,
+                  Strings.time.tr,
                   style: subTitleStyle,
                 ),
                 Container(
                   height: Get.height * 0.05,
                   width: Get.width * 0.05,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     shape: BoxShape.circle,
                     color: Colors.black,
                   ),
                   child: Center(
                     child: Text(
-                      Strings.notification,
+                      Strings.notification.tr,
                       style: notificationStyle,
                     ),
                   ),
@@ -244,33 +244,33 @@ class List_Tile extends StatelessWidget {
           },
           child: ListTile(
             title: Text(
-              Strings.username,
+              Strings.username.tr,
               style: forgotPass,
             ),
             subtitle: Text(
-              Strings.trueline,
+              Strings.trueline.tr,
               style: donthaveac,
             ),
             leading: CircleAvatar(
               radius: Get.height * 0.033,
-              foregroundImage: AssetImage(AssetsRes.userImage),
+              foregroundImage: const AssetImage(AssetsRes.userImage),
             ),
             trailing: Column(
               children: [
                 Text(
-                  Strings.time,
+                  Strings.time.tr,
                   style: subTitleStyle,
                 ),
                 Container(
                   height: Get.height * 0.05,
                   width: Get.width * 0.05,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     shape: BoxShape.circle,
                     color: Colors.black,
                   ),
                   child: Center(
                     child: Text(
-                      Strings.notification,
+                      Strings.notification.tr,
                       style: notificationStyle,
                     ),
                   ),

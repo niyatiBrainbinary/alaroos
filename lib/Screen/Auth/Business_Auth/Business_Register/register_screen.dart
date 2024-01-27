@@ -16,15 +16,13 @@ class BusinessRegisterScreen extends StatelessWidget {
   BusinessRegisterScreen({Key? key}) : super(key: key);
   BusinessRegisterController businessRegisterController =
       Get.put(BusinessRegisterController());
-
   @override
   Widget build(BuildContext context) {
     return GetBuilder<BusinessRegisterController>(
       id: 'business_register',
       builder: (controller) {
         return Scaffold(
-          appBar: AppBar(
-            backgroundColor: ColorRes.themeColor,
+          appBar: AppBar(backgroundColor: ColorRes.themeColor,
             leading: IconButton(
               onPressed: () {
                 Get.back();
@@ -59,7 +57,7 @@ class BusinessRegisterScreen extends StatelessWidget {
                       height: 60,
                       width: double.infinity,
                       child: CommonTextField(
-                        title: Strings.userName,
+                        title: Strings.userName.tr,
                         controller:
                             businessRegisterController.userNameController,
                         onChange: businessRegisterController.setUserName,
@@ -80,7 +78,7 @@ class BusinessRegisterScreen extends StatelessWidget {
                       height: 60,
                       width: double.infinity,
                       child: CommonTextField(
-                        title: Strings.businessName,
+                        title: Strings.businessName.tr,
                         controller:
                             businessRegisterController.businessNameController,
                         onChange: businessRegisterController.setBusinessName,
@@ -101,7 +99,7 @@ class BusinessRegisterScreen extends StatelessWidget {
                       height: 60,
                       width: double.infinity,
                       child: CommonTextField(
-                        title: Strings.businessEmail,
+                        title: Strings.businessEmail.tr,
                         controller:
                             businessRegisterController.businessEmailController,
                         onChange: businessRegisterController.setEmail,
@@ -109,10 +107,10 @@ class BusinessRegisterScreen extends StatelessWidget {
                         // validator: businessRegisterController.validateEmail(),
                       ),
                     ),
-                   /* businessRegisterController.businessEmail.isNotEmpty
+                    businessRegisterController.businessEmail.isNotEmpty
                         ? Text(businessRegisterController.businessEmail,
                             style: errorStyle)
-                        : SizedBox(),*/
+                        : SizedBox(),
                     SizedBox(
                       height: Get.height * 0.03,
                     ),
@@ -120,7 +118,7 @@ class BusinessRegisterScreen extends StatelessWidget {
                       height: 60,
                       width: double.infinity,
                       child: CommonTextField(
-                        title: Strings.phoneno,
+                        title: Strings.phoneno.tr,
                         prefixText: "+91 ",
                         controller:
                             businessRegisterController.phoneNoController,
@@ -129,10 +127,10 @@ class BusinessRegisterScreen extends StatelessWidget {
                         //validator: businessRegisterController.validatePhone(),
                       ),
                     ),
-                    /*businessRegisterController.phoneNo.isNotEmpty
+                    businessRegisterController.phoneNo.isNotEmpty
                         ? Text(businessRegisterController.phoneNo,
                             style: errorStyle)
-                        : SizedBox(),*/
+                        : SizedBox(),
                     SizedBox(
                       height: Get.height * 0.03,
                     ),
@@ -140,7 +138,7 @@ class BusinessRegisterScreen extends StatelessWidget {
                       height: 60,
                       width: double.infinity,
                       child: CommonTextField(
-                        title: Strings.password,
+                        title: Strings.password.tr,
                         controller:
                             businessRegisterController.passwordController,
                         onChange: businessRegisterController.setPassword,
@@ -150,20 +148,56 @@ class BusinessRegisterScreen extends StatelessWidget {
                         //     businessRegisterController.validatePassword(),
                       ),
                     ),
-                  /*  businessRegisterController.password.isNotEmpty
+                    businessRegisterController.password.isNotEmpty
                         ? Text(businessRegisterController.password,
                             style: errorStyle)
-                        : SizedBox(),*/
+                        : SizedBox(),
                     SizedBox(
                       height: Get.height * 0.03,
                     ),
-                    const SizedBox(
+                     SizedBox(
                         height: 60,
                         width: double.infinity,
                         child: DropDownTextFled(
                           //controller: businessRegisterController.categoryController,
-                          title: Strings.category,
+                          title: Strings.category.tr,
                         )),
+                    // DropdownButtonFormField<String>(
+                    //   items: [
+                    //     DropdownMenuItem<String>(
+                    //       value: "January",
+                    //       child: Text(
+                    //         "Male",
+                    //       ),
+                    //     ),
+                    //     DropdownMenuItem<String>(
+                    //       value: "February",
+                    //       child: Text(
+                    //         "Female",
+                    //       ),
+                    //     ),
+                    //   ],
+                    //   onChanged: (value) async {
+                    //     businessRegisterController.setCategoryDrop;
+                    //   },
+                    //   value: businessRegisterController.categoryDrop,
+                    //   validator: (value) =>
+                    //       value == null ? 'Please fill in your gender' : null,
+                    //   decoration: InputDecoration(
+                    //     enabledBorder: UnderlineInputBorder(
+                    //       borderSide: BorderSide(color: Colors.white),
+                    //     ),
+                    //     focusedBorder: UnderlineInputBorder(
+                    //       borderSide: BorderSide(color: Colors.white),
+                    //     ),
+                    //   ),
+                    //   elevation: 2,
+                    //   style: TextStyle(color: Colors.white, fontSize: 16),
+                    //   isDense: true,
+                    //   iconSize: 30.0,
+                    //   iconEnabledColor: Colors.white,
+                    // ),
+
                     SizedBox(
                       height: Get.height * 0.06,
                     ),
@@ -173,17 +207,14 @@ class BusinessRegisterScreen extends StatelessWidget {
                           if (businessRegisterController.validationSignup()) {
                             businessRegisterController.registerUser(
                                 firstName: controller.userNameController.text,
-                                businessname:
-                                    controller.businessNameController.text,
-                                lastName:
-                                    controller.businessEmailController.text,
+                                businessname: controller.businessNameController.text,
+                                lastName: controller.businessEmailController.text,
                                 mobile: controller.passwordController.text,
                                 password: controller.passwordController.text,
                                 category: controller.categoryController.text);
                           }
-                          // businessRegisterController.onTapSignUp();
                         },
-                        title: Strings.register),
+                        title: Strings.register.tr),
                     SizedBox(
                       height: Get.height * 0.06,
                     ),

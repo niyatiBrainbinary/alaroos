@@ -33,7 +33,7 @@ class _Category_Select_ScreenState extends State<Category_Select_Screen> {
         automaticallyImplyLeading: false,
         toolbarHeight: Get.height * 0.13,
         title: Text(
-          Strings.alaroos,
+          Strings.alaroos.tr,
           style: appBarTitle,
         ),
         actions: [
@@ -78,7 +78,7 @@ class _Category_Select_ScreenState extends State<Category_Select_Screen> {
                         children: [
                           Center(
                             child: Text(
-                              Strings.wedding,
+                              Strings.wedding.tr,
                               style: homeTitle,
                             ),
                           ),
@@ -153,7 +153,7 @@ class _Category_Select_ScreenState extends State<Category_Select_Screen> {
                     //Get.to(() => const BottomBar());
                     Get.to(() => const Category_Screen());
                   },
-                  title: Strings.start),
+                  title: Strings.start.tr),
             ),
           ],
         ),

@@ -5,7 +5,7 @@ import 'package:alaroos/service/pref_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-void main() async{
+void main()async {
   WidgetsFlutterBinding.ensureInitialized();
   await PrefService.init();
   runApp(const MyApp());

@@ -10,7 +10,7 @@ class Strings {
   static const password = 'Password';
   static const forgotPassword = 'Forgot Password?';
   static const donthaveaccount = 'Don’t have an account?';
-  static const register = ' Register';
+  static const register = 'Register';
   static const emailError = "Please enter business email";
   static const emailError1 = "Please enter valid email!";
   static const errorPass = "Please enter business password";
@@ -50,9 +50,7 @@ class Strings {
   ///----------------------------------------forgot Password ----------------------------------------
   static const forgot = "Forgot Password";
   static const email = "Email";
-  static const details = '''Please enter your email address. you will
-  receive a link to create a new password via
-  email.''';
+  static const details = '''Please enter your email address. you will receive a link to create a new password via email.''';
   static const send = "Send";
 
   ///-------------------------------------- Select Language -----------------------------------
@@ -69,7 +67,6 @@ class Strings {
   static const username = "Angelica Jackson";
   static const username2 = "Hanny Shella";
   static const title = "What are Fractions? Introductions";
-  static const title2 = "Wedding Venue";
   static const subtitle =
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry.";
 
@@ -84,6 +81,7 @@ class Strings {
   static const contactNo = "+ 91 1234567890";
   static const whatsApp = "Whatsapp";
   static const message = "Message";
+  static const home = "Home";
 
   ///----------------------------------------- Chat Screen --------------------------------------
   static const online = "Online";
@@ -95,7 +93,7 @@ class Strings {
   static const chat3 = "Ok";
   static const time = "10:00 AM";
   static const chatLink =
-      '''https://www.instagram.com/liza royigsh=bm93amRobmZ3Z28y&utm_source=qr''';
+  '''https://www.instagram.com/liza royigsh=bm93amRobmZ3Z28y&utm_source=qr''';
 
   ///------------------------------------------- Message Screen ---------------------------------------
   static const messages = "Messages";

@@ -31,13 +31,19 @@ class Home_Screen extends StatelessWidget {
         //automaticallyImplyLeading: false,
         toolbarHeight: Get.height * 0.13,
         title: Text(
-          Strings.alaroos,
+          Strings.alaroos.tr,
           style: appBarTitle,
         ),
-        actions: [IconButton(onPressed: (){Get.to(()=>Add_New_Post());}, icon: Icon(Icons.add)),
+        actions: [
           IconButton(
             onPressed: () {
-              Get.to(() => Message_Screen());
+              Get.to(() => const Add_New_Post());
+            },
+            icon: const Icon(Icons.add),
+          ),
+          IconButton(
+            onPressed: () {
+              Get.to(() => const Message_Screen());
             },
             icon: const Icon(
               CupertinoIcons.chat_bubble_text,
@@ -47,7 +53,7 @@ class Home_Screen extends StatelessWidget {
         ],
       ),
       body: const Container_Screen(),
-     // bottomNavigationBar: BottomBar(),
+      // bottomNavigationBar: BottomBar(),
     );
   }
 }

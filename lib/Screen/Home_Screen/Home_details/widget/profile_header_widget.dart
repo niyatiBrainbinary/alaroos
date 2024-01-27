@@ -17,7 +17,7 @@ Widget profileHeaderWidget(BuildContext contex) {
           children: [
             CircleAvatar(
               radius: Get.height * 0.060,
-              foregroundImage: AssetImage(AssetsRes.userImage),
+              foregroundImage: const AssetImage(AssetsRes.userImage),
             ),
             SizedBox(
               width: Get.width * 0.05,
@@ -26,19 +26,19 @@ Widget profileHeaderWidget(BuildContext contex) {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  Strings.username,
+                  Strings.username.tr,
                   style: forgotPass,
                 ),
                 Text(
-                  Strings.trueline,
+                  Strings.trueline.tr,
                   style: btnText,
                 ),
                 Text(
-                  Strings.riyadh,
+                  Strings.riyadh.tr,
                   style: btnText,
                 ),
                 Text(
-                  Strings.contactNo,
+                  Strings.contactNo.tr,
                   style: btnText,
                 ),
               ],
@@ -69,7 +69,7 @@ Widget profileHeaderWidget(BuildContext contex) {
                 ),
                 child: Center(
                   child: Text(
-                    Strings.whatsApp,
+                    Strings.whatsApp.tr,
                     style: btnText,
                   ),
                 ),
@@ -91,7 +91,7 @@ Widget profileHeaderWidget(BuildContext contex) {
                 ),
                 child: Center(
                   child: Text(
-                    Strings.message,
+                    Strings.message.tr,
                     style: btnText,
                   ),
                 ),

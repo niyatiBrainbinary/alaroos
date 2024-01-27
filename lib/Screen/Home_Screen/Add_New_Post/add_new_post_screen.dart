@@ -29,7 +29,7 @@ class Add_New_Post extends StatelessWidget {
         backgroundColor: ColorRes.btnColor,
         toolbarHeight: Get.height * 0.13,
         title: Text(
-          Strings.newPost,
+          Strings.newPost.tr,
           style: forgotPass,
         ),
       ),
@@ -46,7 +46,7 @@ class Add_New_Post extends StatelessWidget {
                 color: ColorRes.btnColor,
                 child: Center(
                     child: Text(
-                      Strings.addVideo,
+                      Strings.addVideo.tr,
                       style: newPostTitle,
                     )),
               ),
@@ -59,7 +59,7 @@ class Add_New_Post extends StatelessWidget {
                   height: 60,
                   width: double.infinity,
                   child: CommonTextField(
-                    title: Strings.titles,
+                    title: Strings.titles.tr,
                     controller:
                     new_post_controller.titleController,
                     keyboardType: TextInputType.text,
@@ -75,7 +75,7 @@ class Add_New_Post extends StatelessWidget {
                   height: 60,
                   width: double.infinity,
                   child: CommonTextField(
-                    title: Strings.description,
+                    title: Strings.description.tr,
                     controller:
                     new_post_controller.descriptionController,
                     keyboardType: TextInputType.text,
@@ -87,7 +87,7 @@ class Add_New_Post extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 30,right: 30),
-                child: CommonBtn(onTap: (){Get.to(()=>Home_Details_Screen());}, title: Strings.share),
+                child: CommonBtn(onTap: (){Get.to(()=>Home_Details_Screen());}, title: Strings.share.tr),
               ),
             ],
           ),

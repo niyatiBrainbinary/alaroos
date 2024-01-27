@@ -93,6 +93,9 @@ flutter:
   - family: Lato-Regular
     fonts:
       - asset: assets/fonts/Lato-Regular.ttf
+  - family: Poppins-Medium
+    fonts:
+      - asset: assets/fonts/Poppins-Medium.ttf
   # fonts:
   #   - family: Schyler
   #     fonts:

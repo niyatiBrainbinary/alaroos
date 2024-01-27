@@ -24,7 +24,8 @@ class Container_Screen extends StatelessWidget {
               height: Get.height * 0.300,
               width: double.infinity,
               decoration: const BoxDecoration(
-                image: DecorationImage(image: AssetImage(AssetsRes.banner), fit: BoxFit.cover),
+                image: DecorationImage(
+                    image: AssetImage(AssetsRes.banner), fit: BoxFit.cover),
               ),
             ),
             SizedBox(
@@ -42,13 +43,13 @@ class Container_Screen extends StatelessWidget {
                   children: [
                     CircleAvatar(
                       radius: Get.height * 0.033,
-                      foregroundImage: AssetImage(AssetsRes.userImage),
+                      foregroundImage: const AssetImage(AssetsRes.userImage),
                     ),
                     SizedBox(
                       width: Get.width * 0.020,
                     ),
                     Text(
-                      Strings.username,
+                      Strings.username.tr,
                       style: forgotPass,
                     ),
                   ],
@@ -62,7 +63,10 @@ class Container_Screen extends StatelessWidget {
               height: Get.height * 0.350,
               width: double.infinity,
               decoration: const BoxDecoration(
-                image: DecorationImage(image: AssetImage(AssetsRes.image1), fit: BoxFit.cover),
+                image: DecorationImage(
+                  image: AssetImage(AssetsRes.image1),
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
             Padding(
@@ -71,7 +75,7 @@ class Container_Screen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    Strings.title,
+                    Strings.title.tr,
                     style: register,
                   ),
                   Container(
@@ -79,7 +83,7 @@ class Container_Screen extends StatelessWidget {
                     width: Get.width * 0.45,
                     decoration: const BoxDecoration(),
                     child: Text(
-                      Strings.subtitle,
+                      Strings.subtitle.tr,
                       textAlign: TextAlign.center,
                       style: subTitleStyle,
                     ),
@@ -104,7 +108,7 @@ class Container_Screen extends StatelessWidget {
                       width: Get.width * 0.020,
                     ),
                     Text(
-                      Strings.username2,
+                      Strings.username2.tr,
                       style: forgotPass,
                     ),
                   ],
@@ -118,7 +122,8 @@ class Container_Screen extends StatelessWidget {
               height: Get.height * 0.350,
               width: double.infinity,
               decoration: const BoxDecoration(
-                image: DecorationImage(image: AssetImage(AssetsRes.image2), fit: BoxFit.cover),
+                image: DecorationImage(
+                    image: AssetImage(AssetsRes.image2), fit: BoxFit.cover),
               ),
             ),
             Padding(
@@ -127,7 +132,7 @@ class Container_Screen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    Strings.title2,
+                    Strings.wedding.tr,
                     style: register,
                   ),
                   Container(
@@ -135,7 +140,7 @@ class Container_Screen extends StatelessWidget {
                     width: Get.width * 0.45,
                     decoration: const BoxDecoration(),
                     child: Text(
-                      Strings.subtitle,
+                      Strings.subtitle.tr,
                       textAlign: TextAlign.center,
                       style: subTitleStyle,
                     ),

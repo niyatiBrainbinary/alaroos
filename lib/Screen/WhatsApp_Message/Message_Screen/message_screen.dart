@@ -27,7 +27,7 @@ class Message_Screen extends StatelessWidget {
         backgroundColor: ColorRes.btnColor,
         toolbarHeight: Get.height * 0.13,
         title: Text(
-          Strings.messages,
+          Strings.messages.tr,
           style: splashSubTitle,
         ),
         centerTitle: true,
@@ -42,15 +42,15 @@ class Message_Screen extends StatelessWidget {
                   padding: const EdgeInsets.all(20),
                   child: TextField(
                     controller: messageController.SearchMesgController,
-                    decoration: const InputDecoration(
-                        prefixIcon: Icon(Icons.search_rounded),
+                    decoration:  InputDecoration(
+                        prefixIcon: const Icon(Icons.search_rounded),
                         filled: true,
                         fillColor: ColorRes.serchTextfiled,
-                        border: OutlineInputBorder(borderSide: BorderSide.none),
-                        hintText: Strings.search),
+                        border: const OutlineInputBorder(borderSide: BorderSide.none),
+                        hintText: Strings.search.tr),
                   ),
                 ),
-                List_Tile(),
+                const List_Tile(),
               ],
             ),
           );

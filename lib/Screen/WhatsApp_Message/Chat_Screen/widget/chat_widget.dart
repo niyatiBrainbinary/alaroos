@@ -41,14 +41,14 @@ class ChatWidget extends StatelessWidget {
                           padding: const EdgeInsets.all(8.0),
                           child: Center(
                             child: Text(
-                              Strings.chat1,
+                              Strings.chat1.tr,
                               style: chatStyle,
                             ),
                           ),
                         ),
                       ),
                       Text(
-                        Strings.time,
+                        Strings.time.tr,
                         style: subTitleStyle,
                       ),
                     ],
@@ -94,14 +94,14 @@ class ChatWidget extends StatelessWidget {
                           padding: const EdgeInsets.all(8.0),
                           child: Center(
                             child: Text(
-                              Strings.chat1,
+                              Strings.chat1.tr,
                               style: chatStyle,
                             ),
                           ),
                         ),
                       ),
                       Text(
-                        Strings.time,
+                        Strings.time.tr,
                         style: subTitleStyle,
                       ),
                     ],
@@ -133,14 +133,14 @@ class ChatWidget extends StatelessWidget {
                           padding: const EdgeInsets.all(8.0),
                           child: Center(
                             child: Text(
-                              Strings.chat2,
+                              Strings.chat2.tr,
                               style: chatStyle,
                             ),
                           ),
                         ),
                       ),
                       Text(
-                        Strings.time,
+                        Strings.time.tr,
                         style: subTitleStyle,
                       ),
                     ],
@@ -206,7 +206,7 @@ class ChatWidget extends StatelessWidget {
                                               AssetsRes.userImage2),
                                         ),
                                         SizedBox(width: Get.width * 0.02),
-                                        const Center(
+                                         Center(
                                           child: Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
@@ -214,11 +214,11 @@ class ChatWidget extends StatelessWidget {
                                                 MainAxisAlignment.center,
                                             children: [
                                               Text(
-                                                Strings.username2,
+                                                Strings.username2.tr,
                                                 //style: subTitleStyle,
                                               ),
                                               Text(
-                                                Strings.artline,
+                                                Strings.artline.tr,
                                                 //style: subTitleStyle,
                                               ),
                                             ],
@@ -229,12 +229,12 @@ class ChatWidget extends StatelessWidget {
                                   ),
                                 ),
                                 SizedBox(height: Get.height*0.01),
-                                Text(Strings.chatLink),
+                                Text(Strings.chatLink.tr),
                               ],
                             ),
                           )),
                       Text(
-                        Strings.time,
+                        Strings.time.tr,
                         style: subTitleStyle,
                       ),
                     ],

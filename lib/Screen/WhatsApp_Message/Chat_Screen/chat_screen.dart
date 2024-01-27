@@ -24,14 +24,16 @@ class Chat_Screen extends StatelessWidget {
             },
             icon: const Icon(CupertinoIcons.back),
           ),
-          shape: const Border(bottom: BorderSide(color: ColorRes.textColor)),
+          shape: const Border(
+            bottom: BorderSide(color: ColorRes.textColor),
+          ),
           backgroundColor: ColorRes.btnColor,
           toolbarHeight: Get.height * 0.13,
           title: Row(
             children: [
               CircleAvatar(
                 radius: Get.height * 0.033,
-                foregroundImage: AssetImage(AssetsRes.userImage),
+                foregroundImage: const AssetImage(AssetsRes.userImage),
               ),
               SizedBox(
                 width: Get.width * 0.02,
@@ -39,12 +41,15 @@ class Chat_Screen extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    Strings.username,
-                    style: forgotPass,
+                  SizedBox(
+                    width: Get.width * 0.3,
+                    child: Text(
+                      Strings.username.tr,
+                      style: forgotPass,
+                    ),
                   ),
                   Text(
-                    Strings.online,
+                    Strings.online.tr,
                     style: donthaveac,
                   ),
                 ],
@@ -84,8 +89,8 @@ class Chat_Screen extends StatelessWidget {
                       children: [
                         Row(
                           children: [
-                            Container(
-                              width: Get.width*0.88,
+                            SizedBox(
+                              width: Get.width * 0.88,
                               child: Card(
                                 margin: const EdgeInsets.only(
                                     left: 2, right: 2, bottom: 8),
@@ -112,8 +117,9 @@ class Chat_Screen extends StatelessWidget {
                                   },
                                   decoration: InputDecoration(
                                     border: InputBorder.none,
-                                    hintText: "Type a message",
-                                    hintStyle: const TextStyle(color: Colors.grey),
+                                    hintText: Strings.chatHint.tr,
+                                    hintStyle:
+                                        const TextStyle(color: Colors.grey),
                                     prefixIcon: IconButton(
                                       icon: const Icon(
                                         Icons.emoji_emotions_outlined,
@@ -132,12 +138,15 @@ class Chat_Screen extends StatelessWidget {
                                     suffixIcon: Padding(
                                       padding: const EdgeInsets.all(8.0),
                                       child: CircleAvatar(
-                                        radius: Get.height*0.025,
+                                        radius: Get.height * 0.025,
                                         backgroundColor: ColorRes.textColor,
                                         child: IconButton(
-                                          icon: const Icon(
-                                            Icons.send,
-                                            color: Colors.white,
+                                          icon: const Center(
+                                            child: Icon(
+                                              Icons.send,
+                                              size: 20,
+                                              color: ColorRes.themeColor,
+                                            ),
                                           ),
                                           onPressed: () {
                                             // if (sendButton) {
@@ -160,7 +169,7 @@ class Chat_Screen extends StatelessWidget {
                                         ),
                                       ),
                                     ),
-                                    contentPadding: EdgeInsets.all(5),
+                                    contentPadding: const EdgeInsets.all(5),
                                   ),
                                 ),
                               ),

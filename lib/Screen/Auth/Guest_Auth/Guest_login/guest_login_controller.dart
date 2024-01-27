@@ -19,14 +19,14 @@ class GuestLoginController extends GetxController {
 
   emailValidation() {
     if (emailController.text.trim() == "") {
-      email = Strings.guestEmailError;
+      email = Strings.guestEmailError.tr;
     } else {
       if (RegExp(
           r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
           .hasMatch(emailController.text)) {
         email = '';
       } else {
-        email = Strings.emailError1;
+        email = Strings.emailError1.tr;
       }
     }
     update(['guest_login']);
@@ -40,9 +40,9 @@ class GuestLoginController extends GetxController {
 
   passwordValidation() {
     if (passwordController.text.trim() == "") {
-      password = Strings.guestErrorPass;
+      password = Strings.guestErrorPass.tr;
     } else if (passwordController.text.length < 8) {
-      password = Strings.errorPass1;
+      password = Strings.errorPass1.tr;
     } else {
       password = '';
     }

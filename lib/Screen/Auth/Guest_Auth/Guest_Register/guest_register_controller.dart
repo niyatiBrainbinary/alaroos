@@ -23,7 +23,7 @@ class GuestRegisterController extends GetxController {
 
   validateFirstName() {
     if (firstNameController.text.trim() == "") {
-      firstName = Strings.firstNameErrorMessage;
+      firstName = Strings.firstNameErrorMessage.tr;
     } else {
       firstName = "";
     }
@@ -38,7 +38,7 @@ class GuestRegisterController extends GetxController {
 
   validateLastName() {
     if (lastNameController.text.trim() == "") {
-      lastName = Strings.lastNanmeErrorMessage;
+      lastName = Strings.lastNanmeErrorMessage.tr;
     } else {
       lastName = "";
     }
@@ -56,9 +56,9 @@ class GuestRegisterController extends GetxController {
       r'^[\w-]+(\.[\w-]+)*@([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,7}$',
     );
     if (emailController.text.trim() == "") {
-      email = Strings.emailErrorRegister;
+      email = Strings.emailErrorRegister.tr;
     } else if (!emailRegex.hasMatch(email)) {
-      email = Strings.emailErrorRegister1;
+      email = Strings.emailErrorRegister1.tr;
     } else {
       email = "";
     }
@@ -73,9 +73,9 @@ class GuestRegisterController extends GetxController {
 
   validatePassword() {
     if (passwordController.text.trim() == "") {
-      password = Strings.passwordErrorMessage;
+      password = Strings.passwordErrorMessage.tr;
     } else if (password.length < 8) {
-      password = Strings.passwordErrorMessage1;
+      password = Strings.passwordErrorMessage1.tr;
     } else {
       password = "";
     }

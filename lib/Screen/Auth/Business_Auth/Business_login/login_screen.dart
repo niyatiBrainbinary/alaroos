@@ -50,7 +50,7 @@ class Business_Login_Screen extends StatelessWidget {
                       height: 60,
                       width: double.infinity,
                       child: CommonTextField(
-                        title: Strings.businessEmail,
+                        title: Strings.businessEmail.tr,
                         controller: businessLoginController.emailController,
                         onChange: (val) {
                           businessLoginController.email = val;
@@ -68,7 +68,7 @@ class Business_Login_Screen extends StatelessWidget {
                       height: 60,
                       width: double.infinity,
                       child: CommonTextField(
-                        title: Strings.password,
+                        title: Strings.password.tr,
                         controller: businessLoginController.passController,
                         isObSecure: true,
                         onChange: (val) {
@@ -90,8 +90,8 @@ class Business_Login_Screen extends StatelessWidget {
                       child: Align(
                         alignment: Alignment.bottomRight,
                         child: Text(
-                          Strings.forgotPassword,
-                          style: register,
+                          Strings.forgotPassword.tr,
+                          style: forgot,
                         ),
                       ),
                     ),
@@ -99,22 +99,22 @@ class Business_Login_Screen extends StatelessWidget {
                       height: Get.height * 0.04,
                     ),
                     CommonBtn(
-                      title: Strings.signin,
-                      onTap: () {
-                        FocusScope.of(context).unfocus();
-                        if (businessLoginController.validation()) {
-                          businessLoginController.BusinessLoginApi(
-                                  email: businessLoginController
-                                      .emailController.text,
-                                  password: businessLoginController
-                                      .passController.text)
-                              .then((value) {
-                            if (value == false) {
-                              businessLoginController.emailController.clear();
-                              businessLoginController.passController.clear();
-                            }
-                          });
-                        }
+                      title: Strings.signin.tr,
+                      onTap: () {FocusScope.of(context).unfocus();
+                      if (businessLoginController.validation()) {
+                        businessLoginController.BusinessLoginApi(
+                            email: businessLoginController
+                                .emailController.text,
+                            password: businessLoginController
+                                .passController.text)
+                            .then((value) {
+                          if (value == false) {
+                            businessLoginController.emailController.clear();
+                            businessLoginController.passController.clear();
+                          }
+                        });
+                      }
+                       businessLoginController.onTapLogIn();
                       },
                     ),
                     SizedBox(
@@ -124,16 +124,16 @@ class Business_Login_Screen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          Strings.donthaveaccount,
-                          style: donthaveac,
+                          Strings.donthaveaccount.tr,
+                          style: doNotAccount,
                         ),
                         GestureDetector(
                           onTap: () {
                             Get.to(() => BusinessRegisterScreen());
                           },
                           child: Text(
-                            Strings.register,
-                            style: register,
+                            Strings.register.tr,
+                            style: registerPoppins,
                           ),
                         ),
                       ],

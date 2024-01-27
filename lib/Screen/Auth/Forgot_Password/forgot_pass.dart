@@ -13,6 +13,7 @@ class Forgot_Password_Screen extends StatelessWidget {
   Forgot_Password_Screen({Key? key}) : super(key: key);
   Forgot_Pass_Controller forgot_pass_controller =
       Get.put(Forgot_Pass_Controller());
+
   @override
   Widget build(BuildContext context) {
     return GetBuilder<Forgot_Pass_Controller>(
@@ -21,7 +22,7 @@ class Forgot_Password_Screen extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(
             title: Text(
-              Strings.forgot,
+              Strings.forgot.tr,
               style: forgotPass,
             ),
             centerTitle: true,
@@ -54,11 +55,11 @@ class Forgot_Password_Screen extends StatelessWidget {
                     height: Get.height * 0.06,
                   ),
                   Container(
-                    height: Get.height * 0.07,
-                    width: Get.width * 0.8,
+                    height: Get.height * 0.08,
+                    width: Get.width * 0.7,
                     decoration: const BoxDecoration(),
                     child: Text(
-                      Strings.details,
+                      Strings.details.tr,
                       textAlign: TextAlign.center,
                       style: forgotDetails,
                     ),
@@ -70,7 +71,7 @@ class Forgot_Password_Screen extends StatelessWidget {
                     height: 60,
                     width: double.infinity,
                     child: CommonTextField(
-                      title: Strings.email,
+                      title: Strings.email.tr,
                       onChange: forgot_pass_controller.setForgotEmail,
                       controller: forgot_pass_controller.fogotEmailController,
                       keyboardType: TextInputType.emailAddress,
@@ -84,10 +85,11 @@ class Forgot_Password_Screen extends StatelessWidget {
                     height: Get.height * 0.04,
                   ),
                   CommonBtn(
-                      onTap: () {
-                        forgot_pass_controller.onTapForgotEmail();
-                      },
-                      title: Strings.send)
+                    onTap: () {
+                      forgot_pass_controller.onTapForgotEmail();
+                    },
+                    title: Strings.send.tr,
+                  ),
                 ],
               ),
             ),

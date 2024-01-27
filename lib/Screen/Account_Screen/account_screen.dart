@@ -34,7 +34,7 @@ class Account_Screen extends StatelessWidget {
         backgroundColor: ColorRes.btnColor,
         toolbarHeight: Get.height * 0.13,
         title: Text(
-          Strings.artline,
+          Strings.artline.tr,
           style: forgotPass,
         ),
         centerTitle: true,

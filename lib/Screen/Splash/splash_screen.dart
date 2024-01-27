@@ -24,10 +24,10 @@ class Splash_Screen extends StatelessWidget {
                 BoxShadow(
                   color: ColorRes.shadowColor.withOpacity(0.1),
                   blurRadius: 10,
-                  offset: Offset(0, 5),
+                  offset: const Offset(0, 5),
                 ),
               ],
-              borderRadius: BorderRadius.only(
+              borderRadius: const BorderRadius.only(
                 bottomLeft: Radius.circular(30),
                 bottomRight: Radius.circular(30),
               ),
@@ -45,7 +45,7 @@ class Splash_Screen extends StatelessWidget {
                     height: Get.height * 0.02,
                   ),
                   Text(
-                    Strings.signin,
+                    Strings.signin.tr,
                     style: splashSubTitle,
                   ), SizedBox(
                     height: Get.height * 0.04,
@@ -61,7 +61,7 @@ class Splash_Screen extends StatelessWidget {
               onTap: () {
                 Get.to(() => const Business_Login_Screen());
               },
-              title: Strings.bussinessEntry,
+              title: Strings.bussinessEntry.tr,
             ),
           ),
           SizedBox(
@@ -70,7 +70,7 @@ class Splash_Screen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(left: 30, right: 30),
             child: CommonBtn(
-              title: Strings.loginAsGuest,
+              title: Strings.loginAsGuest.tr,
               onTap: () {
                 Get.to(() => const GuestLoginScreen());
               },

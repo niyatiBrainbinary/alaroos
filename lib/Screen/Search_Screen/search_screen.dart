@@ -29,16 +29,18 @@ class Search_Screen extends StatelessWidget {
                       child: TextFormField(
                         onChanged: searchController.setSearch,
                         controller: searchController.SearchController,
-                        decoration: const InputDecoration(
-                            prefixIcon: Icon(Icons.search_rounded),
+                        decoration:  InputDecoration(
+                            prefixIcon: const Icon(Icons.search_rounded),
                             filled: true,
                             fillColor: ColorRes.serchTextfiled,
                             border:
-                                OutlineInputBorder(borderSide: BorderSide.none),
-                            hintText: Strings.search),
+                                const OutlineInputBorder(borderSide: BorderSide.none),
+                            hintText: Strings.search.tr),
                       ),
                     ),
-                    const Expanded(child: Search_List())
+                     Expanded(
+                      child: Search_List(),
+                    ),
                   ],
                 )
               : Column(
@@ -58,13 +60,13 @@ class Search_Screen extends StatelessWidget {
                                   searchController.setSearch;
                                 },
                                 controller: searchController.SearchController,
-                                decoration: const InputDecoration(
-                                    prefixIcon: Icon(Icons.search_rounded),
+                                decoration:  InputDecoration(
+                                    prefixIcon: const Icon(Icons.search_rounded),
                                     filled: true,
                                     fillColor: ColorRes.serchTextfiled,
-                                    border: OutlineInputBorder(
+                                    border: const OutlineInputBorder(
                                         borderSide: BorderSide.none),
-                                    hintText: Strings.search),
+                                    hintText: Strings.search.tr),
                               ),
                             ),
                           ),
@@ -76,7 +78,7 @@ class Search_Screen extends StatelessWidget {
                               searchController.SearchController.clear();
                               searchController.update(['search']);
                             },
-                            child: const Text(Strings.cancle),
+                            child:  Text(Strings.cancle.tr),
                           ),
                         ],
                       ),
@@ -90,11 +92,11 @@ class Search_Screen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            Strings.recent,
+                            Strings.recent.tr,
                             style: homeTitle,
                           ),
                           Text(
-                            Strings.seeAll,
+                            Strings.seeAll.tr,
                             style: donthaveac,
                           ),
                         ],
@@ -105,36 +107,36 @@ class Search_Screen extends StatelessWidget {
                     ),
                     ListTile(
                       title: Text(
-                        Strings.username,
+                        Strings.username.tr,
                         style: forgotPass,
                       ),
                       subtitle: Text(
-                        Strings.trueline,
+                        Strings.trueline.tr,
                         style: donthaveac,
                       ),
                       leading: CircleAvatar(
                         radius: Get.height * 0.033,
-                        foregroundImage: AssetImage(AssetsRes.userImage),
+                        foregroundImage: const AssetImage(AssetsRes.userImage),
                       ),
-                      trailing: Icon(Icons.close),
+                      trailing: const Icon(Icons.close),
                     ),
                     SizedBox(
                       height: Get.height * 0.02,
                     ),
                     ListTile(
                       title: Text(
-                        Strings.username2,
+                        Strings.username2.tr,
                         style: forgotPass,
                       ),
                       subtitle: Text(
-                        Strings.creativity,
+                        Strings.creativity.tr,
                         style: donthaveac,
                       ),
                       leading: CircleAvatar(
                         radius: Get.height * 0.033,
-                        foregroundImage: AssetImage(AssetsRes.userImage2),
+                        foregroundImage: const AssetImage(AssetsRes.userImage2),
                       ),
-                      trailing: Icon(Icons.close),
+                      trailing: const Icon(Icons.close),
                     )
                   ],
                 );

@@ -27,7 +27,7 @@ class Setting_Screen extends StatelessWidget {
         backgroundColor: ColorRes.btnColor,
         toolbarHeight: Get.height * 0.13,
         title: Text(
-          Strings.setting,
+          Strings.setting.tr,
           style: forgotPass,
         ),
       ),
@@ -39,9 +39,9 @@ class Setting_Screen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(left: 30, right: 30),
             child: Setting_Btn_List(
-              title: Strings.account,
+              title: Strings.account.tr,
               onTap: () {
-                Get.to(() => Account_Screen());
+                Get.to(() => const Account_Screen());
               },
               icon: CupertinoIcons.right_chevron,
             ),
@@ -52,7 +52,7 @@ class Setting_Screen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(left: 30, right: 30),
             child: Setting_Btn_List(
-              title: Strings.language,
+              title: Strings.language.tr,
               onTap: () {
                 Get.to(() => Select_Language());
               },
@@ -65,7 +65,7 @@ class Setting_Screen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(left: 30, right: 30),
             child: Setting_Btn_List(
-              title: Strings.privateAccount,
+              title: Strings.privateAccount.tr,
               onTap: () {},
               icon: CupertinoIcons.right_chevron,
             ),
@@ -76,7 +76,7 @@ class Setting_Screen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(left: 30, right: 30),
             child: Setting_Btn_List(
-              title: Strings.settingNotification,
+              title: Strings.settingNotification.tr,
               onTap: () {},
               icon: CupertinoIcons.right_chevron,
             ),
@@ -87,7 +87,7 @@ class Setting_Screen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(left: 30, right: 30),
             child: Setting_Btn_List(
-              title: Strings.logout,
+              title: Strings.logout.tr,
               onTap: () {
                 Get.to(() => Splash_Screen());
               },

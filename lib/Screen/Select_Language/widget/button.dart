@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import '../../../Common/text_style.dart';
 import '../../../Utils/color_res.dart';
 import '../../../Utils/string.dart';
+import '../../../service/localization.dart';
 import '../language_controller.dart';
 
 class Button extends StatelessWidget {
@@ -19,6 +20,8 @@ class Button extends StatelessWidget {
           () => GestureDetector(
             onTap: () {
               languageController.setLanguage("English");
+              LocalizationService loc = LocalizationService();
+              loc.changeLocale("English");
             },
             child: Padding(
               padding: const EdgeInsets.only(left: 30, right: 30),
@@ -42,7 +45,7 @@ class Button extends StatelessWidget {
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Text(
-                            Strings.english,
+                            Strings.english.tr,
                             style: btnText,
                           ),
                         ),
@@ -84,6 +87,8 @@ class Button extends StatelessWidget {
           () => GestureDetector(
             onTap: () {
               languageController.setLanguage("Arabic");
+              LocalizationService loc = LocalizationService();
+              loc.changeLocale("Arabic");
             },
             child: Padding(
               padding: const EdgeInsets.only(left: 30, right: 30),
@@ -107,7 +112,7 @@ class Button extends StatelessWidget {
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Text(
-                            Strings.arabic,
+                            Strings.arabic.tr,
                             style: btnText,
                           ),
                         ),

@@ -21,7 +21,7 @@ class Category_Screen extends StatelessWidget {
         automaticallyImplyLeading: false,
         toolbarHeight: Get.height * 0.13,
         title: Text(
-          Strings.alaroos,
+          Strings.alaroos.tr,
           style: appBarTitle,
         ),
         actions: [
@@ -45,44 +45,44 @@ class Category_Screen extends StatelessWidget {
                   //Get.to(() => const BottomBar());
                   Get.to(() =>  BottomBar());
                 },
-                title: Strings.event),
+                title: Strings.event.tr),
             SizedBox(height: Get.height*0.03,),
             CommonBtn(
                 onTap: () {
                   //Get.to(() => const BottomBar());
                   Get.to(() =>  BottomBar());
                 },
-                title: Strings.photoStudio),SizedBox(height: Get.height*0.03,),
+                title: Strings.photoStudio.tr),SizedBox(height: Get.height*0.03,),
             CommonBtn(
                 onTap: () {
                   //Get.to(() => const BottomBar());
                   Get.to(() =>  BottomBar());
                 },
-                title: Strings.wedding),SizedBox(height: Get.height*0.03,),
+                title: Strings.wedding.tr),SizedBox(height: Get.height*0.03,),
             CommonBtn(
                 onTap: () {
                   //Get.to(() => const BottomBar());
                   Get.to(() =>  BottomBar());
                 },
-                title: Strings.flowerist),SizedBox(height: Get.height*0.03,),
+                title: Strings.flowerist.tr),SizedBox(height: Get.height*0.03,),
             CommonBtn(
                 onTap: () {
                   //Get.to(() => const BottomBar());
                   Get.to(() =>  BottomBar());
                 },
-                title: Strings.chocoliast),SizedBox(height: Get.height*0.03,),
+                title: Strings.chocoliast.tr),SizedBox(height: Get.height*0.03,),
             CommonBtn(
                 onTap: () {
                   //Get.to(() => const BottomBar());
                   Get.to(() =>  BottomBar());
                 },
-                title: Strings.bride),SizedBox(height: Get.height*0.03,),
+                title: Strings.bride.tr),SizedBox(height: Get.height*0.03,),
             CommonBtn(
                 onTap: () {
                   //Get.to(() => const BottomBar());
                   Get.to(() =>  BottomBar());
                 },
-                title: Strings.decoration),
+                title: Strings.decoration.tr),
           ],
         ),
       ),
