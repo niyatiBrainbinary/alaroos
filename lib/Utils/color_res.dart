@@ -13,4 +13,6 @@ class ColorRes {
   static const chat2 = Color(0xffFDF2CC);
   static const serchTextfiled = Color(0xffF0F0F0);
   static const shareProfileChatColor = Color(0xffE5D6A2);
+  static const color_716B6B = Color(0xff716B6B);
+
 }

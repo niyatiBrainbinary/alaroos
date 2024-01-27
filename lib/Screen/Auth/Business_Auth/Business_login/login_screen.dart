@@ -1,5 +1,5 @@
 import 'package:alaroos/Common/text_style.dart';
-import 'package:alaroos/Screen/Auth/Forgot_Password/forgot_pass.dart';
+import 'package:alaroos/Screen/Auth/Forgot_Password/ForgotPassword.dart';
 import 'package:alaroos/Screen/Home_Screen/home_screen.dart';
 import 'package:alaroos/Utils/assets_res.dart';
 import 'package:alaroos/Utils/color_res.dart';
@@ -60,7 +60,7 @@ class Business_Login_Screen extends StatelessWidget {
                     ),
                     businessLoginController.email.isNotEmpty
                         ? Text(businessLoginController.email, style: errorStyle)
-                        : SizedBox(),
+                        : const SizedBox(),
                     SizedBox(
                       height: Get.height * 0.03,
                     ),
@@ -79,13 +79,13 @@ class Business_Login_Screen extends StatelessWidget {
                     ),
                     businessLoginController.pass.isNotEmpty
                         ? Text(businessLoginController.pass, style: errorStyle)
-                        : SizedBox(),
+                        : const SizedBox(),
                     SizedBox(
                       height: Get.height * 0.01,
                     ),
                     GestureDetector(
                       onTap: () {
-                        Get.to(() => Forgot_Password_Screen());
+                        Get.to(() => ForgotPassword());
                       },
                       child: Align(
                         alignment: Alignment.bottomRight,

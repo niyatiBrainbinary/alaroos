@@ -37,6 +37,7 @@ String CategoryId = "";
   category () async {
     isLoading.value = true;
     categoryModel = await CategoryApi.categoryApi();
+    debugPrint("catmodel ------- ${categoryModel.data}");
    /* if (categoryModel.data != null && categoryModel.data!.isNotEmpty) {
       // Remove duplicates before adding new locations
       Set<String?> existingIds = categoryList.map((data) => data.title).toSet();

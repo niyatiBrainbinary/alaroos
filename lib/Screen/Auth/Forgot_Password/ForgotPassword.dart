@@ -9,8 +9,8 @@ import 'package:get/get.dart';
 import '../../../Utils/assets_res.dart';
 import '../../../Utils/string.dart';
 
-class Forgot_Password_Screen extends StatelessWidget {
-  Forgot_Password_Screen({Key? key}) : super(key: key);
+class ForgotPassword extends StatelessWidget {
+  ForgotPassword({Key? key}) : super(key: key);
   Forgot_Pass_Controller forgot_pass_controller =
       Get.put(Forgot_Pass_Controller());
   @override
@@ -54,7 +54,7 @@ class Forgot_Password_Screen extends StatelessWidget {
                     height: Get.height * 0.06,
                   ),
                   Container(
-                    height: Get.height * 0.07,
+                    height: Get.height * 0.08,
                     width: Get.width * 0.8,
                     decoration: const BoxDecoration(),
                     child: Text(

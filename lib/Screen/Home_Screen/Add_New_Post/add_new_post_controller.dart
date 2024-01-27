@@ -73,18 +73,18 @@ class AddNewPostController extends GetxController {
         context: context,
         builder: (BuildContext bc){
           return Container(
-            child: new Wrap(
+            child: Wrap(
               children: <Widget>[
-                new ListTile(
-                    leading: new Icon(Icons.music_note),
-                    title: new Text('photo'),
+                ListTile(
+                    leading: const Icon(Icons.music_note),
+                    title: const Text('photo'),
                     onTap:
                       pickImage
 
                 ),
-                new ListTile(
-                  leading: new Icon(Icons.videocam),
-                  title: new Text('Video'),
+                ListTile(
+                  leading: const Icon(Icons.videocam),
+                  title: const Text('Video'),
                   onTap: pickVideo,
                 ),
               ],
@@ -145,7 +145,7 @@ update(['newPost']);
     isLoading.value = true;
     addPostModel = await AddPostApi.addPostApi(title: title, description: description, image_url: image);
    if(addPostModel.data != null){
-    Get.to(() => Account_Screen());
+    Get.to(() => const Account_Screen());
    }
     isLoading.value = false;
   }

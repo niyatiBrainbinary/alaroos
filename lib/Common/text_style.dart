@@ -73,7 +73,7 @@ TextStyle forgotDetails = const TextStyle(
   fontWeight: FontWeight.w400,
   fontSize: 14,
   fontFamily: FontRes.latoRegular,
-  color: ColorRes.textfiledBorder,
+  color: ColorRes.color_716B6B,
 );
 
 TextStyle errorStyle = const TextStyle(

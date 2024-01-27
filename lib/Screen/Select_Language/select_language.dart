@@ -21,7 +21,7 @@ class Select_Language extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           title: Text(
-            Strings.forgot,
+            Strings.selectLanguage,
             style: forgotPass,
           ),
           centerTitle: true,

@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:alaroos/Utils/api_res.dart';
 import 'package:alaroos/Utils/pref_key.dart';
 import 'package:alaroos/service/pref_service.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
@@ -28,7 +29,7 @@ class LoginApi {
 
       if (response!.statusCode == 200) {
   var decoded = jsonDecode(response.body);
-  print('=========$decoded');
+  debugPrint('=========$decoded');
   
  // if(decoded["success"]== true){
     PrefService.setValue(PrefKeys.login, true);
@@ -46,7 +47,7 @@ class LoginApi {
         return businessLoginModelFromJson(response.body);
 
       } else {
-        print('Error:::: ${response.body}');
+        debugPrint('Error:::: ${response.body}');
         errorToast(Strings.userNotFound);
         return BusinessLoginModel();
       }

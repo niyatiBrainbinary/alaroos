@@ -1,5 +1,5 @@
 class EndPoints {
-  static const mainBaseUrl = 'https://7a51-2405-201-2024-ad6b-34d7-c362-2d5-88cc.ngrok-free.app';
+  static const mainBaseUrl = 'https://e2da-2405-201-2024-ad6b-59a2-389b-7a04-167f.ngrok-free.app';
  // static const baseUrl = '$mainBaseUrl/api/businessuser';
  // static const businessLogin = "$baseUrl/login-user";
 

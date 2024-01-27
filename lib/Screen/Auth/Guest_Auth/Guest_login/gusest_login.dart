@@ -10,7 +10,7 @@ import '../../../../Utils/assets_res.dart';
 import '../../../../Utils/color_res.dart';
 import '../../../../Utils/string.dart';
 import '../../Business_Auth/Business_Register/register_screen.dart';
-import '../../Forgot_Password/forgot_pass.dart';
+import '../../Forgot_Password/ForgotPassword.dart';
 
 class GuestLoginScreen extends StatelessWidget {
   const GuestLoginScreen({Key? key}) : super(key: key);
@@ -83,7 +83,7 @@ class GuestLoginScreen extends StatelessWidget {
                     ),
                     GestureDetector(
                       onTap: () {
-                        Get.to(() => Forgot_Password_Screen());
+                        Get.to(() => ForgotPassword());
                       },
                       child: Align(
                         alignment: Alignment.bottomRight,

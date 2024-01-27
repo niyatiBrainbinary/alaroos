@@ -70,10 +70,10 @@ class BusinessRegisterScreen extends StatelessWidget {
                         //     businessRegisterController.validateUserName(),
                       ),
                     ),
-                    businessRegisterController.userName.isNotEmpty
+                    businessRegisterController.userName.isEmpty
                         ? Text(businessRegisterController.userName,
                             style: errorStyle)
-                        : SizedBox(),
+                        : const SizedBox(),
                     SizedBox(
                       height: Get.height * 0.03,
                     ),
@@ -91,10 +91,10 @@ class BusinessRegisterScreen extends StatelessWidget {
                         //     businessRegisterController.validateBusinessName(),
                       ),
                     ),
-                    businessRegisterController.businessName.isNotEmpty
+                    businessRegisterController.businessName.isEmpty
                         ? Text(businessRegisterController.businessName,
                             style: errorStyle)
-                        : SizedBox(),
+                        : const SizedBox(),
                     SizedBox(
                       height: Get.height * 0.03,
                     ),
@@ -174,9 +174,9 @@ class BusinessRegisterScreen extends StatelessWidget {
                     businessRegisterController.categoryError.isNotEmpty
                         ? Text(businessRegisterController.categoryError,
                             style: errorStyle)
-                        : SizedBox(),
+                        : const SizedBox(),
                     controller.isClick == false
-                        ? SizedBox()
+                        ? const SizedBox()
                         : Align(
                       alignment: Alignment.centerRight,
                           child: Container(
@@ -200,7 +200,7 @@ class BusinessRegisterScreen extends StatelessWidget {
                                       controller.update(["business_register"]);
                                     },
                                     child: Container(
-                                      padding: EdgeInsets.symmetric(horizontal: 15,vertical: 10),
+                                      padding: const EdgeInsets.symmetric(horizontal: 15,vertical: 10),
                                       child: Row(
                                         children: [
                                           Expanded(child: Text(controller.categoryModel.data?[index].title ?? "")),
