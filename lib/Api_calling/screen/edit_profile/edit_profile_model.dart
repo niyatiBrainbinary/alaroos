@@ -40,13 +40,13 @@ class Data {
   String? phone;
   String? email;
   String? password;
-  List<String>? category;
+  String? category;
   List<String>? posts;
   DateTime? createdAt;
   DateTime? updatedAt;
   int? v;
-  String? profileimage;
   String? refreshToken;
+  String? profileimage;
 
   Data({
     this.id,
@@ -61,8 +61,8 @@ class Data {
     this.createdAt,
     this.updatedAt,
     this.v,
-    this.profileimage,
     this.refreshToken,
+    this.profileimage,
   });
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
@@ -73,13 +73,13 @@ class Data {
     phone: json["phone"],
     email: json["email"],
     password: json["password"],
-    category: json["category"] == null ? [] : List<String>.from(json["category"]!.map((x) => x)),
+    category: json["category"],
     posts: json["posts"] == null ? [] : List<String>.from(json["posts"]!.map((x) => x)),
     createdAt: json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
     updatedAt: json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),
     v: json["__v"],
-    profileimage: json["profileimage"],
     refreshToken: json["refreshToken"],
+    profileimage: json["profileimage"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -90,12 +90,12 @@ class Data {
     "phone": phone,
     "email": email,
     "password": password,
-    "category": category == null ? [] : List<dynamic>.from(category!.map((x) => x)),
+    "category": category,
     "posts": posts == null ? [] : List<dynamic>.from(posts!.map((x) => x)),
     "createdAt": createdAt?.toIso8601String(),
     "updatedAt": updatedAt?.toIso8601String(),
     "__v": v,
-    "profileimage": profileimage,
     "refreshToken": refreshToken,
+    "profileimage": profileimage,
   };
 }

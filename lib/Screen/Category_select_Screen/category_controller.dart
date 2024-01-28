@@ -13,16 +13,7 @@ class CategoryController extends GetxController{
   allCategory () async {
     isLoading.value = true;
     allCategoryModel = await AllCategoryApi.allCategoryApi();
-    /* if (categoryModel.data != null && categoryModel.data!.isNotEmpty) {
-      // Remove duplicates before adding new locations
-      Set<String?> existingIds = categoryList.map((data) => data.title).toSet();
-      List<CategoryModel> newCategory = categoryModel.data!
-          .where((data) => !existingIds.contains(data.title))
-          .toList();
 
-      categoryList.addAll(newCategory);
-      update(['business_register']);
-    }*/
 
     isLoading.value = false;
   }

@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ProfileScreenController extends GetxController {
-
+ String image = '';
   @override
   void onInit() {
     // TODO: implement onInit
@@ -27,15 +27,7 @@ class ProfileScreenController extends GetxController {
   TextEditingController addVideoController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
 
-  String editName = "";
-  String editBusinessName = "";
-  String editEmail = "";
-  String editPhone = "";
-  String editPass = "";
-  String link = "";
-  String language = "";
-  String addVideo = "";
-  String description = "";
+
 
 
 

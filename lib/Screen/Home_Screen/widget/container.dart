@@ -42,7 +42,7 @@ class Container_Screen extends StatelessWidget {
                   children: [
                     CircleAvatar(
                       radius: Get.height * 0.033,
-                      foregroundImage: AssetImage(AssetsRes.userImage),
+                      foregroundImage: const AssetImage(AssetsRes.userImage),
                     ),
                     SizedBox(
                       width: Get.width * 0.020,
@@ -91,7 +91,7 @@ class Container_Screen extends StatelessWidget {
               height: Get.height * 0.046,
             ),
             GestureDetector(
-              onTap: () => Get.to(() => Account_Screen()),
+              onTap: () => Get.to(() => const Account_Screen()),
               child: Padding(
                 padding: const EdgeInsets.only(left: 20),
                 child: Row(

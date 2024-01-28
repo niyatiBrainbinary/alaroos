@@ -19,7 +19,6 @@ class AddNewPostController extends GetxController {
 
   TextEditingController titleController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
-
   String title = "";
   String description = "";
   String imageError = "";
@@ -197,7 +196,6 @@ class AddNewPostController extends GetxController {
   List<Map<String,dynamic>> images = [];
   List<Map<String,dynamic>> videos = [];
   List<VideoPlayerController> videoController = [];
-   int? currentIndex;
   Future<void> callApiGetAllPost() async {
     try {
       isLoading.value = true;
@@ -206,21 +204,37 @@ class AddNewPostController extends GetxController {
       videos = [];
       getAllPostModel = await GetAllPostApi.getAllPostApi();
       if (getAllPostModel.data != null) {
-        for (int i = 0; i < getAllPostModel.data!.length; i++) {
-          if (getAllPostModel.data![i].images!.resourceType=="image") {
-            images.add({"url":getAllPostModel.data![i].images!.url,"des":getAllPostModel.data![i].description,
-            "title":getAllPostModel.data![i].title});
+        for (int i = 0; i < getAllPostModel.data!.posts!.length; i++) {
+          if (getAllPostModel.data!.posts![i].images!.resourceType == "image") {
+            images.add({
+              "url": getAllPostModel.data!.posts![i].images!.url,
+              "des": getAllPostModel.data!.posts![i].description,
+              "title": getAllPostModel.data!.posts![i].title,
+              "firstName": getAllPostModel.data!.firstname,
+              "lastName": getAllPostModel.data!.lastname,
+            });
+          }
 
-          }
-          if (getAllPostModel.data![i].images!.resourceType=="video"){
-            currentIndex = 0;
-            videos.add({"url":getAllPostModel.data![i].images!.url,"des":getAllPostModel.data![i].description,
-              "title":getAllPostModel.data![i].title});
-            videoController.add( VideoPlayerController.network(getAllPostModel.data![i].images!.url.toString()));
-            initializeControllers();
-          }
         }
-        debugPrint("${getAllPostModel.data!.first.images}");
+        for (int i = 0; i < getAllPostModel.data!.posts!.length; i++) {
+          if (getAllPostModel.data!.posts![i].images!.resourceType ==
+              "videos") {
+            videos.add({
+              "url": getAllPostModel.data!.posts![i].images!.url,
+              "des": getAllPostModel.data!.posts![i].description,
+              "title": getAllPostModel.data!.posts![i].title,
+              "firstName": getAllPostModel.data!.firstname,
+              "lastName": getAllPostModel.data!.lastname,
+            });
+            debugPrint("videos $videos");
+            videoController.add(VideoPlayerController.network(
+                getAllPostModel.data!.posts![i].images!.url.toString()));
+            await Future.wait(videoController.map((controller) => controller.initialize()));
+            update(["post"]);
+          }
+
+        }
+        debugPrint("${getAllPostModel.data!.posts!.first.images}");
       }
       isLoading.value = false;
       update(["post"]);
@@ -234,7 +248,4 @@ class AddNewPostController extends GetxController {
     update(["post"]);
   }
 
-  void initializeControllers() async {
-    await Future.wait(videoController.map((controller) => controller.initialize()));
-    update(["post"]);  }
 }

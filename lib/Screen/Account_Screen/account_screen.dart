@@ -51,18 +51,20 @@ class Account_Screen extends StatelessWidget {
             child: NestedScrollView(
               headerSliverBuilder: (context, _) {
                 return [
-                  SliverList(
+                GetBuilder<AddNewPostController>(id:'p',builder: (controller) {
+                  return   SliverList(
                     delegate: SliverChildListDelegate(
                       [
-                        profile(context),
+                        profile(context,addNewPostController),
                       ],
                     ),
-                  ),
+                  );
+                },)
                 ];
               },
               body: Column(
                 children: <Widget>[
-                  const Material(
+                   const Material(
                     color: Colors.white,
                     child: TabBar(
                       unselectedLabelColor: ColorRes.textfiledBorder,

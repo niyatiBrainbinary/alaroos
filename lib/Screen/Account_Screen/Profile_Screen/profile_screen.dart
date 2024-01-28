@@ -1,5 +1,7 @@
 import 'package:alaroos/Screen/Account_Screen/Edit_Account_Screen/edit_account_screen.dart';
 import 'package:alaroos/Screen/Account_Screen/Profile_Screen/profile_screen_controller.dart';
+import 'package:alaroos/Utils/pref_key.dart';
+import 'package:alaroos/service/pref_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -9,7 +11,6 @@ import '../../../Common/text_style.dart';
 import '../../../Utils/assets_res.dart';
 import '../../../Utils/color_res.dart';
 import '../../../Utils/string.dart';
-import '../Edit_Account_Screen/edit_account_controller.dart';
 
 class Profile_Screen extends StatelessWidget {
  Profile_Screen({Key? key}) : super(key: key);
@@ -48,85 +49,41 @@ class Profile_Screen extends StatelessWidget {
                     SizedBox(
                       height: Get.height * 0.04,
                     ),
-                    // CircleAvatar(
-                    //   radius: Get.height * 0.063,
-                    //   foregroundImage:
-                    //   (imgFile == null) ? null : FileImage(imgFile as File),
-                    //   child: FloatingActionButton(
-                    //     elevation: 0,
-                    //     onPressed: () async {
-                    //       scaffoldkey.currentState!.showBottomSheet(
-                    //             (context) => Container(
-                    //           height: 200,
-                    //           child: Column(
-                    //             children: [
-                    //               ListTile(
-                    //                 title: Text("Pick the Camera"),
-                    //                 onTap: () async {
-                    //                   ImagePicker picker = ImagePicker();
-                    //                   XFile? xfile = await picker.pickImage(
-                    //                       source: ImageSource.camera);
-                    //                   String path = xfile!.path;
-                    //                   setState(() {
-                    //                     imgFile = File(path);
-                    //                   });
-                    //                   Navigator.of(context).pop();
-                    //                 },
-                    //               ),
-                    //               ListTile(
-                    //                 title: Text("Pick the Gallery"),
-                    //                 onTap: () async {
-                    //                   ImagePicker picker = ImagePicker();
-                    //                   XFile? xfile = await picker.pickImage(
-                    //                       source: ImageSource.gallery);
-                    //                   String path = xfile!.path;
-                    //                   setState(() {
-                    //                     imgFile = File(path);
-                    //                   });
-                    //                   Navigator.of(context).pop();
-                    //                 },
-                    //               ),
-                    //             ],
-                    //           ),
-                    //         ),
-                    //       );
-                    //     },
-                    //     child: const Icon(
-                    //       Icons.camera_alt_outlined,
-                    //       size: 30,
-                    //     ),
-                    //   ),
-                    // ),
                     Center(
-                      child: CircleAvatar(
-                        radius: Get.height * 0.063,
-                        foregroundImage: AssetImage(AssetsRes.userImage2),
-                      ),
-                    ),
+                        child: Container(
+                      height: 88.85,
+                      width: 88.85,
+                      decoration: const BoxDecoration(shape: BoxShape.circle),
+                      child:PrefService.getString(PrefKeys.userImage).isEmpty
+                          ? Image.asset(AssetsRes.userImage2)
+                          : ClipRRect(
+                              borderRadius: BorderRadius.circular(88.85),
+                              child: Image.network(
+                                PrefService.getString(PrefKeys.userImage),
+                                fit: BoxFit.cover,
+                              )),
+                    )),
                     SizedBox(
                       height: Get.height * 0.02,
                     ),
-                    GestureDetector(onTap: (){
-
-
-
-
-                      Get.to(()=>Edit_Account_Screen(
-
-                      ));},
-
-
+                    GestureDetector(
+                      onTap: () {
+                        Get.to(() =>  const Edit_Account_Screen())!.then((value) {
+                          controller.update(["profile"]);
+                        });
+                      },
                       child: Container(
                         height: Get.height * 0.05,
-                        width: Get.width*0.4,
+                        width: Get.width * 0.4,
                         decoration: ShapeDecoration(
                           color: ColorRes.btnColor,
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8)),
                           shadows: [
                             BoxShadow(
                               color: ColorRes.shadowColor.withOpacity(0.1),
                               blurRadius: 10,
-                              offset: Offset(0, 5),
+                              offset: const Offset(0, 5),
                             ),
                           ],
                         ),
@@ -180,7 +137,7 @@ class Profile_Screen extends StatelessWidget {
                         keyboardType: TextInputType.emailAddress,
                       ),
                     ),
-                    SizedBox(
+                    /*      SizedBox(
                       height: Get.height * 0.03,
                     ),
                     SizedBox(
@@ -193,7 +150,7 @@ class Profile_Screen extends StatelessWidget {
                         isObSecure: true,
                         keyboardType: TextInputType.visiblePassword,
                       ),
-                    ),
+                    ),*/
 
                     SizedBox(
                       height: Get.height * 0.03,

@@ -1,4 +1,5 @@
-import 'package:alaroos/Screen/Dashboard/Widgets/bottom_bar.dart';
+import 'package:alaroos/Utils/pref_key.dart';
+import 'package:alaroos/service/pref_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -8,8 +9,26 @@ import '../../../../Utils/assets_res.dart';
 import '../../../../Utils/color_res.dart';
 import '../../../../Utils/string.dart';
 
-class Post_Screen extends StatelessWidget {
-  const Post_Screen({Key? key}) : super(key: key);
+class Post_Screen extends StatefulWidget {
+  List<Map<String, dynamic>>? images;
+  int? index;
+  String? fName,lName;
+
+  Post_Screen({Key? key, this.images, this.index,this.fName,this.lName}) : super(key: key);
+
+  @override
+  State<Post_Screen> createState() => _Post_ScreenState();
+}
+
+class _Post_ScreenState extends State<Post_Screen> {
+  ScrollController? scrollController = ScrollController();
+
+  @override
+  void initState() {
+    scrollController =
+        ScrollController(initialScrollOffset: widget.index! *  Get.height * 0.56,);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +46,7 @@ class Post_Screen extends StatelessWidget {
         title: Column(
           children: [
             Text(
-              Strings.username,
+              "${widget.fName} ${widget.lName}",
               style: forgotPass,
             ),
             Text(
@@ -39,139 +58,93 @@ class Post_Screen extends StatelessWidget {
         centerTitle: true,
       ),
       body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
-              height: Get.height * 0.026,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 20),
-              child: Row(
-                children: [
-                  CircleAvatar(
-                    radius: Get.height * 0.033,
-                    foregroundImage: AssetImage(AssetsRes.userImage),
-                  ),
-                  SizedBox(
-                    width: Get.width * 0.020,
-                  ),
-                  Text(
-                    Strings.username,
-                    style: forgotPass,
-                  ),
-                ],
+        controller: scrollController,
+          child: ListView.builder(
+        itemCount: widget.images!.length,
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        itemBuilder: (context, ind) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: Get.height * 0.026,
               ),
-            ),
-            SizedBox(
-              height: Get.height * 0.022,
-            ),
-            Container(
-              height: Get.height * 0.350,
-              width: double.infinity,
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage(AssetsRes.image1), fit: BoxFit.cover),
-              ),
-            ),
-            SizedBox(
-              height: Get.height * 0.012,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    Strings.title,
-                    style: register,
-                  ),
-                  Container(
-                    height: Get.height * 0.05,
-                    width: Get.width * 0.45,
-                    decoration: const BoxDecoration(),
-                    child: Text(
-                      Strings.subtitle,
-                      textAlign: TextAlign.center,
-                      style: subTitleStyle,
+              Padding(
+                padding: const EdgeInsets.only(left: 20),
+                child: Row(
+                  children: [
+                    Container(
+                      height:33,
+                      width: 33,
+                      decoration: const BoxDecoration(shape: BoxShape.circle),
+                      child: PrefService.getString(PrefKeys.userImage).isEmpty
+                          ? Image.asset(AssetsRes.userImage2)
+                          : ClipRRect(
+                          borderRadius: BorderRadius.circular(88.85),
+                          child: Image.network(
+                            PrefService.getString(PrefKeys.userImage),
+                            fit: BoxFit.cover,
+                          )),
                     ),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(
-              height: Get.height * 0.026,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 20),
-              child: Row(
-                children: [
-                  CircleAvatar(
-                    radius: Get.height * 0.033,
-                    foregroundImage: AssetImage(AssetsRes.userImage),
-                  ),
-                  SizedBox(
-                    width: Get.width * 0.020,
-                  ),
-                  Text(
-                    Strings.username,
-                    style: forgotPass,
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(
-              height: Get.height * 0.022,
-            ),
-            Container(
-              height: Get.height * 0.350,
-              width: double.infinity,
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage(AssetsRes.image1), fit: BoxFit.cover),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Icon(
-                    CupertinoIcons.left_chevron,
-                    color: ColorRes.themeColor,
-                  ),
-                  Icon(
-                    CupertinoIcons.right_chevron,
-                    color: ColorRes.themeColor,
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(
-              height: Get.height * 0.012,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    Strings.title,
-                    style: register,
-                  ),
-                  Container(
-                    height: Get.height * 0.05,
-                    width: Get.width * 0.45,
-                    decoration: const BoxDecoration(),
-                    child: Text(
-                      Strings.subtitle,
-                      textAlign: TextAlign.center,
-                      style: subTitleStyle,
+                    SizedBox(
+                      width: Get.width * 0.020,
                     ),
-                  ),
-                ],
+                    Text(
+                      Strings.username,
+                      style: forgotPass,
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
-        ),
-      ),
+              SizedBox(
+                height: Get.height * 0.022,
+              ),
+              Container(
+                height: Get.height * 0.350,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: NetworkImage(widget.images![ind]['url']),
+                      fit: BoxFit.cover),
+                ),
+              ),
+              SizedBox(
+                height: Get.height * 0.012,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text(
+                      widget.images?[ind]['title'] ?? "",
+                      style: register,
+                    ),
+                    SizedBox(
+                      height: Get.height * 0.05,
+                      width: Get.width * 0.45,
+                      child: Align(
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          widget.images?[ind]['des'] ?? "",
+                          textAlign: TextAlign.center,
+                          style: subTitleStyle,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: Get.height * 0.008,
+              ),
+            ],
+          );
+        },
+      )),
     );
   }
 }

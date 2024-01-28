@@ -22,7 +22,7 @@ Widget profileHeaderWidget(BuildContext contex) {
           children: [
             CircleAvatar(
               radius: Get.height * 0.060,
-              foregroundImage: AssetImage(AssetsRes.userImage),
+              foregroundImage: const AssetImage(AssetsRes.userImage),
             ),
             SizedBox(
               width: Get.width * 0.05,
@@ -61,7 +61,7 @@ Widget profileHeaderWidget(BuildContext contex) {
         children: [
           GestureDetector(
             onTap: () {
-              Get.to(() => Message_Screen());
+              Get.to(() => const Message_Screen());
             },
             child: Padding(
               padding: const EdgeInsets.only(left: 20, right: 20),

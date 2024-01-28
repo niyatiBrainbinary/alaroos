@@ -54,4 +54,5 @@ class AssetsRes {
       images + "Search_images/decorationPlanner.png";
   static const designer = images + "Search_images/Designer.png";
   static const play = icons + "play.png";
+  static const playSvgrepo = icons + "play_svgrepo.com.png";
 }

@@ -24,18 +24,26 @@ class Gallery extends StatelessWidget {
               mainAxisSpacing: 5.0,
             ),
             itemBuilder: (context, index) {
-              return GestureDetector(onTap: () {
-                Get.to(()=> Post_Screen());
-              },
-                child: Container(
-                  height: 80,
-                  width: 80,
-                  // color: Colors.grey,
-                  decoration: BoxDecoration(
-                      image: DecorationImage(image: NetworkImage( controller.images[index]["url"] ?? ""),fit: BoxFit.cover)
-                  ),
-                ),
-              );
+              return GestureDetector(
+                    onTap: () {
+                      Get.to(() => Post_Screen(
+                            images: controller.images,
+                            index: index,
+                        fName: controller.getAllPostModel.data!.firstname,
+                        lName: controller.getAllPostModel.data!.lastname,
+                          ));
+                    },
+                    child: Container(
+                      height: 80,
+                      width: 80,
+                      // color: Colors.grey,
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                              image: NetworkImage(
+                                  controller.images[index]["url"] ?? ""),
+                              fit: BoxFit.cover)),
+                    ),
+                  );
             },
           );
         },)

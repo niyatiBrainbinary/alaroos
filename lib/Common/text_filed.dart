@@ -42,8 +42,7 @@ class CommonTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        //height: 50,
+      body: SizedBox(
         width: double.infinity,
         child: TextFormField(
           readOnly: readOnly ?? false,
@@ -69,7 +68,7 @@ class CommonTextField extends StatelessWidget {
                     scale: 2.5,
                   )
               )
-                  : SizedBox(): null,
+                  : const SizedBox(): null,
             border: OutlineInputBorder(
               borderSide: const BorderSide(color: Colors.red),
               borderRadius: BorderRadius.circular(4),
@@ -83,68 +82,4 @@ class CommonTextField extends StatelessWidget {
   }
 }
 
-class DropDownTextFled extends StatelessWidget {
-  final String? hintText;
-  final String title;
-  final TextEditingController? controller;
-  const DropDownTextFled(
-      {Key? key, this.controller, this.hintText, required this.title})
-      : super(key: key);
 
-
-  @override
-  Widget build(BuildContext context) {
-
-    BusinessRegisterController businessRegisterController =
-    Get.put(BusinessRegisterController());
-    return Scaffold(
-      body: DropDownTextField(
-        //controller: controller,
-        textFieldDecoration: InputDecoration(
-          // enabledBorder: OutlineInputBorder(
-          //   borderSide: BorderSide(color: ColorRes.textfiledBorder),
-          // ),
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: ColorRes.textfiledBorder),
-          ),
-          labelText: title,
-          labelStyle: textfiledLable,
-          hintText: hintText,
-          border: OutlineInputBorder(
-            borderSide: const BorderSide(color: Colors.red),
-            borderRadius: BorderRadius.circular(4),
-          ),
-        ),
-        // initialValue: "name4",
-        listSpace: 20,
-        listPadding: ListPadding(top: 20),
-        enableSearch: true,
-        validator: (value) {
-          if (value == null) {
-            return "Required field";
-          } else {
-            return null;
-          }
-        },
-        dropDownList: const [
-
-          DropDownValueModel(name: Strings.wedding, value: "value1"),
-          DropDownValueModel(name: Strings.photoStudio, value: "value2"),
-          DropDownValueModel(name: Strings.event, value: "value3"),
-          DropDownValueModel(name: Strings.flowerist, value: "value4"),
-          DropDownValueModel(name: Strings.designer, value: "value5"),
-          DropDownValueModel(name: Strings.chocoliast, value: "value6"),
-          DropDownValueModel(name: Strings.bride, value: "value7"),
-        ],
-
-        dropDownItemCount: 7,
-
-        onChanged: (val) async {
-if(businessRegisterController.validation()){
- await businessRegisterController.category();
-}
-        },
-      ),
-    );
-  }
-}

@@ -1,5 +1,9 @@
-import 'package:alaroos/Screen/Account_Screen/Edit_Account_Screen/edit_account_screen.dart';
 import 'package:alaroos/Screen/Account_Screen/Profile_Screen/profile_screen.dart';
+import 'package:alaroos/Screen/Home_Screen/Add_New_Post/add_new_post_controller.dart';
+import 'package:alaroos/Screen/WhatsApp_Message/Chat_Screen/chat_screen.dart';
+import 'package:alaroos/Utils/assets_res.dart';
+import 'package:alaroos/Utils/pref_key.dart';
+import 'package:alaroos/service/pref_service.dart';
 import 'package:alaroos/Screen/WhatsApp_Message/business/Message_Screen/message_controller.dart';
 import 'package:alaroos/Screen/WhatsApp_Message/business/Message_Screen/message_screen.dart';
 import 'package:alaroos/Screen/WhatsApp_Message/user/Message_Screen_User/message_controller_user.dart';
@@ -10,11 +14,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../../Common/text_style.dart';
-import '../../../../../Utils/assets_res.dart';
 import '../../../../../Utils/color_res.dart';
 import '../../../../../Utils/string.dart';
 
-Widget profile(BuildContext contex) {
+Widget profile(BuildContext contex, AddNewPostController addNewPostController) {
   return Column(
     children: [
       Padding(
@@ -22,9 +25,18 @@ Widget profile(BuildContext contex) {
         child: GestureDetector(onTap: (){Get.to(()=>Profile_Screen());},
           child: Row(
             children: [
-              CircleAvatar(
-                radius: Get.height * 0.060,
-                foregroundImage: const AssetImage(AssetsRes.userImage2),
+              Container(
+                height: 88.85,
+                width: 88.85,
+                decoration: const BoxDecoration(shape: BoxShape.circle),
+                child: PrefService.getString(PrefKeys.userImage).isEmpty
+                    ? Image.asset(AssetsRes.userImage2)
+                    : ClipRRect(
+                        borderRadius: BorderRadius.circular(88.85),
+                        child: Image.network(
+                          PrefService.getString(PrefKeys.userImage),
+                          fit: BoxFit.cover,
+                        )),
               ),
               SizedBox(
                 width: Get.width * 0.05,
@@ -33,7 +45,7 @@ Widget profile(BuildContext contex) {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    Strings.username2,
+                    "${PrefService.getString(PrefKeys.firstName) ?? ""} ${PrefService.getString(PrefKeys.lastName) ?? ""}",
                     style: forgotPass,
                   ),
                   Text(
@@ -45,7 +57,7 @@ Widget profile(BuildContext contex) {
                     style: btnText,
                   ),
                   Text(
-                    Strings.contactNo,
+                    PrefService.getString(PrefKeys.mobileNumber) ?? "",
                     style: btnText,
                   ),
                 ],
@@ -64,7 +76,9 @@ Widget profile(BuildContext contex) {
         children: [
           GestureDetector(
             onTap: () {
-              Get.to(() =>  Profile_Screen());
+              Get.to(() =>  Profile_Screen())!.then((value) {
+                addNewPostController.update(['p']);
+              });
             },
             child: Padding(
               padding: const EdgeInsets.only(left: 20, right: 20),

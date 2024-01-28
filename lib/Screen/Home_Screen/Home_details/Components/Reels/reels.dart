@@ -25,56 +25,68 @@ class Reels extends StatelessWidget {
                 ),
               )
             : GridView.builder(
-                itemCount: controller.videos.length ?? 0,
+                itemCount: controller.videos.length,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 3,
                   crossAxisSpacing: 5.0,
                   mainAxisSpacing: 5.0,
                 ),
                 itemBuilder: (context, index) {
-                  return SizedBox(
-                    height: 80,
-                    width: 80,
+                  return GestureDetector(
+                    onTap: () {
+                      Get.to( Reels_Screen(
+                        images: controller.videos,
+                        index: index,
+                        fName: controller.getAllPostModel.data!.firstname,
+                        lName: controller.getAllPostModel.data!.lastname,
+                        videoController:  controller.videoController,
+                      ));
+                    },
+                    child: SizedBox(
+                      height: 80,
+                      width: 80,
+                      child: Stack(
+                        alignment: Alignment.bottomRight,
+                        children: [
+                          AspectRatio(
+                            aspectRatio: controller
+                                .videoController[index]
+                                .value
+                                .aspectRatio,
+                            child: VideoPlayer(
+                              controller.videoController[index],
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Image.asset(
+                              AssetsRes.play,
+                              height: 13.33,
+                              width: 12.67,
+                              fit: BoxFit.cover,
+                            ),
+                          )
+                          /*  GestureDetector(
+                              onTap: () {
 
-                    child: Stack(
-                      alignment: Alignment.bottomRight,
-                      children: [
-                        AspectRatio(
-                          aspectRatio:  controller
-                              .videoController[controller.currentIndex!].value.aspectRatio,
-                          child: VideoPlayer( controller
-                              .videoController[index],),
-                        ),
-                        GestureDetector(
-                            onTap: () {
-                              Get.to(()=> const Reels_Screen());
-                              /*controller
-                                      .videoController[controller.currentIndex!]
-                                      .value
-                                      .isPlaying
-                                  ? controller
-                                      .videoController[controller.currentIndex!]
-                                      .pause()
-                                  : controller
-                                      .videoController[controller.currentIndex!]
-                                      .play();*/
-                              controller.update(["post"]);
-                            },
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Image.asset(AssetsRes.play,height: 13.33,width: 12.67,fit: BoxFit.cover,),
-                            )
-                          /*const Icon(
-                              controller
-                                      .videoController[controller.currentIndex!]
-                                      .value
-                                      .isPlaying
-                                  ? Icons.pause
-                                  : Icons.play_arrow,
-                              color: Colors.grey,
-                              size: 40,
-                            )*/)
-                      ],
+                                */ /*controller
+                                        .videoController[controller.currentIndex!]
+                                        .value
+                                        .isPlaying
+                                    ? controller
+                                        .videoController[controller.currentIndex!]
+                                        .pause()
+                                    : controller
+                                        .videoController[controller.currentIndex!]
+                                        .play();*/ /*
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Image.asset(AssetsRes.play,height: 13.33,width: 12.67,fit: BoxFit.cover,),
+                              )
+                          )*/
+                        ],
+                      ),
                     ),
                   );
                 },

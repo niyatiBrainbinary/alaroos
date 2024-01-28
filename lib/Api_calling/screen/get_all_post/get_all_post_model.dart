@@ -11,7 +11,7 @@ String getAllPostModelToJson(GetAllPostModel data) => json.encode(data.toJson())
 class GetAllPostModel {
   bool? success;
   int? code;
-  List<Datum>? data;
+  Data? data;
 
   GetAllPostModel({
     this.success,
@@ -22,53 +22,117 @@ class GetAllPostModel {
   factory GetAllPostModel.fromJson(Map<String, dynamic> json) => GetAllPostModel(
     success: json["success"],
     code: json["code"],
-    data: json["data"] == null ? [] : List<Datum>.from(json["data"]!.map((x) => Datum.fromJson(x))),
+    data: json["data"] == null ? null : Data.fromJson(json["data"]),
   );
 
   Map<String, dynamic> toJson() => {
     "success": success,
     "code": code,
-    "data": data == null ? [] : List<dynamic>.from(data!.map((x) => x.toJson())),
+    "data": data?.toJson(),
   };
 }
 
-class Datum {
+class Data {
+  String? id;
+  String? firstname;
+  String? lastname;
+  String? businessname;
+  String? phone;
+  String? email;
+  String? password;
+  String? category;
+  List<Post>? posts;
+  DateTime? createdAt;
+  DateTime? updatedAt;
+  int? v;
+  String? refreshToken;
+
+  Data({
+    this.id,
+    this.firstname,
+    this.lastname,
+    this.businessname,
+    this.phone,
+    this.email,
+    this.password,
+    this.category,
+    this.posts,
+    this.createdAt,
+    this.updatedAt,
+    this.v,
+    this.refreshToken,
+  });
+
+  factory Data.fromJson(Map<String, dynamic> json) => Data(
+    id: json["_id"],
+    firstname: json["firstname"],
+    lastname: json["lastname"],
+    businessname: json["businessname"],
+    phone: json["phone"],
+    email: json["email"],
+    password: json["password"],
+    category: json["category"],
+    posts: json["posts"] == null ? [] : List<Post>.from(json["posts"]!.map((x) => Post.fromJson(x))),
+    createdAt: json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
+    updatedAt: json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),
+    v: json["__v"],
+    refreshToken: json["refreshToken"],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "_id": id,
+    "firstname": firstname,
+    "lastname": lastname,
+    "businessname": businessname,
+    "phone": phone,
+    "email": email,
+    "password": password,
+    "category": category,
+    "posts": posts == null ? [] : List<dynamic>.from(posts!.map((x) => x.toJson())),
+    "createdAt": createdAt?.toIso8601String(),
+    "updatedAt": updatedAt?.toIso8601String(),
+    "__v": v,
+    "refreshToken": refreshToken,
+  };
+}
+
+class Post {
+  Images? images;
   String? id;
   String? title;
   String? description;
   DateTime? createdAt;
   DateTime? updatedAt;
   int? v;
-  Images? images;
 
-  Datum({
+  Post({
+    this.images,
     this.id,
     this.title,
     this.description,
     this.createdAt,
     this.updatedAt,
     this.v,
-    this.images,
   });
 
-  factory Datum.fromJson(Map<String, dynamic> json) => Datum(
+  factory Post.fromJson(Map<String, dynamic> json) => Post(
+    images: json["images"] == null ? null : Images.fromJson(json["images"]),
     id: json["_id"],
     title: json["title"],
     description: json["description"],
     createdAt: json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
     updatedAt: json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),
     v: json["__v"],
-    images: json["images"] == null ? null : Images.fromJson(json["images"]),
   );
 
   Map<String, dynamic> toJson() => {
+    "images": images?.toJson(),
     "_id": id,
     "title": title,
     "description": description,
     "createdAt": createdAt?.toIso8601String(),
     "updatedAt": updatedAt?.toIso8601String(),
     "__v": v,
-    "images": images?.toJson(),
   };
 }
 

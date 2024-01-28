@@ -24,7 +24,7 @@ class Home_Details_Screen extends StatelessWidget {
           },
           icon: const Icon(CupertinoIcons.back),
         ),
-        shape: Border(bottom: BorderSide(color: ColorRes.textColor)),
+        shape: const Border(bottom: BorderSide(color: ColorRes.textColor)),
         backgroundColor: ColorRes.btnColor,
         toolbarHeight: Get.height * 0.13,
         title: Text(
@@ -49,7 +49,7 @@ class Home_Details_Screen extends StatelessWidget {
           },
           body:  Column(
             children: <Widget>[
-              Material(
+              const Material(
 
                 child: TabBar(unselectedLabelColor: ColorRes.textfiledBorder,
                   labelColor: ColorRes.textColor,
@@ -73,7 +73,7 @@ class Home_Details_Screen extends StatelessWidget {
                 child: TabBarView(
                   children: [
                     Gallery(),
-                    Reels(),
+                    const Reels(),
                   ],
                 ),
               ),
