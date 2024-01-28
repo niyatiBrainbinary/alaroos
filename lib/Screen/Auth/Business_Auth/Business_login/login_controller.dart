@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:alaroos/Screen/Home_Screen/home_screen.dart';
 import 'package:alaroos/Utils/api_res.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -31,14 +32,59 @@ class BusinessLoginController extends GetxController {
   async {
     isLoading.value = true;
     businessLoginModel =  await LoginApi.loginApi(email: email,password: password, userType: '');
-    if(businessLoginModel.data!=null){
-      await PrefService.setValue(PrefKeys.registerToken, businessLoginModel.data!.token);
+    if(businessLoginModel.data!=null) {
+      await PrefService.setValue(
+          PrefKeys.registerToken, businessLoginModel.data!.token);
+      PrefService.setValue(
+          PrefKeys.firstNameBusiness, businessLoginModel.data?.firstname);
+      PrefService.setValue(
+          PrefKeys.lastNameBusiness, businessLoginModel.data?.lastname);
+      PrefService.setValue(
+          PrefKeys.emailBusiness, businessLoginModel.data?.email);
+      PrefService.setValue(
+          PrefKeys.mobileNumberBusiness, businessLoginModel.data?.phone);
+      PrefService.setValue(
+          PrefKeys.employeeIdBusiness, businessLoginModel.data?.id);
+      PrefService.setValue(PrefKeys.type, "business");
+
+
+      bool isUpdate = false;
+      String docId = '';
+      var bussinessData = await FirebaseFirestore.instance.collection("Auth")
+          .doc("Business").collection("BusinessEntry")
+          .get();
+      bussinessData.docs.forEach((element) {
+        if (element['bussinessEmail'] == businessLoginModel.data?.email) {
+          isUpdate = true;
+          docId = element.id;
+        }
+      });
+
+      if (isUpdate) {
+        await FirebaseFirestore.instance.collection("Auth").doc("Business")
+            .collection("BusinessEntry").doc(docId)
+            .update({
+          "firstName": businessLoginModel.data?.firstname,
+          "lastName": businessLoginModel.data?.lastname,
+          "businessName": businessLoginModel.data?.businessname,
+          "businessEmail": businessLoginModel.data?.email,
+          "businessPhone": businessLoginModel.data?.phone,
+        });
+      }
+      else {
+        await FirebaseFirestore.instance.collection("Auth")
+            .doc("Business")
+            .collection("BusinessEntry")
+            .add({
+          "firstName": businessLoginModel.data?.firstname,
+          "lastName": businessLoginModel.data?.lastname,
+          "businessName": businessLoginModel.data?.businessname,
+          "businessEmail": businessLoginModel.data?.email,
+          "businessPhone": businessLoginModel.data?.phone,
+        });
+      }
     }
-    PrefService.setValue(PrefKeys.firstName, businessLoginModel.data?.firstname);
-    PrefService.setValue(PrefKeys.lastName, businessLoginModel.data?.lastname);
-    PrefService.setValue(PrefKeys.email, businessLoginModel.data?.email);
-    PrefService.setValue(PrefKeys.mobileNumber, businessLoginModel.data?.phone);
-   PrefService.setValue(PrefKeys.employeeId, businessLoginModel.data?.id);
+
     isLoading.value = false;
   }
 

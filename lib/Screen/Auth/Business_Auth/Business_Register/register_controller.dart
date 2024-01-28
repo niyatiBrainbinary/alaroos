@@ -27,9 +27,9 @@ List<CategoryModel> categoryList = [];
 String CategoryId = "";
 
 
-  registerUser({password, firstName, lastName, mobile,businessname,category }) async {
+  registerUser({password, firstName, lastName, mobile,businessname,category ,email}) async {
     isLoading.value = true;
-    await BusinessRegisterApi.businessRegisterApi(password: password, firstName: firstName, lastName: lastName, mobile: mobile, businessname: businessname,email: businessEmail, categoryId: CategoryId);
+    await BusinessRegisterApi.businessRegisterApi(password: password, firstName: firstName, lastName: lastName, mobile: mobile, businessname: businessname,email: email, categoryId: CategoryId);
     isLoading.value = false;
   }
 
@@ -206,7 +206,7 @@ String CategoryId = "";
 
   @override
   Future<void> onInit() async {
-    // TODO: implement onInit
+   category();
     super.onInit();
     //await category();
   }

@@ -1,7 +1,11 @@
 import 'package:alaroos/Screen/Account_Screen/Edit_Account_Screen/edit_account_screen.dart';
 import 'package:alaroos/Screen/Account_Screen/Profile_Screen/profile_screen.dart';
-import 'package:alaroos/Screen/WhatsApp_Message/Chat_Screen/chat_screen.dart';
-import 'package:alaroos/Screen/WhatsApp_Message/Message_Screen/message_screen.dart';
+import 'package:alaroos/Screen/WhatsApp_Message/business/Message_Screen/message_controller.dart';
+import 'package:alaroos/Screen/WhatsApp_Message/business/Message_Screen/message_screen.dart';
+import 'package:alaroos/Screen/WhatsApp_Message/user/Message_Screen_User/message_controller_user.dart';
+import 'package:alaroos/Screen/WhatsApp_Message/user/Message_Screen_User/message_screen_user.dart';
+import 'package:alaroos/Utils/pref_key.dart';
+import 'package:alaroos/service/pref_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -81,8 +85,20 @@ Widget profile(BuildContext contex) {
             ),
           ),
           GestureDetector(
-            onTap: () {
-              Get.to(() =>  Chat_Screen());
+            onTap: () async {
+              if(    PrefService.getString(PrefKeys.type) =="business"){
+                MessageController messsageController = Get.put(MessageController());
+                await messsageController.init();
+                Get.to(() => Message_Screen());
+
+              }
+              else
+              {
+                MessageUserController messageUserController = Get.put(MessageUserController());
+                await messageUserController.init();
+                Get.to(() => Message_ScreenUser());
+
+              }
             },
             child: Padding(
               padding: const EdgeInsets.only(right: 20),

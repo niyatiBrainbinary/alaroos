@@ -2,6 +2,7 @@ import 'package:alaroos/Screen/Auth/Forgot_Password/ForgotPassword.dart';
 import 'package:alaroos/Screen/Select_Language/select_language.dart';
 import 'package:alaroos/Utils/pref_key.dart';
 import 'package:alaroos/service/pref_service.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get_connect/http/src/response/response.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -44,9 +45,49 @@ class BusinessRegisterApi {
     if (response.statusCode == 200) {
       // flutterToast(decoded["message"]["en"]);
       // PrefService.setValue(PrefKeys.loginType, role.toString().capitalizeFirst);
-      PrefService.setValue(PrefKeys.firstName, decoded["user"]["firstname"]);
+      PrefService.setValue(PrefKeys.firstNameBusiness, decoded["user"]["firstname"]);
+      PrefService.setValue(PrefKeys.lastNameBusiness, decoded["user"]["lastname"]);
+      PrefService.setValue(PrefKeys.emailBusiness, decoded["user"]["email"]);
+      PrefService.setValue(PrefKeys.mobileNumberBusiness, decoded["user"]["phone"]);
+      PrefService.setValue(PrefKeys.employeeIdBusiness, decoded["user"]["_id"]);
+      PrefService.setValue(PrefKeys.type,"business");
+
       debugPrint(
           "First Name After Register Api${PrefService.getString(PrefKeys.firstName)}");
+      PrefService.setValue(PrefKeys.login, true);
+
+      bool isUpdate = false;
+      String docId ='';
+      var bussinessData =  await  FirebaseFirestore.instance.collection("Auth").doc("Business").collection("BusinessEntry").get();
+      bussinessData.docs.forEach((element) {
+        if(element['bussinessEmail'] == decoded["user"]["email"])
+        {
+          isUpdate = true;
+          docId = element.id;
+        }
+      });
+
+if(isUpdate){
+  await FirebaseFirestore.instance.collection("Auth").doc("Business").collection("BusinessEntry").doc(docId).update({
+    "firstName":decoded["user"]["firstname"],
+    "lastName":decoded["user"]["lastname"],
+    "businessName":decoded["user"]["businessname"],
+    "businessEmail":decoded["user"]["email"],
+    "businessPhone":decoded["user"]["phone"],
+  });
+}
+else
+  {
+    await FirebaseFirestore.instance.collection("Auth").doc("Business").collection("BusinessEntry").add({
+      "firstName":decoded["user"]["firstname"],
+      "lastName":decoded["user"]["lastname"],
+      "businessName":decoded["user"]["businessname"],
+      "businessEmail":decoded["user"]["email"],
+      "businessPhone":decoded["user"]["phone"],
+    });
+  }
+
+
       Get.to(() => Select_Language());
       return response.body;
     } else {

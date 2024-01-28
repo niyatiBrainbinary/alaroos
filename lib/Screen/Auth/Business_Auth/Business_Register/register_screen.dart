@@ -242,11 +242,12 @@ class BusinessRegisterScreen extends StatelessWidget {
                           if (businessRegisterController.validation()) {
                             businessRegisterController.registerUser(
                                 firstName: controller.userNameController.text,
+                                email: controller.businessEmailController.text,
                                 businessname:
-                                    controller.businessEmailController.text,
-                                lastName:
                                     controller.businessNameController.text,
-                                mobile: controller.passwordController.text,
+                                lastName:
+                                    controller.userNameController.text,
+                                mobile: controller.phoneNoController.text,
                                 password: controller.passwordController.text,
                                 category: controller.categoryController.text);
                           }

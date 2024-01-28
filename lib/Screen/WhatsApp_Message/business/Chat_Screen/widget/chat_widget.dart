@@ -1,10 +1,9 @@
+import 'package:alaroos/Common/text_style.dart';
+import 'package:alaroos/Utils/assets_res.dart';
+import 'package:alaroos/Utils/color_res.dart';
+import 'package:alaroos/Utils/string.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../../../Common/text_style.dart';
-import '../../../../Utils/assets_res.dart';
-import '../../../../Utils/color_res.dart';
-import '../../../../Utils/string.dart';
 
 class ChatWidget extends StatelessWidget {
   const ChatWidget({Key? key}) : super(key: key);

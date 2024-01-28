@@ -1,6 +1,12 @@
 import 'package:alaroos/Api_calling/auth/all_category/all_category_model.dart';
 import 'package:alaroos/Screen/Dashboard/Widgets/bottom_bar.dart';
 import 'package:alaroos/Screen/Dashboard/Widgets/bottom_controller.dart';
+import 'package:alaroos/Screen/WhatsApp_Message/business/Message_Screen/message_controller.dart';
+import 'package:alaroos/Screen/WhatsApp_Message/business/Message_Screen/message_screen.dart';
+import 'package:alaroos/Screen/WhatsApp_Message/user/Message_Screen_User/message_controller_user.dart';
+import 'package:alaroos/Screen/WhatsApp_Message/user/Message_Screen_User/message_screen_user.dart';
+import 'package:alaroos/Utils/pref_key.dart';
+import 'package:alaroos/service/pref_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,7 +16,6 @@ import '../../Common/text_style.dart';
 import '../../Utils/color_res.dart';
 import '../../Utils/string.dart';
 import '../Category_select_Screen/category_controller.dart';
-import '../WhatsApp_Message/Message_Screen/message_screen.dart';
 
 class Category_Screen extends StatelessWidget {
    Category_Screen({Key? key}) : super(key: key);
@@ -31,8 +36,20 @@ class Category_Screen extends StatelessWidget {
         ),
         actions: [
           IconButton(
-            onPressed: () {
-              Get.to(() => const Message_Screen());
+            onPressed: () async {
+              if(    PrefService.getString(PrefKeys.type) =="business"){
+                MessageController messsageController = Get.put(MessageController());
+                await messsageController.init();
+                Get.to(() => Message_Screen());
+
+              }
+              else
+              {
+                MessageUserController messageUserController = Get.put(MessageUserController());
+                await messageUserController.init();
+                Get.to(() => Message_ScreenUser());
+
+              }
             },
             icon: const Icon(
               CupertinoIcons.chat_bubble_text,
@@ -58,7 +75,7 @@ class Category_Screen extends StatelessWidget {
                       bom.currentPage.value = 0;
                       Get.to(() =>  BottomBar());
                     },
-                    title: categoryController.allCategoryModel.data![index].title ?? ""),
+                    title: categoryController.allCategoryModel.data?[index].title ?? ""),
                 const SizedBox(height: 20,),
 
               ],

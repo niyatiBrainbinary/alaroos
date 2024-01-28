@@ -1,7 +1,12 @@
 import 'package:alaroos/Screen/Category_Screen/category_screen.dart';
 import 'package:alaroos/Screen/Category_select_Screen/category_controller.dart';
 import 'package:alaroos/Screen/Dashboard/Widgets/bottom_bar.dart';
-import 'package:alaroos/Screen/WhatsApp_Message/Message_Screen/message_screen.dart';
+import 'package:alaroos/Screen/WhatsApp_Message/business/Message_Screen/message_controller.dart';
+import 'package:alaroos/Screen/WhatsApp_Message/business/Message_Screen/message_screen.dart';
+import 'package:alaroos/Screen/WhatsApp_Message/user/Message_Screen_User/message_controller_user.dart';
+import 'package:alaroos/Screen/WhatsApp_Message/user/Message_Screen_User/message_screen_user.dart';
+import 'package:alaroos/Utils/pref_key.dart';
+import 'package:alaroos/service/pref_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -39,8 +44,20 @@ CategoryController categoryController = Get.put(CategoryController());
         ),
         actions: [
           IconButton(
-            onPressed: () {
-              Get.to(() => Message_Screen());
+            onPressed: () async {
+              if(    PrefService.getString(PrefKeys.type) =="business"){
+                MessageController messsageController = Get.put(MessageController());
+                await messsageController.init();
+                Get.to(() => Message_Screen());
+
+              }
+              else
+              {
+                MessageUserController messageUserController = Get.put(MessageUserController());
+                await messageUserController.init();
+                Get.to(() => Message_ScreenUser());
+
+              }
             },
             icon: const Icon(
               CupertinoIcons.chat_bubble_text,
