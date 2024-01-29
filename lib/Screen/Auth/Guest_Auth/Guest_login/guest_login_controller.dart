@@ -42,32 +42,37 @@ class GuestLoginController extends GetxController {
 
     bool isUpdate = false;
     String docId ='';
-    var bussinessData =  await  FirebaseFirestore.instance.collection("Auth").doc("User").collection("UserEntry").get();
-    bussinessData.docs.forEach((element) {
-      if(element['email'] == guestLoginModel.data?.email)
-      {
-        isUpdate = true;
-        docId = element.id;
-      }
-    });
+    if( guestLoginModel.data?.email != null) {
+      var bussinessData = await FirebaseFirestore.instance.collection("Auth")
+          .doc("User").collection("UserEntry")
+          .get();
+      bussinessData.docs.forEach((element) {
+        if (element['email'] == guestLoginModel.data?.email) {
+          isUpdate = true;
+          docId = element.id;
+        }
+      });
 
-    if(isUpdate)
-      {
-        await FirebaseFirestore.instance.collection("Auth").doc("User").collection("UserEntry").doc(docId).update({
-          "firstName":guestLoginModel.data?.firstname,
-          "lastName":guestLoginModel.data?.lastname,
+      if (isUpdate) {
+        await FirebaseFirestore.instance.collection("Auth").doc("User")
+            .collection("UserEntry").doc(docId)
+            .update({
+          "firstName": guestLoginModel.data?.firstname,
+          "lastName": guestLoginModel.data?.lastname,
           "email": guestLoginModel.data?.email,
         });
       }
-    else
-      {
-        await FirebaseFirestore.instance.collection("Auth").doc("User").collection("UserEntry").add({
-          "firstName":guestLoginModel.data?.firstname,
-          "lastName":guestLoginModel.data?.lastname,
+      else {
+        await FirebaseFirestore.instance.collection("Auth")
+            .doc("User")
+            .collection("UserEntry")
+            .add({
+          "firstName": guestLoginModel.data?.firstname,
+          "lastName": guestLoginModel.data?.lastname,
           "email": guestLoginModel.data?.email,
         });
       }
-
+    }
 
     isLoading.value = false;
   }

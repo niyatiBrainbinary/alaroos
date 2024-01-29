@@ -22,13 +22,15 @@ MessageController messageController = Get.put(MessageController());
           if (snapshot.hasData == false) {
             return const SizedBox();
           }
+
       return (snapshot.data != null)
+
       ?ListView.builder(
         shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
           itemCount: snapshot.data.docs.length,
           itemBuilder: (context,i){
-          messageController.getFirestoreData(snapshot.data.docs[i]['email']);
+          messageController.getFirestoreData(snapshot.data.docs[i]['email'] ?? '');
 
             return    GestureDetector(
             onTap: () async {
