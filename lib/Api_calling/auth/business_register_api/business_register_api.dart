@@ -1,4 +1,3 @@
-import 'package:alaroos/Screen/Auth/Forgot_Password/ForgotPassword.dart';
 import 'package:alaroos/Screen/Select_Language/select_language.dart';
 import 'package:alaroos/Utils/pref_key.dart';
 import 'package:alaroos/service/pref_service.dart';

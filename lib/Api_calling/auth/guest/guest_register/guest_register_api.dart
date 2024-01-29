@@ -1,4 +1,3 @@
-import 'package:alaroos/Screen/Auth/Forgot_Password/ForgotPassword.dart';
 import 'package:alaroos/Screen/Select_Language/select_language.dart';
 import 'package:alaroos/Utils/pref_key.dart';
 import 'package:alaroos/service/pref_service.dart';
@@ -37,7 +36,7 @@ class GuestRegisterApi {
       PrefService.setValue(PrefKeys.type,"user");
       debugPrint(
           "First Name After Register Api${PrefService.getString(PrefKeys.firstName)}");
-      PrefService.setValue(PrefKeys.login, true);
+      PrefService.setValue(PrefKeys.guestLogin, true);
 
       bool isUpdate = false;
       String docId ='';

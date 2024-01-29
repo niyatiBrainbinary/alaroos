@@ -33,7 +33,7 @@ class GuestLoginController extends GetxController {
     isLoading.value = true;
     guestLoginModel =  await GuestLoginApi.guestLoginApi(email: email,password: password);
     PrefService.setValue(PrefKeys.registerToken, guestLoginModel.data?.token);
-    PrefService.setValue(PrefKeys.login, true);
+    PrefService.setValue(PrefKeys.guestLogin, true);
     PrefService.setValue(PrefKeys.firstName, guestLoginModel.data?.firstname);
     PrefService.setValue(PrefKeys.lastName, guestLoginModel.data?.lastname);
     PrefService.setValue(PrefKeys.email, guestLoginModel.data?.email);

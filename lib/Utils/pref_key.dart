@@ -8,6 +8,7 @@ class PrefKeys {
   static const employeeId = "employeeId";
   static const mobileNumber = "mobileNumber";
   static const type = "TypeLogin";
+  static const guestLogin = "TypeLogin";
 
   static const firstNameBusiness = "firstNameBusiness";
   static const lastNameBusiness = "lastNameBusiness";

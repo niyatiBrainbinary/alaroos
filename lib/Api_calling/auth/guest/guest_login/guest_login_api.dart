@@ -26,7 +26,7 @@ class GuestLoginApi {
       http.Response? response = await HttpService.postApi(body: {
         "email": email,
         "password": password,
-      }, url: "https://e2da-2405-201-2024-ad6b-59a2-389b-7a04-167f.ngrok-free.app/api/user/login-user",
+      }, url: "$EndPoints.guestLogin",
       );
       if (response!.statusCode == 200) {
 

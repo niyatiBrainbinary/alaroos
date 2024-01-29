@@ -1,6 +1,6 @@
 import 'package:alaroos/Screen/Account_Screen/Profile_Screen/profile_screen.dart';
 import 'package:alaroos/Screen/Home_Screen/Add_New_Post/add_new_post_controller.dart';
-import 'package:alaroos/Screen/WhatsApp_Message/Chat_Screen/chat_screen.dart';
+//import 'package:alaroos/Screen/WhatsApp_Message/Chat_Screen/chat_screen.dart';
 import 'package:alaroos/Utils/assets_res.dart';
 import 'package:alaroos/Utils/pref_key.dart';
 import 'package:alaroos/service/pref_service.dart';

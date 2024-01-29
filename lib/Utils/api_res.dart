@@ -13,8 +13,9 @@ class EndPoints {
   static const logout = "$mainBaseUrl/api/businessuser/logout-user";
   static const post = "$mainBaseUrl/api/businessuser/addpost/65b0e6296cc23f3f0d077158";
   static const video = "$mainBaseUrl/upload-media";
-  static const guestLogin = "$mainBaseUrl/user/login-user";
+  static const guestLogin = "$mainBaseUrl/api/user/login-user";
   static const guestRegister = "$mainBaseUrl/api/user/register-user";
   static const forgotPassword = "$mainBaseUrl/api/user/forgot-password";
   static const getAllPost = "$mainBaseUrl/api/businessuser/allpost";
+  static const verifyOtp = "$mainBaseUrl/api/user/verify-otp/65ab75bdbe03a9245abc0d7e";
 }

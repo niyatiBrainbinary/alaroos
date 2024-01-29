@@ -47,6 +47,11 @@ class Strings {
   static const firstName = "First Name";
   static const lastName = "last Name";
 
+  ///---------------------------verify otp--------------------------
+  static const otpVerification = "Please enter OTP to\nverification";
+
+
+
   ///----------------------------------------forgot Password ----------------------------------------
   static const forgot = "Forgot Password";
   static const email = "Email";

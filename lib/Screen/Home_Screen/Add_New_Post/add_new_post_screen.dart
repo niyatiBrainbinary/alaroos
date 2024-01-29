@@ -185,7 +185,7 @@ class _Add_New_PostState extends State<Add_New_Post> {
                             ),
                             (controller.imageError != "")
                                 ? Align(
-                                    alignment: Alignment.centerRight,
+                                  //  alignment: Alignment.centerRight,
                                     child: Padding(
                                       padding: const EdgeInsets.only(top: 3),
                                       child: Text(controller.imageError.tr,
@@ -211,93 +211,99 @@ class _Add_New_PostState extends State<Add_New_Post> {
                                 ),
                               ],
                             ),*/
+
                             Padding(
-                              padding:
-                                  const EdgeInsets.only(left: 30, right: 30),
-                              child: SizedBox(
-                                height: 60,
-                                width: double.infinity,
-                                child: CommonTextField(
-                                  title: Strings.titles,
-                                  controller:
-                                      addNewPostController.titleController,
-                                  keyboardType: TextInputType.text,
-                                ),
-                              ),
-                            ),
-                            (controller.titleError != "")
-                                ? Align(
-                                    alignment: Alignment.centerRight,
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(top: 3),
-                                      child: Text(controller.titleError.tr,
-                                          style: errorStyle),
+                              padding: const EdgeInsets.only(left: 30, right: 30),
+                              child: Column(
+                                children: [
+                                  Padding(
+                                    padding:
+                                    const EdgeInsets.only(left: 0, right: 0),
+                                    child: SizedBox(
+                                      height: 60,
+                                      width: double.infinity,
+                                      child: CommonTextField(
+                                        title: Strings.titles,
+                                        controller:
+                                        addNewPostController.titleController,
+                                        keyboardType: TextInputType.text,
+                                      ),
                                     ),
+                                  ),
+                                  (controller.titleError != "")
+
+
+                                      ?
+                                  Align(
+                                    alignment: Alignment.bottomLeft,
+                                    child: Text(controller.titleError.tr,
+                                        style: errorStyle),
                                   )
-                                : const SizedBox(),
-                            SizedBox(
-                              height: Get.height * 0.03,
-                            ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.only(left: 30, right: 30),
-                              child: SizedBox(
-                                height: 60,
-                                width: double.infinity,
-                                child: CommonTextField(
-                                  title: Strings.description,
-                                  controller: addNewPostController
-                                      .descriptionController,
-                                  keyboardType: TextInputType.text,
-                                ),
-                              ),
-                            ),
-                            (controller.descriptionError != "")
-                                ? Align(
-                                    alignment: Alignment.centerRight,
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(top: 3),
-                                      child: Text(
-                                          controller.descriptionError.tr,
-                                          style: errorStyle),
+                                      : const SizedBox(),
+
+
+                                  SizedBox(
+                                    height: Get.height * 0.03,
+                                  ),
+                                  Padding(
+                                    padding:
+                                    const EdgeInsets.only(left: 0, right: 0),
+                                    child: SizedBox(
+                                      height: 60,
+                                      width: double.infinity,
+                                      child: CommonTextField(
+                                        title: Strings.description,
+                                        controller: addNewPostController
+                                            .descriptionController,
+                                        keyboardType: TextInputType.text,
+                                      ),
                                     ),
-                                  )
-                                : const SizedBox(),
-                            SizedBox(
-                              height: Get.height * 0.1,
-                            ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.only(left: 30, right: 30),
-                              child: CommonBtn(
-                                  onTap: () {
-                                    if (controller.validation()) {
-                                      if(controller.addVideoModel.data!=null){
-                                        addNewPostController.addPostApi(
-                                            title: addNewPostController
-                                                .titleController.text,
-                                            description: addNewPostController
-                                                .descriptionController.text,
-                                            image: controller.addVideoModel.data!.first.mediaUrl.toString(),
-                                          type:  controller.addVideoModel.data!.first.type.toString(),
-                                          id:  controller.addVideoModel.data!.first.publicId
+                                  ),
+                                  (controller.descriptionError != "")
+                                      ? Align(
+                                    alignment: Alignment.bottomLeft,child: Text(controller.descriptionError.tr,
+                                        style: errorStyle),
+                                      )
+                                      : const SizedBox(),
+                                  SizedBox(
+                                    height: Get.height * 0.1,
+                                  ),
+                                  Padding(
+                                    padding:
+                                    const EdgeInsets.only(left: 0, right: 0),
+                                    child: CommonBtn(
+                                        onTap: () {
+                                          if (controller.validation()) {
+                                            if(controller.addVideoModel.data!=null){
+                                              addNewPostController.addPostApi(
+                                                  title: addNewPostController
+                                                      .titleController.text,
+                                                  description: addNewPostController
+                                                      .descriptionController.text,
+                                                  image: controller.addVideoModel.data!.first.mediaUrl.toString(),
+                                                  type:  controller.addVideoModel.data!.first.type.toString(),
+                                                  id:  controller.addVideoModel.data!.first.publicId
 
-                                        );
-                                      }else{
-                                        errorToast("Please Upload Video/Image");
-                                      }
+                                              );
+                                            }else{
+                                              errorToast("Please Upload Video/Image");
+                                            }
 
-                                    }
-                                    //profileScreenController.isEditProfile = true;
-                                    addNewPostController.update(['newPost']);
+                                          }
+                                          //profileScreenController.isEditProfile = true;
+                                          addNewPostController.update(['newPost']);
 
-                                    //Get.to(() => Home_Details_Screen());
-                                  },
-                                  title: Strings.share),
-                            ),
-                            SizedBox(
-                              height: Get.height * 0.08,
-                            ),
+                                          //Get.to(() => Home_Details_Screen());
+                                        },
+                                        title: Strings.share),
+                                  ),
+                                  SizedBox(
+                                    height: Get.height * 0.08,
+                                  ),
+                                ],
+                              ),
+                            )
+
                           ],
                         ),
                       );

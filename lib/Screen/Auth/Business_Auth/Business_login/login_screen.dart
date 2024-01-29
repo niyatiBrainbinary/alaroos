@@ -1,6 +1,5 @@
 import 'package:alaroos/Common/loader.dart';
 import 'package:alaroos/Common/text_style.dart';
-import 'package:alaroos/Screen/Auth/Forgot_Password/ForgotPassword.dart';
 import 'package:alaroos/Screen/Home_Screen/home_screen.dart';
 import 'package:alaroos/Utils/assets_res.dart';
 import 'package:alaroos/Utils/color_res.dart';
@@ -10,6 +9,7 @@ import 'package:get/get.dart';
 import '../../../../Common/common_btn.dart';
 import '../../../../Common/text_filed.dart';
 import '../../../../Utils/string.dart';
+import '../../Guest_Auth/Forgot_Password/ForgotPassword.dart';
 import '../Business_Register/register_screen.dart';
 import 'login_controller.dart';
 

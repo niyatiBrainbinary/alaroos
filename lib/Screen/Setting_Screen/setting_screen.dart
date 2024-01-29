@@ -90,9 +90,9 @@ SettingController settingController = Get.put(SettingController());
             padding: const EdgeInsets.only(left: 30, right: 30),
             child: Setting_Btn_List(
               title: Strings.logout,
-              onTap: () {
+              onTap: () async{
               //  settingController.logout();
-                PrefService.clear();
+                 await PrefService.clear();
                 Get.to(() => Splash_Screen());
               },
               icon: Icons.logout,
