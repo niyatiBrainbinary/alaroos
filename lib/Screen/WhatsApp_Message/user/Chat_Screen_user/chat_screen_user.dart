@@ -4,6 +4,7 @@ import 'package:alaroos/Screen/WhatsApp_Message/user/Message_Screen_User/message
 import 'package:alaroos/Utils/assets_res.dart';
 import 'package:alaroos/Utils/color_res.dart';
 import 'package:alaroos/Utils/string.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -160,7 +161,7 @@ class ChatUserScreen extends StatelessWidget {
                                           crossAxisAlignment:
                                           CrossAxisAlignment.end,
                                           children: [
-                                          /*  documents[index]["type"] ==
+                                         documents[index]["type"] ==
                                                 "image"
                                                 ? Container(
                                               height: 150,
@@ -184,16 +185,15 @@ class ChatUserScreen extends StatelessWidget {
                                                   placeholder: (context,
                                                       url) =>
                                                       Image.asset(
-                                                          AssetRes
-                                                              .user),
+                                                          AssetsRes.image1
+                                                              ),
                                                   errorWidget: (context,
                                                       url,
                                                       error) =>
                                                       Image.asset(
-                                                          AssetRes
-                                                              .user)),
+                                                          AssetsRes.image1)),
                                             )
-                                                : */
+                                                :
 
                                             IntrinsicWidth(
                                               child: Container(
@@ -265,7 +265,7 @@ class ChatUserScreen extends StatelessWidget {
                                           crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                           children: [
-                                           /* documents[index]["type"] ==
+                                            documents[index]["type"] ==
                                                 "image"
                                                 ? Container(
                                               height: 150,
@@ -289,16 +289,14 @@ class ChatUserScreen extends StatelessWidget {
                                                   placeholder: (context,
                                                       url) =>
                                                       Image.asset(
-                                                          AssetRes
-                                                              .user),
+                                                          AssetsRes.image1),
                                                   errorWidget: (context,
                                                       url,
                                                       error) =>
                                                       Image.asset(
-                                                          AssetRes
-                                                              .user)),
+                                                          AssetsRes.image1)),
                                             )
-                                                :*/
+                                                :
                                             IntrinsicWidth(
                                               child: Container(
                                                 padding: EdgeInsets
@@ -422,10 +420,11 @@ class ChatUserScreen extends StatelessWidget {
                                     hintStyle: const TextStyle(color: Colors.grey),
                                     prefixIcon: IconButton(
                                       icon: const Icon(
-                                        Icons.emoji_emotions_outlined,
+                                        Icons.image,
                                         size: 30,
                                       ),
                                       onPressed: () {
+                                        controller.pickImage(context, myEmail!);
                                         // if (!show) {
                                         //   focusNode.unfocus();
                                         //   focusNode.canRequestFocus = false;

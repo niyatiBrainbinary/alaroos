@@ -40,34 +40,42 @@ class GuestRegisterApi {
 
       bool isUpdate = false;
       String docId ='';
-      var bussinessData =  await  FirebaseFirestore.instance.collection("Auth").doc("User").collection("UserEntry").get();
+      if(decoded["user"]["email"] != null) {
+        var bussinessData = await FirebaseFirestore.instance.collection("Auth")
+            .doc("User").collection("UserEntry")
+            .get();
 
-      bussinessData.docs.forEach((element) {
-        if(element['email'] == decoded["user"]["email"])
-        {
-          isUpdate = true;
-          docId = element.id;
-        }
-      });
-      if(isUpdate){
-        await FirebaseFirestore.instance.collection("Auth").doc("User").collection("UserEntry").doc(docId).update({
-          "firstName":decoded["user"]["firstname"],
-          "lastName":decoded["user"]["lastname"],
-          "email":decoded["user"]["email"],
+        bussinessData.docs.forEach((element) {
+          if (element['email'] == decoded["user"]["email"]) {
+            isUpdate = true;
+            docId = element.id;
+          }
         });
-      }
-      else
-        {
-          await FirebaseFirestore.instance.collection("Auth").doc("User").collection("UserEntry").add({
-            "firstName":decoded["user"]["firstname"],
-            "lastName":decoded["user"]["lastname"],
-            "email":decoded["user"]["email"],
+        if (isUpdate) {
+          await FirebaseFirestore.instance.collection("Auth").doc("User")
+              .collection("UserEntry").doc(docId)
+              .update({
+            "firstName": decoded["user"]["firstname"],
+            "lastName": decoded["user"]["lastname"],
+            "email": decoded["user"]["email"],
           });
         }
+        else {
+          await FirebaseFirestore.instance.collection("Auth")
+              .doc("User")
+              .collection("UserEntry")
+              .add({
+            "firstName": decoded["user"]["firstname"],
+            "lastName": decoded["user"]["lastname"],
+            "email": decoded["user"]["email"],
+          });
+        }
+      }
 
       Get.to(() => Select_Language());
       return response.body;
-    } else {
+    }
+    else {
       errorToast(decoded["message"]);
     }
     return null;

@@ -205,7 +205,7 @@ class ChatWidget extends StatelessWidget {
                                               AssetsRes.userImage2),
                                         ),
                                         SizedBox(width: Get.width * 0.02),
-                                        const Center(
+                                         const Center(
                                           child: Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
@@ -228,7 +228,7 @@ class ChatWidget extends StatelessWidget {
                                   ),
                                 ),
                                 SizedBox(height: Get.height*0.01),
-                                Text(Strings.chatLink),
+                                const Text(Strings.chatLink),
                               ],
                             ),
                           )),

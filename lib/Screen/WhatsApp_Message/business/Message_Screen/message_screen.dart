@@ -34,6 +34,7 @@ class Message_Screen extends StatelessWidget {
         centerTitle: true,
       ),
       body: GetBuilder<MessageController>(
+        id: "chatBusiness",
         builder: (controller) {
           // return List_Tile();
           return SingleChildScrollView(

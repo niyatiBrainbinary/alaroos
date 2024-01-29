@@ -1,9 +1,15 @@
 
+import 'dart:io';
+
+import 'package:alaroos/Utils/color_res.dart';
 import 'package:alaroos/Utils/pref_key.dart';
 import 'package:alaroos/service/pref_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 
 class MessageUserController extends GetxController {
@@ -18,7 +24,122 @@ class MessageUserController extends GetxController {
   var imageChat;
   List lastMessageTime = [];
 
+  pickImage(context, roomId) async {
+    final picker = ImagePicker();
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      imageChat = File(pickedFile!.path);
 
+      showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+                title: Text("Send Image"),
+                content: Obx(
+                      () => Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      Container(
+                          height: 300,
+                          width: 300,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15)),
+                          child: Image.file(File(pickedFile.path))),
+                      loader.value ? const CircularProgressIndicator() : const SizedBox(),
+                    ],
+                  ),
+                ),
+                actions: [
+                  InkWell(
+                    onTap: () {
+                      imageChat = null;
+                      Get.back();
+                    },
+                    child: Container(
+                      height: 40,
+                      width: 90,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: ColorRes.textColor,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: const Text(
+                        "Cancel",
+                        style: TextStyle(color: Colors.white, fontSize: 15),
+                      ),
+                    ),
+                  ),
+                  InkWell(
+                    onTap: () async {
+                      await uploadImage(roomId);
+                      Get.back();
+                    },
+                    child: Container(
+                      height: 40,
+                      width: 90,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: ColorRes.textColor,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: const Text(
+                        "Send",
+                        style: TextStyle(color: Colors.white, fontSize: 15),
+                      ),
+                    ),
+                  )
+                ]);
+          });
+      print(pickedFile.path);
+      update(['create_profile']);
+    }
+  }
+
+
+  Future<void> uploadImage(String roomId) async {
+    if (imageChat == null) return;
+
+    loader.value = true;
+
+    String fileName =
+        'chat_images/${DateTime.now().millisecondsSinceEpoch}_${uid}_${imageChat!.path.split('/').last}';
+    firebase_storage.Reference storageRef =
+    firebase_storage.FirebaseStorage.instance.ref().child(fileName);
+
+    try {
+      firebase_storage.TaskSnapshot snapshot =
+      await storageRef.putFile(imageChat!);
+
+      String downloadUrl = await snapshot.ref.getDownloadURL();
+
+      await sendImageMessage(roomEmail!, uid, downloadUrl);
+
+      imageChat = null;
+
+      loader.value = false;
+    } on firebase_storage.FirebaseException catch (e) {
+      print(e);
+      loader.value = false;
+    }
+  }
+
+  Future<void> sendImageMessage(
+      String roomId, String senderUid, String imageUrl) async {
+    final messagesRef = FirebaseFirestore.instance
+        .collection("chats_user")
+        .doc(roomId)
+        .collection(roomId);
+
+    await messagesRef.add({
+      "content": imageUrl,
+      "type": "image",
+      "senderUid": senderUid,
+      "time": DateTime.now(),
+      "read": false,
+    });
+
+    await setLastMsgInDoc(imageUrl);
+  }
   void sendMessage(String roomId, otherUid) async {
     DateTime now = DateTime.now().toUtc(); // Get current date and time in UTC
 
@@ -234,7 +355,7 @@ class MessageUserController extends GetxController {
     final chatLastMsgData = await FirebaseFirestore.instance
         .collection("chats_user")
         .where('emailList',
-      arrayContains: PrefService.getString(PrefKeys.emailBusiness), )
+      arrayContains: PrefService.getString(PrefKeys.email), )
 
         .get();
     for (var e = 0; e < chatLastMsgData.docs.length; e++) {
@@ -247,13 +368,18 @@ class MessageUserController extends GetxController {
           newMsgCount.value[e] = await countUnreadMessagesUntilRead(getChatId(
               chatLastMsgData.docs[e]["emailList"][0],
               chatLastMsgData.docs[e]["emailList"][1]));
+          if(updateData)
+          {
+            update( ['chatUser']);
+            updateData = false;
+          }
         }
 
       }
     }
     newMsgCount.refresh();
   }
-
+bool updateData =false;
   countUnreadMessagesUntilRead(String roomId) async {
     CollectionReference messagesCollection = FirebaseFirestore.instance
         .collection('chats_user')
@@ -269,6 +395,8 @@ class MessageUserController extends GetxController {
       Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
 
       if (data['read'] == false) {
+updateData =true;
+
         await unreadCount++;
       } else {
         break;

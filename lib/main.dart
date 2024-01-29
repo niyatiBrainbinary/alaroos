@@ -15,14 +15,18 @@ import 'Screen/Auth/Guest_Auth/reset_password/reset_password_screen.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   if(Platform.isIOS) {
-    await Firebase.initializeApp(options: const FirebaseOptions(apiKey: "AIzaSyD44YQfUOoFzxVSRvwdF7U8wypPoiMTK8Y",
+    await Firebase.initializeApp(options: const FirebaseOptions(
+        storageBucket: 'aiaroos.appspot.com',
+        apiKey: "AIzaSyD44YQfUOoFzxVSRvwdF7U8wypPoiMTK8Y",
         appId: "1:83573673094:ios:d78b7b7cce8571d7331507",
         messagingSenderId: "83573673094",
         projectId: "aiaroos"));
   }
   else
     {
-      await Firebase.initializeApp(options: const FirebaseOptions(apiKey: "AIzaSyAbovX3kfvoOyjaBYRYfHbrdhr_cFftrKM",
+      await Firebase.initializeApp(options: const FirebaseOptions(
+          storageBucket: 'aiaroos.appspot.com',
+          apiKey: "AIzaSyAbovX3kfvoOyjaBYRYfHbrdhr_cFftrKM",
           appId: "1:83573673094:android:daaa950e9b7d7a47331507",
           messagingSenderId: "83573673094",
           projectId: "aiaroos"));

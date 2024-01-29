@@ -32,7 +32,9 @@ class Message_ScreenUser extends StatelessWidget {
         centerTitle: true,
       ),
       body: GetBuilder<MessageUserController>(
+        id: "chatUser",
         builder: (controller) {
+
           // return List_Tile();
           return SingleChildScrollView(
             child: Column(

@@ -59,7 +59,7 @@ class BusinessRegisterApi {
       String docId ='';
       var bussinessData =  await  FirebaseFirestore.instance.collection("Auth").doc("Business").collection("BusinessEntry").get();
       bussinessData.docs.forEach((element) {
-        if(element['bussinessEmail'] == decoded["user"]["email"])
+        if(element['businessEmail'] == decoded["user"]["email"])
         {
           isUpdate = true;
           docId = element.id;
