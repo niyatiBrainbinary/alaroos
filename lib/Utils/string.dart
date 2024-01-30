@@ -49,6 +49,8 @@ class Strings {
 
   ///---------------------------verify otp--------------------------
   static const otpVerification = "Please enter OTP to\nverification";
+  static const enterOtp = "Please enter OTP first";
+  static const enterValidOtp = "Please enter valid OTP";
 
 
 

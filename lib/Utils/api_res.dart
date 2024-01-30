@@ -17,5 +17,5 @@ class EndPoints {
   static const guestRegister = "$mainBaseUrl/api/user/register-user";
   static const forgotPassword = "$mainBaseUrl/api/user/forgot-password";
   static const getAllPost = "$mainBaseUrl/api/businessuser/allpost";
-  static const verifyOtp = "$mainBaseUrl/api/user/verify-otp/65ab75bdbe03a9245abc0d7e";
+  static const verifyOtp = "$mainBaseUrl/api/user/verify-otp";
 }

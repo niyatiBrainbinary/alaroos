@@ -1,4 +1,6 @@
 import 'package:alaroos/Screen/Auth/Guest_Auth/verify_otp/verify_otp_controller.dart';
+import 'package:alaroos/Utils/pref_key.dart';
+import 'package:alaroos/service/pref_service.dart';
 import 'package:flutter/material.dart';
 import 'package:alaroos/Screen/Auth/Guest_Auth/reset_password/reset_password_controller.dart';
 import 'package:flutter/cupertino.dart';
@@ -18,7 +20,7 @@ class VerifyOtpScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  GetBuilder<VerifyOtpController>(
-      id: 'forgot_email',
+      id: 'otp',
       builder: (controller) {
         return Scaffold(
           appBar: AppBar(
@@ -40,38 +42,13 @@ class VerifyOtpScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  /*  Center(
-                    child: Container(
-                      height: Get.height * 0.2,
-                      width: Get.width * 0.75,
-                      decoration: const BoxDecoration(
-                        image: DecorationImage(
-                          image: AssetImage(AssetsRes.forgot),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: Get.height * 0.06,
-                  ),
-                  Container(
-                    height: Get.height * 0.08,
-                    width: Get.width * 0.8,
-                    decoration: const BoxDecoration(),
-                    child: Text(
-                      Strings.details,
-                      textAlign: TextAlign.center,
-                      style: forgotDetails,
-                    ),
-                  ),*/
                   SizedBox(
                     height: Get.height * 0.08,
                   ),
                   PinCodeTextField(
-
+controller: controller.otpController,
                     appContext: context,
-                    length: 4,
+                    length: 6,
                     onChanged: (value) {
                       // Handle changes in the entered pin code
                       print(value);
@@ -89,30 +66,16 @@ class VerifyOtpScreen extends StatelessWidget {
                       activeFillColor: Colors.white,
                     ),
                   ),
-
-                  /* SizedBox(
-                    height: 60,
-                    width: double.infinity,
-                    child: CommonTextField(
-                      controller: ,
-                      title: Strings.email,
-                    //  onChange: forgot_pass_controller.setForgotEmail,
-                      //controller: forgot_pass_controller.fogotEmailController,
-                      keyboardType: TextInputType.emailAddress,
-                    ),
-                  ),*/
-                  /*forgot_pass_controller.forgotEmail.isNotEmpty
-                      ? Text(forgot_pass_controller.forgotEmail,
-                          style: errorStyle)
-                      : SizedBox(),*/
                   SizedBox(
                     height: Get.height * 0.04,
                   ),
                   CommonBtn(
                       onTap: () {
-                        FocusScope.of(context).unfocus();
-                        // controller.fogotEmailController.clear();
-
+                        controller.onTapSubmit();
+                        if (controller.otpError == "") {
+                          controller.verifyOtp(
+                              otp: controller.otpController.text);
+                        }
                       },
                       title: Strings.send)
                 ],
