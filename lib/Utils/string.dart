@@ -52,6 +52,12 @@ class Strings {
   static const enterOtp = "Please enter OTP first";
   static const enterValidOtp = "Please enter valid OTP";
 
+  ///---------------------------change password-----------------------
+  static const changePassword = 'Change Password';
+  static const passwordValidation = 'Enter the Password';
+  static const confirmPasswordValidation = 'Enter the Confirm Password';
+  static const notMatch = 'Not match with Password';
+
 
 
   ///----------------------------------------forgot Password ----------------------------------------

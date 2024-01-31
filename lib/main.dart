@@ -10,6 +10,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'Screen/Auth/Guest_Auth/change_password/change_password_screen.dart';
 import 'Screen/Auth/Guest_Auth/reset_password/reset_password_screen.dart';
 
 void main() async {
@@ -47,8 +48,8 @@ class MyApp extends StatelessWidget {
         primaryColor: ColorRes.themeColor,
       ),
       debugShowCheckedModeBanner: false,
-    //home:  ResetPasswordScreen(),
-     home: PrefService.getBool(PrefKeys.login)==true ?BottomBar(): const Splash_Screen(),
+   // home:  ChangePasswordScreen(),
+    home: PrefService.getBool(PrefKeys.login)==true ?BottomBar(): const Splash_Screen(),
     );
   }
 }

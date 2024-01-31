@@ -48,7 +48,7 @@ class BusinessRegisterApi {
       PrefService.setValue(PrefKeys.lastNameBusiness, decoded["user"]["lastname"]);
       PrefService.setValue(PrefKeys.emailBusiness, decoded["user"]["email"]);
       PrefService.setValue(PrefKeys.mobileNumberBusiness, decoded["user"]["phone"]);
-      PrefService.setValue(PrefKeys.employeeIdBusiness, decoded["user"]["_id"]);
+      PrefService.setValue(PrefKeys.employeeId, decoded["user"]["_id"]);
       PrefService.setValue(PrefKeys.type,"business");
 
       debugPrint(

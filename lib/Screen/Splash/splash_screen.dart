@@ -70,7 +70,7 @@ class _Splash_ScreenState extends State<Splash_Screen> {
             padding: const EdgeInsets.only(left: 30, right: 30),
             child: CommonBtn(
               onTap: () {
-                Get.to(() => const Business_Login_Screen());
+                Get.to(() =>  Business_Login_Screen());
               },
               title: Strings.bussinessEntry,
             ),

@@ -44,7 +44,7 @@ class BusinessLoginController extends GetxController {
       PrefService.setValue(
           PrefKeys.mobileNumberBusiness, businessLoginModel.data?.phone);
       PrefService.setValue(
-          PrefKeys.employeeIdBusiness, businessLoginModel.data?.id);
+          PrefKeys.employeeId, businessLoginModel.data?.id);
       PrefService.setValue(PrefKeys.type, "business");
 
 

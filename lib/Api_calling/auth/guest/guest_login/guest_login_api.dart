@@ -26,7 +26,7 @@ class GuestLoginApi {
       http.Response? response = await HttpService.postApi(body: {
         "email": email,
         "password": password,
-      }, url: "$EndPoints.guestLogin",
+      }, url: EndPoints.guestLogin,
       );
       if (response!.statusCode == 200) {
 

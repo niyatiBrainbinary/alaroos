@@ -1,5 +1,6 @@
 class PrefKeys {
   static const registerToken = "registerToken";
+  static const registerTokenUser = "registerToken";
 
   static const login = "login";
   static const firstName = "firstName";
@@ -9,6 +10,9 @@ class PrefKeys {
   static const mobileNumber = "mobileNumber";
   static const type = "TypeLogin";
   static const guestLogin = "TypeLogin";
+ // static const businessId = "businessId";
+
+
 
   static const firstNameBusiness = "firstNameBusiness";
   static const lastNameBusiness = "lastNameBusiness";

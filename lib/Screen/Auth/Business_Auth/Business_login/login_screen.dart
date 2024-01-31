@@ -11,15 +11,18 @@ import '../../../../Common/text_filed.dart';
 import '../../../../Utils/string.dart';
 import '../../Guest_Auth/Forgot_Password/ForgotPassword.dart';
 import '../Business_Register/register_screen.dart';
+import '../business_forgot_password/business_forgot_password_screen.dart';
 import 'login_controller.dart';
 
 class Business_Login_Screen extends StatelessWidget {
-  const Business_Login_Screen({Key? key}) : super(key: key);
+   Business_Login_Screen({Key? key}) : super(key: key);
+
+  final BusinessLoginController businessLoginController =
+  Get.put(BusinessLoginController());
 
   @override
   Widget build(BuildContext context) {
-    final BusinessLoginController businessLoginController =
-        Get.put(BusinessLoginController());
+
     return Scaffold(
       body: GetBuilder<BusinessLoginController>(
         id: 'business_login',
@@ -86,7 +89,10 @@ class Business_Login_Screen extends StatelessWidget {
                     ),
                     GestureDetector(
                       onTap: () {
-                        Get.to(() => ForgotPassword());
+                       /* Navigator.push(context, MaterialPageRoute(builder: (context) {
+                          return tinas();
+                        },));*/
+                        Get.to(() => ForgotPasswords());
                       },
                       child: Align(
                         alignment: Alignment.bottomRight,

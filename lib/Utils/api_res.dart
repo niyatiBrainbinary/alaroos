@@ -18,4 +18,7 @@ class EndPoints {
   static const forgotPassword = "$mainBaseUrl/api/user/forgot-password";
   static const getAllPost = "$mainBaseUrl/api/businessuser/allpost";
   static const verifyOtp = "$mainBaseUrl/api/user/verify-otp";
+  static const changePassword = "$mainBaseUrl/api/user/reset-password";
+  static const businessForgotPassword = "$mainBaseUrl/api/businessuser/forgot-password";
+  static const businessVerifyOtp = "$mainBaseUrl/api/businessuser/verify-otp";
 }
