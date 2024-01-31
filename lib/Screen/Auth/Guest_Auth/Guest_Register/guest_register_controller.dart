@@ -17,80 +17,92 @@ class GuestRegisterController extends GetxController {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
-  String firstName = "";
+
   RxBool isLoading = false.obs;
   GuestRegisterModel guestRegisterModel = GuestRegisterModel();
+
+  String firstName = "";
+  String lastName = "";
+  String emailAddress = "";
+  String password = "";
+  String firstNameError = "";
+  String lastNameError = "";
+  String emailAddressError = "";
+  String passwordError = "";
+
+  firstNameValidation (){
+    if(firstNameController.text.trim() == ""){
+      firstNameError = Strings.firstNameErrorMessage;
+    }else {
+      firstNameError = "";
+    }
+    update(['guest_register']);
+  }
+
+  lastNameValidation (){
+    if(lastNameController.text.trim() == ""){
+      lastNameError = Strings.lastNanmeErrorMessage;
+    }else {
+      lastNameError = "";
+    }
+    update(['guest_register']);
+  }
+
+  emailValidation() {
+    update(['guest_register']);
+    if (emailController.text.trim() == "") {
+      // errorToast(StringRes.enterEmailError.tr);
+      emailAddressError = Strings.emailErrorRegister.tr;
+      update(['guest_register']);
+      return false;
+    } else {
+      if (RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+          .hasMatch(emailController.text)) {
+        emailAddressError = '';
+        update(['guest_register']);
+        return true;
+      } else {
+        // errorToast(StringRes.enterValidEmail.tr);
+        emailAddressError = Strings.emailError1.tr;
+        update(['guest_register']);
+        return false;
+      }
+    }
+  }
+
+  passwordValidation() {
+    if (passwordController.text.trim() == "") {
+      passwordError = Strings.passwordErrorMessage;
+      // } else if (password.length < 1) {
+      //   passwordError = Strings.passwordErrorMessage1;
+    } else {
+      passwordError = "";
+    }
+    update(['guest_register']);
+  }
+
+  val() async {
+    firstNameValidation();
+    lastNameValidation();
+    emailValidation();
+    passwordValidation();
+  }
+
+  validation (){
+    val();
+    if(firstName == "" && lastName == "" && emailAddress == "" && password == ""){
+      return true;
+    } else {
+       return false;
+    }
+  }
+
+
 
   guestRegister({password, firstName, lastName,email}) async {
     isLoading.value = true;
     await GuestRegisterApi.guestRegisterApi(password: password, firstName: firstName, lastName: lastName,email: email);
     isLoading.value = false;
-  }
-
-
-  void setFirstName(String value) {
-    firstName = value.trim();
-  }
-
-  validateFirstName() {
-    if (firstNameController.text.trim() == "") {
-      firstName = Strings.firstNameErrorMessage;
-    } else {
-      firstName = "";
-    }
-    update(['guest_register']);
-  }
-
-  String lastName = "";
-
-  void setLastName(String value) {
-    lastName = value.trim();
-  }
-
-  validateLastName() {
-    if (lastNameController.text.trim() == "") {
-      lastName = Strings.lastNanmeErrorMessage;
-    } else {
-      lastName = "";
-    }
-    update(['guest_register']);
-  }
-
-  String email = "";
-
-  void setEmail(String value) {
-    email = value.trim();
-  }
-
-  validateEmail() {
-    final emailRegex = RegExp(
-      r'^[\w-]+(\.[\w-]+)*@([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,7}$',
-    );
-    if (emailController.text.trim() == "") {
-      email = Strings.emailErrorRegister;
-    } else if (!emailRegex.hasMatch(email)) {
-      email = Strings.emailErrorRegister1;
-    } else {
-      email = "";
-    }
-    update(['guest_register']);
-  }
-
-  String password = '';
-
-  void setPassword(String value) {
-    password = value.trim();
-  }
-
-  validatePassword() {
-    if (passwordController.text.trim() == "") {
-      password = Strings.passwordErrorMessage;
-    } else if (password.length < 1) {
-      password = Strings.passwordErrorMessage1;
-    } else {
-      password = "";
-    }
-    update(['guest_register']);
   }
 
 /*  bool validation() {

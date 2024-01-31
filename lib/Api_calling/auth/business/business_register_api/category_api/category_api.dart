@@ -1,11 +1,11 @@
 import 'dart:convert';
 
-import 'package:alaroos/Api_calling/auth/business_register_api/category_api/category_model.dart';
 import 'package:http/http.dart' as http;
 
-import '../../../../Common/toast.dart';
-import '../../../../Utils/api_res.dart';
-import '../../../../service/http_service.dart';
+import '../../../../../Common/toast.dart';
+import '../../../../../Utils/api_res.dart';
+import '../../../../../service/http_service.dart';
+import 'category_model.dart';
 
 class CategoryApi {
   static Future categoryApi () async {

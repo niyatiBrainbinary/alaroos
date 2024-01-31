@@ -3,14 +3,12 @@ import 'package:get/get.dart';
 
 import '../../../../Api_calling/auth/business/business_change_password/business_change_password_api.dart';
 import '../../../../Api_calling/auth/business/business_change_password/business_change_passwrod_model.dart';
-import '../../../../Api_calling/auth/guest/change_password/change_password_api.dart';
-import '../../../../Api_calling/auth/guest/change_password/change_password_model.dart';
 import '../../../../Utils/string.dart';
 
-class ResetPasswordController extends GetxController {
+class BusinessChangePasswordController extends GetxController {
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
-  ChangePasswordModel changePasswordModel = ChangePasswordModel();
+  BusinessChangePasswordModel businessChangePasswordModel = BusinessChangePasswordModel();
   RxBool isLoading = false.obs;
 
   String password = "";
@@ -54,7 +52,7 @@ class ResetPasswordController extends GetxController {
   Future changePasswordApi({ required String password}) async {
     isLoading.value = true;
 
-    changePasswordModel = await ChangePasswordApi.changePasswordApi(
+    businessChangePasswordModel = await BusinessChangePasswordApi.businessChangePasswordApi(
         password: password);
     //  passwordController.text = changePasswordModel.data?.password??"";
     isLoading.value = false;

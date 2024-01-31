@@ -9,10 +9,8 @@ import '../../../Select_Language/select_language.dart';
 class BusinessForgotController extends GetxController {
   TextEditingController forgotEmailController = TextEditingController();
   String forgotEmail = "";
+  String emailError = "";
 
-  void setForgotEmail(String value) {
-    forgotEmail = value.trim();
-  }
 
   RxBool isLoading = false.obs;
 
@@ -22,28 +20,36 @@ class BusinessForgotController extends GetxController {
     isLoading.value = false;
   }
 
-  validateForgotEmail() {
-    final emailRegex = RegExp(
-      r'^[\w-]+(\.[\w-]+)*@([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,7}$',
-    );
+  emailValidation() {
+    update(['business_login']);
     if (forgotEmailController.text.trim() == "") {
-      forgotEmail = Strings.emailErrorRegister;
-    } else if (!emailRegex.hasMatch(forgotEmail)) {
-      forgotEmail = Strings.emailErrorRegister1;
+      // errorToast(StringRes.enterEmailError.tr);
+      emailError = Strings.emailError;
+      update(['business_login']);
+      return false;
     } else {
-      forgotEmail = "";
+      if (RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+          .hasMatch(forgotEmailController.text)) {
+        emailError = '';
+        update(['business_login']);
+        return true;
+      } else {
+        // errorToast(StringRes.enterValidEmail.tr);
+        emailError = Strings.emailError1;
+        update(['business_login']);
+        return false;
+      }
     }
-    update(['forgot_password']);
   }
 
+
   val() async {
-    validateForgotEmail();
+    emailValidation();
   }
 
    validation() {
-    // validateForgotEmail();
-val();
-    if (forgotEmail == '' && forgotEmail == '') {
+    val();
+    if (emailError == '') {
       return true;
     } else {
       return false;

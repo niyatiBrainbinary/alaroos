@@ -15,148 +15,163 @@ import '../business_forgot_password/business_forgot_password_screen.dart';
 import 'login_controller.dart';
 
 class Business_Login_Screen extends StatelessWidget {
-   Business_Login_Screen({Key? key}) : super(key: key);
+  Business_Login_Screen({Key? key}) : super(key: key);
 
   final BusinessLoginController businessLoginController =
-  Get.put(BusinessLoginController());
+      Get.put(BusinessLoginController());
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-      body: GetBuilder<BusinessLoginController>(
-        id: 'business_login',
-        builder: (controller) {
-          return SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.only(left: 30, right: 30),
-              child: Form(
-                key: businessLoginController.loginForm,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      height: Get.height * 0.08,
-                    ),
-                    Center(
-                      child: Container(
-                        height: Get.height * 0.3,
-                        width: Get.width * 0.55,
-                        decoration: const BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage(AssetsRes.login),
-                            fit: BoxFit.cover,
+      body: Stack(
+        children: [
+          GetBuilder<BusinessLoginController>(
+            id: 'business_login',
+            builder: (controller) {
+              return SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 30, right: 30),
+                  child: Form(
+                    key: businessLoginController.loginForm,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          height: Get.height * 0.08,
+                        ),
+                        Center(
+                          child: Container(
+                            height: Get.height * 0.3,
+                            width: Get.width * 0.55,
+                            decoration: const BoxDecoration(
+                              image: DecorationImage(
+                                image: AssetImage(AssetsRes.login),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
                           ),
                         ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 60,
-                      width: double.infinity,
-                      child: CommonTextField(
-                        title: Strings.businessEmail,
-                        controller: businessLoginController.emailController,
-                        onChange: (val) {
-                          businessLoginController.email = val;
-                        },
-                        keyboardType: TextInputType.emailAddress,
-                      ),
-                    ),
-                    businessLoginController.email.isNotEmpty
-                        ? Text(businessLoginController.email, style: errorStyle)
-                        : const SizedBox(),
-                    SizedBox(
-                      height: Get.height * 0.03,
-                    ),
-                    SizedBox(
-                      height: 60,
-                      width: double.infinity,
-                      child: CommonTextField(
-                        title: Strings.password,
-                        controller: businessLoginController.passController,
-                        isObSecure: true,
-                        onChange: (val) {
-                          businessLoginController.pass = val;
-                        },
-                        keyboardType: TextInputType.visiblePassword,
-                      ),
-                    ),
-                    businessLoginController.pass.isNotEmpty
-                        ? Text(businessLoginController.pass, style: errorStyle)
-                        : const SizedBox(),
-                    SizedBox(
-                      height: Get.height * 0.01,
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                       /* Navigator.push(context, MaterialPageRoute(builder: (context) {
-                          return tinas();
-                        },));*/
-                        Get.to(() => ForgotPasswords());
-                      },
-                      child: Align(
-                        alignment: Alignment.bottomRight,
-                        child: Text(
-                          Strings.forgotPassword,
-                          style: register,
+                        SizedBox(
+                          height: 60,
+                          width: double.infinity,
+                          child: CommonTextField(
+                            title: Strings.businessEmail,
+                            controller: businessLoginController.emailController,
+                            /*  onChange: (val) {
+                              businessLoginController.email = val;
+                            },*/
+                            keyboardType: TextInputType.emailAddress,
+                          ),
                         ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: Get.height * 0.04,
-                    ),
-                    CommonBtn(
-                      title: Strings.signin,
-                      onTap: () {
-                        FocusScope.of(context).unfocus();
-                        if (businessLoginController.validation()) {
-                          businessLoginController.businessLoginApi(
-                                  email: businessLoginController
-                                      .emailController.text,
-                                  password: businessLoginController
-                                      .passController.text
-                          //     .then((value) {
-                           /* if (value == false) {
-                              businessLoginController.emailController.clear();
-                              businessLoginController.passController.clear();
-                            }*/
-                          // }
-                          );
-                        }
-                      },
-                    ),
-                    SizedBox(
-                      height: Get.height * 0.03,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          Strings.donthaveaccount,
-                          style: donthaveac,
+                        (controller.emailError != "")
+                            ? Text(controller.emailError, style: errorStyle)
+                            : const SizedBox(),
+                        SizedBox(
+                          height: Get.height * 0.03,
+                        ),
+                        SizedBox(
+                          height: 60,
+                          width: double.infinity,
+                          child: CommonTextField(
+                            title: Strings.password,
+                            controller: businessLoginController.passController,
+                            isObSecure: true,
+                            /* onChange: (val) {
+                              businessLoginController.pass = val;
+                            },*/
+                            keyboardType: TextInputType.visiblePassword,
+                          ),
+                        ),
+                        (controller.passwordError != "")
+                            ? Text(controller.passwordError, style: errorStyle)
+                            : const SizedBox(),
+                        SizedBox(
+                          height: Get.height * 0.01,
                         ),
                         GestureDetector(
                           onTap: () {
-                            Get.to(() => BusinessRegisterScreen());
+                            /* Navigator.push(context, MaterialPageRoute(builder: (context) {
+                              return tinas();
+                            },));*/
+                            Get.to(() => ForgotPasswords());
                           },
-                          child: Text(
-                            Strings.register,
-                            style: register,
+                          child: Align(
+                            alignment: Alignment.bottomRight,
+                            child: Text(
+                              Strings.forgotPassword,
+                              style: register,
+                            ),
                           ),
                         ),
+                        SizedBox(
+                          height: Get.height * 0.04,
+                        ),
+                        CommonBtn(
+                          title: Strings.signin,
+                          onTap: () {
+                            /* businessLoginController.emailController.clear();
+                            businessLoginController.passController.clear();*/
+                            FocusScope.of(context).unfocus();
+
+                            if (businessLoginController.validation()) {
+                              businessLoginController
+                                  .businessLoginApi(
+                                      email: businessLoginController
+                                          .emailController.text,
+                                      password: businessLoginController
+                                          .passController.text
+                                      //     .then((value) {
+                                      /* if (value == false) {
+
+                                }*/
+                                      // }
+                                      );
+                                /*  .then((value) {
+                                if (value == false) {
+                                  businessLoginController.emailController
+                                      .clear();
+                                  businessLoginController.passController
+                                      .clear();
+                                }
+                              }
+                              );*/
+                            }
+                          },
+                        ),
+                        SizedBox(
+                          height: Get.height * 0.03,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              Strings.donthaveaccount,
+                              style: donthaveac,
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                Get.to(() => BusinessRegisterScreen());
+                              },
+                              child: Text(
+                                Strings.register,
+                                style: register,
+                              ),
+                            ),
+                          ],
+                        ),
+                        // Obx(() => controller.isLoading.value ? Loader() : SizedBox())
                       ],
                     ),
-                    Obx(() => controller.isLoading.value ? Loader() : SizedBox())
-                  ],
-                  
+                  ),
                 ),
-              ),
-            ),
-
-          );
-        },
+              );
+            },
+          ),
+          Obx(() => businessLoginController.isLoading.value
+              ? const Loader()
+              : const SizedBox())
+        ],
       ),
-
       backgroundColor: ColorRes.themeColor,
     );
   }

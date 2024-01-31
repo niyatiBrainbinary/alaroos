@@ -24,6 +24,8 @@ class BusinessLoginController extends GetxController {
   TextEditingController passController = TextEditingController();
   String email = "";
   String pass = "";
+  String emailError = "";
+  String passwordError = "";
 
   RxBool isLoading = false.obs;
   BusinessLoginModel businessLoginModel =BusinessLoginModel();
@@ -88,51 +90,67 @@ class BusinessLoginController extends GetxController {
     isLoading.value = false;
   }
 
-
-
-
   emailValidation() {
+    update(['business_login']);
     if (emailController.text.trim() == "") {
-      email = Strings.emailError;
+      // errorToast(StringRes.enterEmailError.tr);
+      emailError = Strings.emailError;
+      update(['business_login']);
+      return false;
     } else {
-      if (RegExp(
-              r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+      if (RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
           .hasMatch(emailController.text)) {
-        email = '';
+        emailError = '';
+        update(['business_login']);
+        return true;
       } else {
-        email = Strings.emailError1;
+        // errorToast(StringRes.enterValidEmail.tr);
+        emailError = Strings.emailError1;
+        update(['business_login']);
+        return false;
       }
     }
-    update(['business_login']);
   }
 
   passwordValidation() {
     if (passController.text.trim() == "") {
-      pass = Strings.errorPass;
-    } else if (passController.text.length < 1) {
-      pass = Strings.errorPass1;
+      // errorToast(StringRes.enterPasswordError.tr);
+      passwordError = Strings.errorPass;
+      update(['logIn']);
+      return false;
     } else {
-      pass = '';
+      if (passController.text.trim().length >= 1) {
+        passwordError = '';
+        update(['logIn']);
+        return true;
+      } else {
+        // errorToast(StringRes.passwordMustBe.tr);
+        passwordError = Strings.errorPass1;
+        update(['logIn']);
+        return false;
+      }
     }
-    update(['business_login']);
   }
 
-  bool validation() {
-    emailValidation();
-    passwordValidation();
+   validation() {
+    val();
 
-    if (email == '' && pass == '') {
+    if (emailError == '' && passwordError == '') {
       return true;
     } else {
       return false;
     }
   }
+  val() async {
+    emailValidation();
+    passwordValidation();
+  }
 
-  onTapLogIn() {
+  /*onTapLogIn() {
     if (validation()) {
       Get.to(() => Select_Language());
     }
-  }
+  }*/
   //
   // loginApi({required String email, required String password,required String userType}) async{
   //   loader.value = true;

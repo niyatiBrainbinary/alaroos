@@ -28,7 +28,15 @@ class GuestLoginApi {
         "password": password,
       }, url: EndPoints.guestLogin,
       );
-      if (response!.statusCode == 200) {
+      final decod = jsonDecode(response!.body);
+      print(decod);
+      if (response.statusCode == 200) {
+
+  PrefService.setValue(PrefKeys.firstName, decod['data']['firstname']);
+  PrefService.setValue(PrefKeys.lastName, decod['data']['lastname']);
+  PrefService.setValue(PrefKeys.email, decod['data']['email']);
+  PrefService.setValue(PrefKeys.employeeId, decod['data']['_id']);
+  debugPrint("============================${PrefService.getString(PrefKeys.employeeId)}");
 
         var decoded = jsonDecode(response.body);
         debugPrint('=========$decoded');

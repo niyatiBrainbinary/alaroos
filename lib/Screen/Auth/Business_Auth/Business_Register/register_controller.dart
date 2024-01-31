@@ -1,15 +1,11 @@
-import 'package:alaroos/Api_calling/auth/business_register_api/category_api/category_model.dart';
 import 'package:alaroos/Screen/Home_Screen/home_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
-import '../../../../Api_calling/auth/business_register_api/business_register_api.dart';
-import '../../../../Api_calling/auth/business_register_api/category_api/category_api.dart';
+import '../../../../Api_calling/auth/business/business_register_api/business_register_api.dart';
+import '../../../../Api_calling/auth/business/business_register_api/category_api/category_api.dart';
+import '../../../../Api_calling/auth/business/business_register_api/category_api/category_model.dart';
 import '../../../../Utils/string.dart';
-import '../../../Category_select_Screen/category_screen.dart';
-import '../../../Dashboard/Widgets/bottom_bar.dart';
-import '../../../Dashboard/dashboard.dart';
-import '../../../Select_Language/select_language.dart';
 
 class BusinessRegisterController extends GetxController {
   final GlobalKey<FormState> signupForm = GlobalKey<FormState>();
@@ -38,17 +34,6 @@ String CategoryId = "";
     isLoading.value = true;
     categoryModel = await CategoryApi.categoryApi();
     debugPrint("catmodel ------- ${categoryModel.data}");
-   /* if (categoryModel.data != null && categoryModel.data!.isNotEmpty) {
-      // Remove duplicates before adding new locations
-      Set<String?> existingIds = categoryList.map((data) => data.title).toSet();
-      List<CategoryModel> newCategory = categoryModel.data!
-          .where((data) => !existingIds.contains(data.title))
-          .toList();
-
-      categoryList.addAll(newCategory);
-      update(['business_register']);
-    }*/
-
     isLoading.value = false;
   }
 
@@ -147,7 +132,7 @@ String CategoryId = "";
     phoneNo = value.trim();
   }*/
 
-  phoneValidation() {
+/*  phoneValidation() {
     if (phoneNoController.text.trim() == "") {
       phoneError = Strings.phoneErrorMessage;
     } else if (phoneNo.length < 10) {
@@ -158,7 +143,36 @@ String CategoryId = "";
       phoneError = "";
     }
     update(['business_register']);
+  }*/
+
+  phoneValidation() {
+    if (phoneNoController.text.trim() == "") {
+      // errorToast(StringRes.enterPhoneError.tr.tr);
+      phoneError = Strings.phoneErrorMessage.tr;
+      update(['business_register']);
+      return false;
+    }
+    if (RegExp(r'(^(?:[+0]9)?[0-9]{10,12}$)').hasMatch(phoneNoController.text)) {
+      phoneError = Strings.validNumberError;
+      update(['business_register']);
+    }
+    else {
+      phoneError = '';
+      update(['business_register']);
+      return true;
+    }
   }
+/*
+  String formatPhoneNumber(String value) {
+    // Ensure that the phone number is in the format +91 1234567890
+    if (_phoneNumberRegExp.hasMatch(value)) {
+      return value;
+    }
+
+    // If not, attempt to format it (assumes it's a valid 10-digit number)
+    String formattedNumber = '+91 ' + value.substring(0, 10);
+    return formattedNumber;
+  }*/
 
 
 /*
@@ -171,8 +185,8 @@ String CategoryId = "";
   passwordValidation() {
     if (passwordController.text.trim() == "") {
       passwordError = Strings.passwordErrorMessage;
-    } else if (password.length < 8) {
-      passwordError = Strings.passwordErrorMessage1;
+    // } else if (password.length < 1) {
+    //   passwordError = Strings.passwordErrorMessage1;
     } else {
       passwordError = "";
     }

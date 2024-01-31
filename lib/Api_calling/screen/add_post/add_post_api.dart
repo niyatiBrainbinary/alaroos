@@ -108,7 +108,7 @@ class AddPostApi {
         'Content-Type': 'application/json',
         'Authorization': "Bearer ${PrefService.getString(PrefKeys.registerToken)}",
       };
-      var request = http.Request('POST', Uri.parse('${EndPoints.mainBaseUrl}/api/businessuser/addpost/${PrefService.getString(PrefKeys.employeeIdBusiness)}'));
+      var request = http.Request('POST', Uri.parse('${EndPoints.mainBaseUrl}/api/businessuser/addpost/${PrefService.getString(PrefKeys.employeeId)}'));
      request.body = json.encode({
        "title":title,
        "description": description,

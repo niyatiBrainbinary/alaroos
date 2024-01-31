@@ -76,7 +76,7 @@ class GuestRegisterApi {
       return response.body;
     }
     else {
-      errorToast(decoded["message"]);
+     // errorToast(decoded["message"]);
     }
     return null;
   }

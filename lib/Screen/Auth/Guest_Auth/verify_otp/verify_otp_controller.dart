@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
-import '../../../../Api_calling/auth/verify_otp/verify_otp_api.dart';
+import '../../../../Api_calling/auth/guest/verify_otp/verify_otp_api.dart';
 import '../../../../Utils/string.dart';
 
 class VerifyOtpController extends GetxController {

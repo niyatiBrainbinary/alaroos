@@ -6,12 +6,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get_connect/http/src/response/response.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get.dart';
-import '../../../Common/toast.dart';
-import '../../../Utils/api_res.dart';
+import '../../../../Common/toast.dart';
+import '../../../../Utils/api_res.dart';
+import '../../../../service/http_service.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-import '../../../service/http_service.dart';
 
 class BusinessRegisterApi {
   static businessRegisterApi(

@@ -30,9 +30,10 @@ class Strings {
   static const emailErrorRegister = "Email can not be empty";
   static const emailErrorRegister1 = "Invalid email format";
   static const phoneErrorMessage = "Phone number can not be empty";
+  static const validNumberError = "Enter Valid Phone Number";
   static const phoneErrorMessage1 = "Phone number be at least 10 characters";
   static const passwordErrorMessage = "Password can not be empty";
-  static const passwordErrorMessage1 = "Password be at least 8 characters";
+  static const passwordErrorMessage1 = "Password be at least 1 characters";
   static const selectCategory = "Please select category";
 
   ///-----------------------------------------guest login-----------------------------------------------

@@ -8,19 +8,8 @@ import '../../Common/common_btn.dart';
 import '../../Utils/color_res.dart';
 import '../Auth/Business_Auth/Business_login/login_screen.dart';
 
-class Splash_Screen extends StatefulWidget {
+class Splash_Screen extends StatelessWidget {
   const Splash_Screen({Key? key}) : super(key: key);
-
-  @override
-  State<Splash_Screen> createState() => _Splash_ScreenState();
-}
-
-class _Splash_ScreenState extends State<Splash_Screen> {
-  @override
-  void initState() {
-
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {

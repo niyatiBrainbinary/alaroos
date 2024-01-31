@@ -32,12 +32,12 @@ class GuestLoginController extends GetxController {
   async {
     isLoading.value = true;
     guestLoginModel =  await GuestLoginApi.guestLoginApi(email: email,password: password);
-    PrefService.setValue(PrefKeys.registerToken, guestLoginModel.data?.token);
+   /* PrefService.setValue(PrefKeys.registerToken, guestLoginModel.data?.token);
     PrefService.setValue(PrefKeys.guestLogin, true);
     PrefService.setValue(PrefKeys.firstName, guestLoginModel.data?.firstname);
     PrefService.setValue(PrefKeys.lastName, guestLoginModel.data?.lastname);
     PrefService.setValue(PrefKeys.email, guestLoginModel.data?.email);
-    PrefService.setValue(PrefKeys.employeeId, guestLoginModel.data?.id);
+    PrefService.setValue(PrefKeys.employeeId, guestLoginModel.data?.id);*/
     PrefService.setValue(PrefKeys.type,"user");
 
     bool isUpdate = false;

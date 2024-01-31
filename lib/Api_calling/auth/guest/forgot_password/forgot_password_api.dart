@@ -1,7 +1,10 @@
 import 'dart:convert';
 
+import 'package:alaroos/Common/toast.dart';
 import 'package:alaroos/Utils/api_res.dart';
+import 'package:alaroos/Utils/pref_key.dart';
 import 'package:alaroos/service/http_service.dart';
+import 'package:alaroos/service/pref_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
@@ -9,6 +12,7 @@ import 'package:http/http.dart' as http;
 import '../../../../Screen/Auth/Guest_Auth/reset_password/reset_password_screen.dart';
 import '../../../../Screen/Auth/Guest_Auth/verify_otp/verify_otp_screen.dart';
 import '../../../../Screen/Select_Language/select_language.dart';
+import '../../../../Utils/string.dart';
 
 class ForgotPasswordApi {
   static Future  forgotPasswordApi({ required String email}) async{
@@ -25,6 +29,7 @@ class ForgotPasswordApi {
       );
       if(response!.statusCode == 200) {
         var decoded = jsonDecode(response.body);
+        PrefService.setValue(PrefKeys.employeeId, decoded['user']['_id']);
         debugPrint('===========$decoded');
         Get.to(()=> VerifyOtpScreen());
       }

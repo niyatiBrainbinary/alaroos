@@ -1,25 +1,25 @@
 // To parse this JSON data, do
 //
-//     final editProfileModel = editProfileModelFromJson(jsonString);
+//     final businessChangePasswordModel = businessChangePasswordModelFromJson(jsonString);
 
 import 'dart:convert';
 
-EditProfileModel editProfileModelFromJson(String str) => EditProfileModel.fromJson(json.decode(str));
+BusinessChangePasswordModel businessChangePasswordModelFromJson(String str) => BusinessChangePasswordModel.fromJson(json.decode(str));
 
-String editProfileModelToJson(EditProfileModel data) => json.encode(data.toJson());
+String businessChangePasswordModelToJson(BusinessChangePasswordModel data) => json.encode(data.toJson());
 
-class EditProfileModel {
+class BusinessChangePasswordModel {
   bool? success;
   int? code;
   Data? data;
 
-  EditProfileModel({
+  BusinessChangePasswordModel({
     this.success,
     this.code,
     this.data,
   });
 
-  factory EditProfileModel.fromJson(Map<String, dynamic> json) => EditProfileModel(
+  factory BusinessChangePasswordModel.fromJson(Map<String, dynamic> json) => BusinessChangePasswordModel(
     success: json["success"],
     code: json["code"],
     data: json["data"] == null ? null : Data.fromJson(json["data"]),
@@ -41,12 +41,12 @@ class Data {
   String? email;
   String? password;
   String? category;
-  List<String>? posts;
+  List<dynamic>? posts;
   DateTime? createdAt;
   DateTime? updatedAt;
   int? v;
-  String? profileimage;
   String? refreshToken;
+  String? passwordResetOtp;
 
   Data({
     this.id,
@@ -61,8 +61,8 @@ class Data {
     this.createdAt,
     this.updatedAt,
     this.v,
-    this.profileimage,
     this.refreshToken,
+    this.passwordResetOtp,
   });
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
@@ -74,12 +74,12 @@ class Data {
     email: json["email"],
     password: json["password"],
     category: json["category"],
-    posts: json["posts"] == null ? [] : List<String>.from(json["posts"]!.map((x) => x)),
+    posts: json["posts"] == null ? [] : List<dynamic>.from(json["posts"]!.map((x) => x)),
     createdAt: json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
     updatedAt: json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),
     v: json["__v"],
-    profileimage: json["profileimage"],
     refreshToken: json["refreshToken"],
+    passwordResetOtp: json["passwordResetOTP"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -95,7 +95,7 @@ class Data {
     "createdAt": createdAt?.toIso8601String(),
     "updatedAt": updatedAt?.toIso8601String(),
     "__v": v,
-    "profileimage": profileimage,
     "refreshToken": refreshToken,
+    "passwordResetOTP": passwordResetOtp,
   };
 }

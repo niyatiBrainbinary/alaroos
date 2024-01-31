@@ -19,124 +19,130 @@ class GuestLoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final GuestLoginController guestLoginController = Get.put(GuestLoginController());
     return Scaffold(
-      body: GetBuilder<GuestLoginController>(
-        id: 'guest_login',
-        builder: (controller) {
-          return SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.only(left: 30, right: 30),
-              child: Form(
-                key: guestLoginController.guestLogin,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      height: Get.height * 0.08,
-                    ),
-                    Center(
-                      child: Container(
-                        height: Get.height * 0.3,
-                        width: Get.width * 0.55,
-                        decoration: const BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage(AssetsRes.login),
-                            fit: BoxFit.cover,
+      body: Stack(
+        children: [
+          GetBuilder<GuestLoginController>(
+            id: 'guest_login',
+            builder: (controller) {
+              return SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 30, right: 30),
+                  child: Form(
+                    key: guestLoginController.guestLogin,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          height: Get.height * 0.08,
+                        ),
+                        Center(
+                          child: Container(
+                            height: Get.height * 0.3,
+                            width: Get.width * 0.55,
+                            decoration: const BoxDecoration(
+                              image: DecorationImage(
+                                image: AssetImage(AssetsRes.login),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
                           ),
                         ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 60,
-                      width: double.infinity,
-                      child: CommonTextField(
-                        title: Strings.email,
-                        controller: guestLoginController.emailController,
-                        onChange: (val) {
-                          guestLoginController.email = val;
-                        },
-                        keyboardType: TextInputType.emailAddress,
-                      ),
-                    ),
-                    guestLoginController.email.isNotEmpty
-                        ? Text(guestLoginController.email, style: errorStyle)
-                        : SizedBox(),
-                    SizedBox(
-                      height: Get.height * 0.03,
-                    ),
-                    SizedBox(
-                      height: 60,
-                      width: double.infinity,
-                      child: CommonTextField(isObSecure: true,
-                        title: Strings.password,
-                        controller: guestLoginController.passwordController,
-                        onChange: (val) {
-                          guestLoginController.password = val;
-                        },
-                        keyboardType: TextInputType.visiblePassword,
-                      ),
-                    ),
-                    guestLoginController.password.isNotEmpty
-                        ? Text(guestLoginController.password, style: errorStyle)
-                        : SizedBox(),
-                    SizedBox(
-                      height: Get.height * 0.01,
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        Get.to(() => ForgotPassword());
-                      },
-                      child: Align(
-                        alignment: Alignment.bottomRight,
-                        child: Text(
-                          Strings.forgotPassword,
-                          style: register,
+                        SizedBox(
+                          height: 60,
+                          width: double.infinity,
+                          child: CommonTextField(
+                            title: Strings.email,
+                            controller: guestLoginController.emailController,
+                            onChange: (val) {
+                              guestLoginController.email = val;
+                            },
+                            keyboardType: TextInputType.emailAddress,
+                          ),
                         ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: Get.height * 0.04,
-                    ),
-                    CommonBtn(
-                      title: Strings.signin,
-                      onTap: () {
-                        FocusScope.of(context).unfocus();
-                        if(guestLoginController.validation()){
-                          guestLoginController.guestLoginApi(
-                            email: guestLoginController.emailController.text,
-                            password: guestLoginController.passwordController.text
-                          );
-                        }
-                       // guestLoginController.onTapLogIn();
-                      },
-                    ),
-                    SizedBox(
-                      height: Get.height * 0.03,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          Strings.donthaveaccount,
-                          style: donthaveac,
+                        guestLoginController.email.isNotEmpty
+                            ? Text(guestLoginController.email, style: errorStyle)
+                            : SizedBox(),
+                        SizedBox(
+                          height: Get.height * 0.03,
+                        ),
+                        SizedBox(
+                          height: 60,
+                          width: double.infinity,
+                          child: CommonTextField(isObSecure: true,
+                            title: Strings.password,
+                            controller: guestLoginController.passwordController,
+                            onChange: (val) {
+                              guestLoginController.password = val;
+                            },
+                            keyboardType: TextInputType.visiblePassword,
+                          ),
+                        ),
+                        guestLoginController.password.isNotEmpty
+                            ? Text(guestLoginController.password, style: errorStyle)
+                            : SizedBox(),
+                        SizedBox(
+                          height: Get.height * 0.01,
                         ),
                         GestureDetector(
                           onTap: () {
-                            Get.to(() => GuestRegisterScreen());
+                            Get.to(() => ForgotPassword());
                           },
-                          child: Text(
-                            Strings.register,
-                            style: register,
+                          child: Align(
+                            alignment: Alignment.bottomRight,
+                            child: Text(
+                              Strings.forgotPassword,
+                              style: register,
+                            ),
                           ),
                         ),
+                        SizedBox(
+                          height: Get.height * 0.04,
+                        ),
+                        CommonBtn(
+                          title: Strings.signin,
+                          onTap: () {
+                            FocusScope.of(context).unfocus();
+                            if(guestLoginController.validation()){
+                              guestLoginController.guestLoginApi(
+                                email: guestLoginController.emailController.text,
+                                password: guestLoginController.passwordController.text
+                              );
+                            }
+                           // guestLoginController.onTapLogIn();
+                          },
+                        ),
+                        SizedBox(
+                          height: Get.height * 0.03,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              Strings.donthaveaccount,
+                              style: donthaveac,
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                Get.to(() => GuestRegisterScreen());
+                              },
+                              child: Text(
+                                Strings.register,
+                                style: register,
+                              ),
+                            ),
+                          ],
+                        ),
+                      //  Obx(() => controller.isLoading.value ? Loader() : SizedBox())
                       ],
                     ),
-                  //  Obx(() => controller.isLoading.value ? Loader() : SizedBox())
-                  ],
+                  ),
                 ),
-              ),
-            ),
-          );
-        },
+              );
+            },
+          ),
+      Obx(() => guestLoginController.isLoading.value ? const Loader() : SizedBox() )
+
+        ],
       ),
       backgroundColor: ColorRes.themeColor,
     );

@@ -27,13 +27,20 @@ class LoginApi {
         "email": email,
         "password": password,
       }, url: url);
-
-      if (response!.statusCode == 200) {
-        var decoded = jsonDecode(response.body);
-        debugPrint('=========$decoded');
+      final decoded = jsonDecode(response!.body);
+      if (response.statusCode == 200) {
+        PrefService.setValue(PrefKeys.employeeId, decoded['data']['_id']);
+        PrefService.setValue(PrefKeys.firstName, decoded['data']['firstname']);
+        PrefService.setValue(PrefKeys.lastName, decoded['data']['lastname']);
+       // PrefService.setValue(PrefKeys.bu, decoded['data']['businessname']);
+        PrefService.setValue(PrefKeys.email, decoded['data']['email']);
+        PrefService.setValue(PrefKeys.mobileNumber, decoded['data']['phone']);
+        debugPrint('=======*******************==${PrefService.getString(PrefKeys.employeeId)}');
 
         // if(decoded["success"]== true){
         PrefService.setValue(PrefKeys.login, true);
+
+
         // PrefService.setValue(PrefKeys.firstName, decoded["data"]["firstname"]);
         Get.to(() => Select_Language());
 
