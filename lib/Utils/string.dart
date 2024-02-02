@@ -23,16 +23,16 @@ class Strings {
   ///------------------------------------business register --------------------------------------------
   static const userName = "User name";
   static const businessName = "Business name";
-  static const phoneno = "Phone number";
+  static const phoneNo = "Phone number";
   static const category = "Category";
-  static const usernameerrorMessage = "User name can not be empty";
-  static const businessnameerrorMessage = "Business name can not be empty";
-  static const emailErrorRegister = "Email can not be empty";
+  static const usernameerrorMessage = "Please enter user name";
+  static const businessnameerrorMessage = "Please enter business name";
+  static const emailErrorRegister = "Please enter email";
   static const emailErrorRegister1 = "Invalid email format";
-  static const phoneErrorMessage = "Phone number can not be empty";
+  static const phoneErrorMessage = "Please enter the phone number";
   static const validNumberError = "Enter Valid Phone Number";
   static const phoneErrorMessage1 = "Phone number be at least 10 characters";
-  static const passwordErrorMessage = "Password can not be empty";
+  static const passwordErrorMessage = "Please enter the password";
   static const passwordErrorMessage1 = "Password be at least 1 characters";
   static const selectCategory = "Please select category";
 

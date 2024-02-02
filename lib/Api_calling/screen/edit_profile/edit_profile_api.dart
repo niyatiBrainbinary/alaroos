@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:alaroos/Api_calling/screen/edit_profile/edit_profile_model.dart';
 import 'package:alaroos/Screen/Account_Screen/Profile_Screen/profile_screen_controller.dart';
+import 'package:alaroos/Screen/Account_Screen/account_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
@@ -13,7 +14,7 @@ import '../../../service/http_service.dart';
 import '../../../service/pref_service.dart';
 
 class EditProfileApi {
-  static editProfileApi({ firstName, lastName, businessName,  phone,  email,  profileImage}) async {
+  static editProfileApi({ firstName, lastName, businessName, phone, email, profileImage}) async {
     try {
       var headers = {
          'Authorization': "Bearer ${PrefService.getString(PrefKeys.registerToken)}",
@@ -34,8 +35,8 @@ class EditProfileApi {
       );
 
       if (response?.statusCode == 200) {
-
-        Get.back();
+Get.to(Account_Screen());
+       // Get.back();
         return editProfileModelFromJson(response!.body);
 
 

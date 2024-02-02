@@ -6,6 +6,7 @@ import 'package:alaroos/Screen/Home_Screen/Home_details/home_details.dart';
 import 'package:alaroos/Screen/Home_Screen/home_controller.dart';
 import 'package:alaroos/Utils/assets_res.dart';
 import 'package:alaroos/Utils/color_res.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -13,9 +14,9 @@ import 'package:get/get.dart';
 import '../../../Utils/string.dart';
 
 class Container_Screen extends StatelessWidget {
-   Container_Screen({Key? key}) : super(key: key);
+  Container_Screen({Key? key}) : super(key: key);
 
-   final HomeController homeController = Get.put(HomeController());
+  final HomeController homeController = Get.put(HomeController());
 
   @override
   Widget build(BuildContext context) {
@@ -25,10 +26,10 @@ class Container_Screen extends StatelessWidget {
           SingleChildScrollView(
             child: SizedBox(
               height: Get.height,
-            width: Get.width,
-            //  height: 400, width: 300,
+              width: Get.width,
+              //  height: 400, width: 300,
               child: ListView.builder(
-                itemCount:3,
+                itemCount: 3,
                 itemBuilder: (context, index) {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -72,16 +73,11 @@ class Container_Screen extends StatelessWidget {
                         height: Get.height * 0.022,
                       ),*/
                       Container(
-                        height: Get.height * 0.350,
-                        width: double.infinity,
-                        decoration:  BoxDecoration(
-                          image: DecorationImage(image: 
-                         // NetworkImage(homeController.allPostModel.data![index].images![index].name.toString()),
-                          AssetImage(
-                            //homeController.allPostModel0.data[index].images,
-                              AssetsRes.image1
-                          ),
-                            fit: BoxFit.cover),
+                        height: Get.height*0.35, width: Get.width,
+                        child: CachedNetworkImage(
+
+                          imageUrl: homeController.allPostModel.data?[index].images?.url??"",
+                          fit: BoxFit.fill,
                         ),
                       ),
                       Padding(
@@ -90,7 +86,8 @@ class Container_Screen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-              homeController.allPostModel.data?[index].title ?? "",
+                              homeController.allPostModel.data?[index].title ??
+                                  "",
                               //Strings.title,
                               style: register,
                             ),
@@ -99,8 +96,9 @@ class Container_Screen extends StatelessWidget {
                               width: Get.width * 0.45,
                               decoration: const BoxDecoration(),
                               child: Text(
-                                homeController.allPostModel.data?[index].description ?? "",
-                               // Strings.subtitle,
+                                homeController.allPostModel.data?[index]
+                                    .description ?? "",
+                                // Strings.subtitle,
                                 textAlign: TextAlign.center,
                                 style: subTitleStyle,
                               ),
@@ -170,11 +168,11 @@ class Container_Screen extends StatelessWidget {
                     ],
                   );
                 },
-              
+
               ),
             ),
           ),
-          
+
           Obx(() => homeController.isLoading.value ? Loader() : SizedBox())
         ],
       ),

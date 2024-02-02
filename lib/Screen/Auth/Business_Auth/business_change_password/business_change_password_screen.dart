@@ -37,66 +37,71 @@ class BusinessChangePasswordScreen extends StatelessWidget {
               icon: const Icon(CupertinoIcons.back),
             ),
           ),
-          body: Stack(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 30, right: 30),
-                child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        height: Get.height * 0.08,
-                      ),
-                      SizedBox(
-                        height: 60,
-                        width: double.infinity,
-                        child: CommonTextField(isObSecure: true,
-                          title: Strings.password,
-                          controller: businessChangePasswordController.passwordController,
-                          onChange: (val) {
-                            businessChangePasswordController.password = val;
-                          },
-                          keyboardType: TextInputType.visiblePassword,
+          body: GestureDetector(
+            onTap: (){
+              FocusScope.of(context).unfocus();
+            },
+            child: Stack(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 30, right: 30),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          height: Get.height * 0.08,
                         ),
-                      ),
-                      businessChangePasswordController.password.isNotEmpty
-                          ? Text(businessChangePasswordController.password, style: errorStyle)
-                          : SizedBox(),
-                      SizedBox(
-                        height: Get.height*0.08,
-                      ),
-                      SizedBox(
-                        height: 60,
-                        width: double.infinity,
-                        child: CommonTextField(isObSecure: true,
-                          title: Strings.changePassword,
-                          controller: businessChangePasswordController.confirmPasswordController,
-                          onChange: (val) {
-                            businessChangePasswordController.password = val;
-                          },
-                          keyboardType: TextInputType.visiblePassword,
+                        SizedBox(
+                          height: 60,
+                          width: double.infinity,
+                          child: CommonTextField(isObSecure: true,
+                            title: Strings.password,
+                            controller: businessChangePasswordController.passwordController,
+                            onChange: (val) {
+                              businessChangePasswordController.password = val;
+                            },
+                            keyboardType: TextInputType.visiblePassword,
+                          ),
                         ),
-                      ),
-                      businessChangePasswordController.confirmPassword.isNotEmpty
-                          ? Text(businessChangePasswordController.confirmPassword, style: errorStyle)
-                          : SizedBox(),
-                      SizedBox(
-                        height: Get.height * 0.04,
-                      ),
-                      CommonBtn(
-                        onTap: (){
-                          if(businessChangePasswordController.validation()){
-                            businessChangePasswordController.changePasswordApi(password: businessChangePasswordController.passwordController.text);
-                          }
-                        },
-                          title: Strings.send)
-                    ],
+                        businessChangePasswordController.password.isNotEmpty
+                            ? Text(businessChangePasswordController.password, style: errorStyle)
+                            : SizedBox(),
+                        SizedBox(
+                          height: Get.height*0.08,
+                        ),
+                        SizedBox(
+                          height: 60,
+                          width: double.infinity,
+                          child: CommonTextField(isObSecure: true,
+                            title: Strings.changePassword,
+                            controller: businessChangePasswordController.confirmPasswordController,
+                            onChange: (val) {
+                              businessChangePasswordController.password = val;
+                            },
+                            keyboardType: TextInputType.visiblePassword,
+                          ),
+                        ),
+                        businessChangePasswordController.confirmPassword.isNotEmpty
+                            ? Text(businessChangePasswordController.confirmPassword, style: errorStyle)
+                            : SizedBox(),
+                        SizedBox(
+                          height: Get.height * 0.04,
+                        ),
+                        CommonBtn(
+                          onTap: (){
+                            if(businessChangePasswordController.validation()){
+                              businessChangePasswordController.changePasswordApi(password: businessChangePasswordController.passwordController.text);
+                            }
+                          },
+                            title: Strings.send)
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              Obx(() => businessChangePasswordController.isLoading.value ? Loader() : SizedBox())
-            ],
+                Obx(() => businessChangePasswordController.isLoading.value ? Loader() : SizedBox())
+              ],
+            ),
           ),
         );
       },

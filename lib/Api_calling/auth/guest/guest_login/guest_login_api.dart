@@ -48,6 +48,7 @@ class GuestLoginApi {
 
         return guestLoginModelFromJson(response.body);
       } else {
+
         debugPrint('Error:::: ${response.body}');
         errorToast(Strings.userNotFound);
         return GuestLoginModel();

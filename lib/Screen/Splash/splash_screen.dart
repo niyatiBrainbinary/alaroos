@@ -72,7 +72,7 @@ class Splash_Screen extends StatelessWidget {
             child: CommonBtn(
               title: Strings.loginAsGuest,
               onTap: () {
-                Get.to(() => const GuestLoginScreen());
+                Get.to(() =>  GuestLoginScreen());
               },
             ),
           ),

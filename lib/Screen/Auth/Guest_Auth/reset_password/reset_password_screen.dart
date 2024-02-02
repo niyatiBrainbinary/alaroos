@@ -36,66 +36,72 @@ class ResetPasswordScreen extends StatelessWidget {
               icon: const Icon(CupertinoIcons.back),
             ),
           ),
-          body: Stack(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 30, right: 30),
-                child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        height: Get.height * 0.08,
-                      ),
-                      SizedBox(
-                        height: 60,
-                        width: double.infinity,
-                        child: CommonTextField(isObSecure: true,
-                          title: Strings.password,
-                          controller: resetPasswordController.passwordController,
-                          onChange: (val) {
-                            resetPasswordController.password = val;
-                          },
-                          keyboardType: TextInputType.visiblePassword,
+          body: GestureDetector(
+
+            onTap: (){
+              FocusScope.of(context).unfocus();
+            },
+            child: Stack(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 30, right: 30),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          height: Get.height * 0.08,
                         ),
-                      ),
-                      resetPasswordController.password.isNotEmpty
-                          ? Text(resetPasswordController.password, style: errorStyle)
-                          : SizedBox(),
-                      SizedBox(
-                        height: Get.height*0.08,
-                      ),
-                      SizedBox(
-                        height: 60,
-                        width: double.infinity,
-                        child: CommonTextField(isObSecure: true,
-                          title: Strings.changePassword,
-                          controller: resetPasswordController.confirmPasswordController,
-                          onChange: (val) {
-                            resetPasswordController.password = val;
-                          },
-                          keyboardType: TextInputType.visiblePassword,
+                        SizedBox(
+                          height: 60,
+                          width: double.infinity,
+                          child: CommonTextField(isObSecure: true,
+                            title: Strings.password,
+                            controller: resetPasswordController.passwordController,
+                            onChange: (val) {
+                              resetPasswordController.password = val;
+                            },
+                            keyboardType: TextInputType.visiblePassword,
+                          ),
                         ),
-                      ),
-                      resetPasswordController.confirmPassword.isNotEmpty
-                          ? Text(resetPasswordController.confirmPassword, style: errorStyle)
-                          : SizedBox(),
-                      SizedBox(
-                        height: Get.height * 0.04,
-                      ),
-                      CommonBtn(
-                          onTap: (){
-                            if(resetPasswordController.validation()){
-                              resetPasswordController.changePasswordApi(password: resetPasswordController.passwordController.text);
-                            }
-                          },
-                          title: Strings.send)
-                    ],
+                        resetPasswordController.password.isNotEmpty
+                            ? Text(resetPasswordController.password, style: errorStyle)
+                            : SizedBox(),
+                        SizedBox(
+                          height: Get.height*0.08,
+                        ),
+                        SizedBox(
+                          height: 60,
+                          width: double.infinity,
+                          child: CommonTextField(isObSecure: true,
+                            title: Strings.changePassword,
+                            controller: resetPasswordController.confirmPasswordController,
+                            onChange: (val) {
+                              resetPasswordController.password = val;
+                            },
+                            keyboardType: TextInputType.visiblePassword,
+                          ),
+                        ),
+                        resetPasswordController.confirmPassword.isNotEmpty
+                            ? Text(resetPasswordController.confirmPassword, style: errorStyle)
+                            : SizedBox(),
+                        SizedBox(
+                          height: Get.height * 0.04,
+                        ),
+                        CommonBtn(
+                            onTap: (){
+                              if(resetPasswordController.validation()){
+                                resetPasswordController.changePasswordApi(password: resetPasswordController.passwordController.text);
+                              }
+                            },
+                            title: Strings.send)
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              Obx(() => resetPasswordController.isLoading.value ? Loader() : SizedBox())
-            ],
+                Obx(() => resetPasswordController.isLoading.value ? Loader() : SizedBox())
+              ],
+            ),
           ),
         );
       },

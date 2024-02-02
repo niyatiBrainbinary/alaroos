@@ -159,7 +159,7 @@ class Profile_Screen extends StatelessWidget {
                       height: 60,
                       width: double.infinity,
                       child: CommonTextField(readOnly: true,
-                        title: Strings.phoneno,
+                        title: Strings.phoneNo,
                         prefixText: "+91 ",
                         controller:
                         profileScreenController.editPhoneNoController,

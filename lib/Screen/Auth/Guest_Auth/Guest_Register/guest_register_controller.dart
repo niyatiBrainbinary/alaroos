@@ -90,7 +90,7 @@ class GuestRegisterController extends GetxController {
 
   validation (){
     val();
-    if(firstName == "" && lastName == "" && emailAddress == "" && password == ""){
+    if(firstNameError == "" && lastNameError == "" && emailAddressError == "" && passwordError == ""){
       return true;
     } else {
        return false;

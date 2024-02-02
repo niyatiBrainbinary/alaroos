@@ -45,7 +45,9 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'Alaroos',
       theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: ColorRes.chat2,),
         primaryColor: ColorRes.themeColor,
+
       ),
       debugShowCheckedModeBanner: false,
    // home:  ChangePasswordScreen(),

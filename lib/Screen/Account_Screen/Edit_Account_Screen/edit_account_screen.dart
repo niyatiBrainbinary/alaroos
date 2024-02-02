@@ -158,7 +158,7 @@ class _Edit_Account_ScreenState extends State<Edit_Account_Screen> {
                               height: 60,
                               width: double.infinity,
                               child: CommonTextField(
-                                title: Strings.phoneno,
+                                title: Strings.phoneNo,
                                 prefixText: "+91 ",
                                 controller:
                                     editAccountController.editPhoneNoController,
@@ -196,12 +196,13 @@ class _Edit_Account_ScreenState extends State<Edit_Account_Screen> {
                                           .editBusinessNameController.text,
                                       profileImage: PrefService.getString(
                                                   PrefKeys.userImage)
-                                              .isNotEmpty
-                                          ? PrefService.getString(
-                                              PrefKeys.userImage)
-                                          : editAccountController.addVideoModel
-                                              .data!.first.mediaUrl
-                                              .toString());
+                                      //         .isNotEmpty
+                                      //     ? PrefService.getString(
+                                      //         PrefKeys.userImage)
+                                      //     : editAccountController.addVideoModel
+                                      //         .data!.first.mediaUrl
+                                      //         .toString()
+                                  );
                                   //profileScreenController.isEditProfile = true;
                                   editAccountController
                                       .update(['edit_account']);

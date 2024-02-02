@@ -34,75 +34,80 @@ class ForgotPassword extends StatelessWidget {
               icon: const Icon(CupertinoIcons.back),
             ),
           ),
-          body: Stack(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 30, right: 30),
-                child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Center(
-                        child: Container(
-                          height: Get.height * 0.2,
-                          width: Get.width * 0.75,
-                          decoration: const BoxDecoration(
-                            image: DecorationImage(
-                              image: AssetImage(AssetsRes.forgot),
-                              fit: BoxFit.cover,
+          body: GestureDetector(
+            onTap: (){
+              FocusScope.of(context).unfocus();
+            },
+            child: Stack(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 30, right: 30),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Center(
+                          child: Container(
+                            height: Get.height * 0.2,
+                            width: Get.width * 0.75,
+                            decoration: const BoxDecoration(
+                              image: DecorationImage(
+                                image: AssetImage(AssetsRes.forgot),
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      SizedBox(
-                        height: Get.height * 0.06,
-                      ),
-                      Container(
-                        height: Get.height * 0.08,
-                        width: Get.width * 0.8,
-                        decoration: const BoxDecoration(),
-                        child: Text(
-                          Strings.details,
-                          textAlign: TextAlign.center,
-                          style: forgotDetails,
+                        SizedBox(
+                          height: Get.height * 0.06,
                         ),
-                      ),
-                      SizedBox(
-                        height: Get.height * 0.08,
-                      ),
-                      SizedBox(
-                        height: 60,
-                        width: double.infinity,
-                        child: CommonTextField(
-                          title: Strings.email,
-                          onChange: forgot_pass_controller.setForgotEmail,
-                          controller: forgot_pass_controller.fogotEmailController,
-                          keyboardType: TextInputType.emailAddress,
+                        Container(
+                          height: Get.height * 0.08,
+                          width: Get.width * 0.8,
+                          decoration: const BoxDecoration(),
+                          child: Text(
+                            Strings.details,
+                            textAlign: TextAlign.center,
+                            style: forgotDetails,
+                          ),
                         ),
-                      ),
-                      /*forgot_pass_controller.forgotEmail.isNotEmpty
-                          ? Text(forgot_pass_controller.forgotEmail,
-                              style: errorStyle)
-                          : SizedBox(),*/
-                      SizedBox(
-                        height: Get.height * 0.04,
-                      ),
-                      CommonBtn(
-                          onTap: () {
-                            FocusScope.of(context).unfocus();
-                           // controller.fogotEmailController.clear();
-                            controller.forgotPassword(
-                              email: controller.fogotEmailController.text
-                            );
-                            forgot_pass_controller.onTapForgotEmail();
-                          },
-                          title: Strings.send)
-                    ],
+                        SizedBox(
+                          height: Get.height * 0.08,
+                        ),
+                        SizedBox(
+                          height: 60,
+                          width: double.infinity,
+                          child: CommonTextField(
+                            title: Strings.email,
+                            onChange: forgot_pass_controller.setForgotEmail,
+                            controller: forgot_pass_controller.fogotEmailController,
+                            keyboardType: TextInputType.emailAddress,
+                          ),
+                        ),
+                        /*forgot_pass_controller.forgotEmail.isNotEmpty
+                            ? Text(forgot_pass_controller.forgotEmail,
+                                style: errorStyle)
+                            : SizedBox(),*/
+                        SizedBox(
+                          height: Get.height * 0.04,
+                        ),
+                        CommonBtn(
+                            onTap: () {
+                              FocusScope.of(context).unfocus();
+                             // controller.fogotEmailController.clear();
+                              controller.forgotPassword(
+                                email: controller.fogotEmailController.text
+                              );
+                              forgot_pass_controller.onTapForgotEmail();
+                            },
+                            title: Strings.send)
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              Obx(() => forgot_pass_controller.isLoading.value ? const Loader() : const SizedBox())
-            ],
+                Obx(() => forgot_pass_controller.isLoading.value ? const Loader() : const SizedBox())
+              ],
+            ),
           ),
         );
       },

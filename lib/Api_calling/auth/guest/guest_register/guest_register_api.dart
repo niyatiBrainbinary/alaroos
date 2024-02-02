@@ -36,7 +36,7 @@ class GuestRegisterApi {
       PrefService.setValue(PrefKeys.type,"user");
       debugPrint(
           "First Name After Register Api${PrefService.getString(PrefKeys.firstName)}");
-      PrefService.setValue(PrefKeys.guestLogin, true);
+      PrefService.setValue(PrefKeys.login, true);
 
       bool isUpdate = false;
       String docId ='';
@@ -76,7 +76,7 @@ class GuestRegisterApi {
       return response.body;
     }
     else {
-     // errorToast(decoded["message"]);
+     errorToast(decoded["message"]);
     }
     return null;
   }

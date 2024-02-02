@@ -40,7 +40,7 @@ class Button extends StatelessWidget {
                       Align(
                         alignment: Alignment.centerLeft,
                         child: Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.symmetric(horizontal: 8),
                           child: Text(
                             Strings.english,
                             style: btnText,
@@ -105,7 +105,7 @@ class Button extends StatelessWidget {
                       Align(
                         alignment: Alignment.centerLeft,
                         child: Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.symmetric(horizontal: 8),
                           child: Text(
                             Strings.arabic,
                             style: btnText,

@@ -17,6 +17,9 @@ class GuestLoginController extends GetxController {
   TextEditingController passwordController = TextEditingController();
 
   String email = "";
+  String password = "";
+  String emailError = "";
+  String passwordError = "";
 
   @override
   void onInit() {
@@ -75,50 +78,49 @@ class GuestLoginController extends GetxController {
     }
 
     isLoading.value = false;
-  }
 
-
-  void setEmail(String value) {
-    email = value.trim();
   }
 
   emailValidation() {
+    update(['logIn']);
     if (emailController.text.trim() == "") {
-      email = Strings.guestEmailError;
+      // errorToast(StringRes.enterEmailError.tr);
+      emailError = Strings.guestEmailError.tr;
+      update(['logIn']);
+      return false;
     } else {
-      if (RegExp(
-          r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+      if (RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
           .hasMatch(emailController.text)) {
-        email = '';
+        emailError = '';
+        update(['logIn']);
+        return true;
       } else {
-        email = Strings.emailError1;
+        // errorToast(StringRes.enterValidEmail.tr);
+        emailError = Strings.emailError1.tr;
+        update(['logIn']);
+        return false;
       }
     }
-    update(['guest_login']);
-  }
-
-  String password="";
-
-  void setPassword(String value) {
-    password = value.trim();
   }
 
   passwordValidation() {
     if (passwordController.text.trim() == "") {
-      password = Strings.guestErrorPass;
+      passwordError = Strings.guestErrorPass;  update(['guest_login']);
     } else if (passwordController.text.length < 1) {
-      password = Strings.errorPass1;
+      passwordError = Strings.errorPass1;  update(['guest_login']);
     } else {
-      password = '';
+      passwordError = '';  update(['guest_login']);
     }
-    update(['guest_login']);
+
   }
+val() async {
+  emailValidation();
+  passwordValidation();
 
-  bool validation() {
-    emailValidation();
-    passwordValidation();
-
-    if (email == '' && password == '') {
+}
+   validation() {
+  val();
+    if (emailError == '' && passwordError == '') {
       return true;
     } else {
       return false;

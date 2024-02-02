@@ -46,71 +46,76 @@ class ChangePasswordScreen extends StatelessWidget {
               icon: const Icon(CupertinoIcons.back),
             ),
           ),
-          body: Stack(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 30, right: 30),
-                child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        height: Get.height * 0.08,
-                      ),
-                      SizedBox(
-                        height: 60,
-                        width: double.infinity,
-                        child: CommonTextField(isObSecure: true,
-                          title: Strings.password,
-                          controller: changePasswordController.passwordController,
-                          onChange: (val) {
-                            changePasswordController.password = val;
-                          },
-                          keyboardType: TextInputType.visiblePassword,
+          body: GestureDetector(
+            onTap: (){
+              FocusScope.of(context).unfocus();
+            },
+            child: Stack(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 30, right: 30),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          height: Get.height * 0.08,
                         ),
-                      ),
-                      changePasswordController.password.isNotEmpty
-                          ? Text(changePasswordController.password, style: errorStyle)
-                          : SizedBox(),
-                      SizedBox(
-                        height: Get.height*0.08,
-                      ),
-                      SizedBox(
-                        height: 60,
-                        width: double.infinity,
-                        child: CommonTextField(isObSecure: true,
-                          title: Strings.changePassword,
-                          controller: changePasswordController.confirmPasswordController,
-                          onChange: (val) {
-                            changePasswordController.password = val;
-                          },
-                          keyboardType: TextInputType.visiblePassword,
+                        SizedBox(
+                          height: 60,
+                          width: double.infinity,
+                          child: CommonTextField(isObSecure: true,
+                            title: Strings.password,
+                            controller: changePasswordController.passwordController,
+                            onChange: (val) {
+                              changePasswordController.password = val;
+                            },
+                            keyboardType: TextInputType.visiblePassword,
+                          ),
                         ),
-                      ),
-                      changePasswordController.confirmPassword.isNotEmpty
-                          ? Text(changePasswordController.confirmPassword, style: errorStyle)
-                          : SizedBox(),
-                      SizedBox(
-                        height: Get.height * 0.04,
-                      ),
-                      CommonBtn(
-                          onTap: () {
+                        changePasswordController.password.isNotEmpty
+                            ? Text(changePasswordController.password, style: errorStyle)
+                            : SizedBox(),
+                        SizedBox(
+                          height: Get.height*0.08,
+                        ),
+                        SizedBox(
+                          height: 60,
+                          width: double.infinity,
+                          child: CommonTextField(isObSecure: true,
+                            title: Strings.changePassword,
+                            controller: changePasswordController.confirmPasswordController,
+                            onChange: (val) {
+                              changePasswordController.password = val;
+                            },
+                            keyboardType: TextInputType.visiblePassword,
+                          ),
+                        ),
+                        changePasswordController.confirmPassword.isNotEmpty
+                            ? Text(changePasswordController.confirmPassword, style: errorStyle)
+                            : SizedBox(),
+                        SizedBox(
+                          height: Get.height * 0.04,
+                        ),
+                        CommonBtn(
+                            onTap: () {
 
-                            if(changePasswordController.validation()){
-                              changePasswordController.changePasswordApi(
-                                  password: changePasswordController.passwordController.text
-                              );
-                              //Get.to(GuestLoginScreen());
+                              if(changePasswordController.validation()){
+                                changePasswordController.changePasswordApi(
+                                    password: changePasswordController.passwordController.text
+                                );
+                                //Get.to(GuestLoginScreen());
 
-                            }
-                          },
-                          title: Strings.send)
-                    ],
+                              }
+                            },
+                            title: Strings.send)
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              Obx(() => changePasswordController.isLoading.value ? const Loader() : const SizedBox())
-            ],
+                Obx(() => changePasswordController.isLoading.value ? const Loader() : const SizedBox())
+              ],
+            ),
           ),
         );
       },
